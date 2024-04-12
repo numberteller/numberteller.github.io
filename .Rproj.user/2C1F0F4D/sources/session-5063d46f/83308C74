@@ -1,19 +1,17 @@
 {
-    "id": "9265CC3F",
-    "path": "~/madduxbt/docs/index.html",
-    "project_path": "docs/index.html",
+    "id": "83308C74",
+    "path": "~/madduxbt/docs/introductory-programming-in-rrr.html",
+    "project_path": "docs/introductory-programming-in-rrr.html",
     "type": "html",
     "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1712953853795.0,
+    "created": 1712956717131.0,
     "source_on_save": false,
-    "relative_order": 6,
+    "relative_order": 7,
     "properties": {
         "source_window_id": "",
-        "Source": "Source",
-        "cursorPosition": "0,0",
-        "scrollLine": "167"
+        "Source": "Source"
     },
     "folds": "",
     "lastKnownWriteTime": 1712956707,
