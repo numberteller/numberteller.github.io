@@ -1,0 +1,31 @@
+{
+    "id": "D9F75BA5",
+    "path": "~/madduxbt/01-intro.Rmd",
+    "project_path": "01-intro.Rmd",
+    "type": "r_markdown",
+    "hash": "197377002",
+    "contents": "",
+    "dirty": false,
+    "created": 1712954267750.0,
+    "source_on_save": false,
+    "relative_order": 6,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "0,33",
+        "scrollLine": "0",
+        "rmdVisualMode": "false",
+        "rmdVisualWrapConfigured": "true",
+        "docOutlineVisible": "1",
+        "rmdVisualCollapsedChunks": "",
+        "rmdVisualModeLocation": "143:0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1712954944,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1712954944380,
+    "read_only": false,
+    "read_only_alternatives": []
+}

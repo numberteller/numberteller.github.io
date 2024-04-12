@@ -1,24 +1,26 @@
 {
-    "id": "984C559C",
+    "id": "DE7EF804",
     "path": "~/madduxbt/_bookdown.yml",
     "project_path": "_bookdown.yml",
     "type": "yaml",
-    "hash": "0",
+    "hash": "2981342481",
     "contents": "",
     "dirty": false,
-    "created": 1712937456756.0,
+    "created": 1712948238474.0,
     "source_on_save": false,
-    "relative_order": 3,
+    "relative_order": 4,
     "properties": {
         "source_window_id": "",
-        "Source": "Source"
+        "Source": "Source",
+        "cursorPosition": "2,17",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1712937452,
+    "lastKnownWriteTime": 1712948495,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1712937452,
+    "last_content_update": 1712948495083,
     "read_only": false,
     "read_only_alternatives": []
 }
