@@ -35,4 +35,14 @@ github-repo: rstudio/bookdown-demo
 
 -   [Installing R on Linux](https://www.youtube.com/watch?v=eE1zh0YVMeM)
 
-After having R installed in your machine, you can proceed to download RStudio [here](https://posit.co/downloads/) and follow the instructions to install it. Henceforth, you only need to launch RStudio to write **R** code.
+After having **R** installed in your machine, you can proceed to download **RStudio** [here](https://posit.co/downloads/) and follow the instructions to install it. Henceforth, you only need to launch **RStudio** to write **R** code.
+
+When you open **RStudio**, a window appears with three panes in it, as in the following figure. The largest pane is a console window. This is where you'll run your **R** code and see results. The console window is tantamount to what you would normally see if you ran R from a UNIX console or the Windows or Mac GUIs. Everything else you see is unique to **RStudio**. Hidden in the other panes are a text editor, there lies a graphics window, a debugger, a file manager, and so forth.
+
+![](images/RStudio.png)
+
+## Script Window versus Console Window
+
+If you click the icon underneath "File", then choose "R Script", another window pops up at the top left in **RStudio**, above the console window. This window is referred as script window. The script window is the place to enter and run your code so that it is easily edited and saved for future use. To execute your code in the R script, you can either highlight the code and click on Run, or you can highlight the code and press Ctrl+Enter on your keyboard.
+
+![](images/console.jpg)

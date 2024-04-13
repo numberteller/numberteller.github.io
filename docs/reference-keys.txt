@@ -5,6 +5,7 @@ thm:tri
 about-r-and-rstudio
 what-is-r-and-rstudio
 how-to-install-r-and-rstudio
+script-window-versus-console-window
 introductory-programming-in-r
 a-section
 cross

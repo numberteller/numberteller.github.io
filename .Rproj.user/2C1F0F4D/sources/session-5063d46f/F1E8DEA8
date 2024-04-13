@@ -3,7 +3,7 @@
     "path": "~/madduxbt/index.Rmd",
     "project_path": "index.Rmd",
     "type": "r_markdown",
-    "hash": "79628288",
+    "hash": "520861056",
     "contents": "",
     "dirty": false,
     "created": 1712937456433.0,
@@ -12,20 +12,20 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "27,0",
-        "scrollLine": "24",
+        "cursorPosition": "43,0",
+        "scrollLine": "33",
         "rmdVisualMode": "true",
         "rmdVisualWrapConfigured": "true",
         "docOutlineVisible": "1",
         "rmdVisualCollapsedChunks": "",
-        "rmdVisualModeLocation": "2198:816.7999877929688"
+        "rmdVisualModeLocation": "2851:1784"
     },
     "folds": "",
-    "lastKnownWriteTime": 1712969390,
+    "lastKnownWriteTime": 1712971144,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1712969390145,
+    "last_content_update": 1712971144956,
     "read_only": false,
     "read_only_alternatives": []
 }
