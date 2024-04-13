@@ -3,7 +3,7 @@ tab:nice-tab
 eq:binom
 thm:tri
 about-r-and-rstudio
-usage
+what-is-r-and-rstudio
 render-book
 preview-book
 introductory-programming-in-r
