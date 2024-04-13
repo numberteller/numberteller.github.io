@@ -1,4 +1,4 @@
---- 
+---
 title: "Introductory Programming in R"
 author: "Bao Maddux"
 date: "`r Sys.Date()`"
@@ -17,12 +17,22 @@ github-repo: rstudio/bookdown-demo
 
 # About R and RStudio
 
-
 ## What is R and RStudio?
-**R** is a language and environment for statistical computing and graphics. It is a GNU project which is similar to the S language and environment which was developed at Bell Laboratories (formerly AT&T, now Lucent Technologies) by John Chambers and colleagues. R can be considered as a different implementation of S. There are some important differences, but much code written for S runs unaltered under R.
 
-**R** provides a wide variety of statistical (linear and nonlinear modelling, classical statistical tests, time-series analysis, classification, clustering, …) and graphical techniques, and is highly extensible. The S language is often the vehicle of choice for research in statistical methodology, and R provides an Open Source route to participation in that activity.
+**R** is a language and environment for statistical computing and graphics. It is a GNU project which is similar to the S language and environment which was developed at Bell Laboratories (formerly AT&T, now Lucent Technologies) by John Chambers and colleagues. **R** can be considered as a different implementation of S. There are some important differences, but much code written for S runs unaltered under **R**.
 
-**RStudio** is an integrated development environment for R, a programming language for statistical computing and graphics. **RStudio** offers a copious number of other nice features and a clean editor with syntax highlighting.
+**R** provides a wide variety of statistical (linear and nonlinear modelling, classical statistical tests, time-series analysis, classification, clustering, ...) and graphical techniques, and is highly extensible. The S language is often the vehicle of choice for research in statistical methodology, and **R** provides an Open Source route to participation in that activity.
+
+**RStudio** is an integrated development environment for **R**, a programming language for statistical computing and graphics. **RStudio** is user-friendly, offers a copious number of other decent features and a clean editor with syntax highlighting.
 
 ## How to Install R and RStudio?
+
+**R** is maintained by an international team of developers who make the language available through the web page of [The Comprehensive R Archive Network](https://cran.r-project.org/). The top of the web page provides three links for downloading **R**. Follow the link that describes your operating system: Windows, Mac, or Linux.
+
+-   [Installing R on Windows](https://www.youtube.com/watch?v=Ohnk9hcxf9M)
+
+-   [Installing R on Mac](https://www.youtube.com/watch?v=uxuuWXU-7UQ)
+
+-   [Installing R on Linux](https://www.youtube.com/watch?v=eE1zh0YVMeM)
+
+After having R installed in your machine, you can proceed to download RStudio [here](https://posit.co/downloads/) and follow the instructions to install it. Henceforth, you only need to launch RStudio to write **R** code.

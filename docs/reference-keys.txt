@@ -4,8 +4,7 @@ eq:binom
 thm:tri
 about-r-and-rstudio
 what-is-r-and-rstudio
-render-book
-preview-book
+how-to-install-r-and-rstudio
 introductory-programming-in-r
 a-section
 cross
@@ -23,4 +22,3 @@ sharing-your-book
 publishing
 pages
 metadata-for-sharing
-how-to-install-r-and-rstudio
