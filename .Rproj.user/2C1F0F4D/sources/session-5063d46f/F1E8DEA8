@@ -3,7 +3,7 @@
     "path": "~/madduxbt/index.Rmd",
     "project_path": "index.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "230281352",
     "contents": "",
     "dirty": false,
     "created": 1712937456433.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "11,13",
-        "scrollLine": "0"
+        "cursorPosition": "28,0",
+        "scrollLine": "12"
     },
     "folds": "",
-    "lastKnownWriteTime": 1712967050,
+    "lastKnownWriteTime": 1712967820,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1712967050547,
+    "last_content_update": 1712967820984,
     "read_only": false,
     "read_only_alternatives": []
 }
