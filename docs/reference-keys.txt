@@ -1,3 +1,5 @@
 down-the-rabbit-hole
+how-to-ruin-a-regression-model
+forgot-to-check-linear-regression-assumptions
 the-pool-of-tears
 a-caucus-race-and-a-long-tale

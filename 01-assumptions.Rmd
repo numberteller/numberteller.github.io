@@ -1,0 +1,110 @@
+
+# How to Ruin a Regression Model
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Forgot to Check Linear Regression Assumptions
+
+1.  **Linearity**. This means that the mean of the response variable is a linear combination of the parameters (regression coefficients) and the predictor variables. Note that this assumption puts restriction on the *parameters* only and the predictor variables are treated as fixed values (see above). The predictor variables themselves can be arbitrarily transformed.
+
+    [*How to check:*]{.underline} One can verify this assumption visually by a scatterplot of the response variable against the predictor variable, or numerically by the correlation coefficient. However, in the event of multiple predictor variables, individual correlation coefficients or individual scatterplots are no longer feasible. The most common way to check linearity in this case is to scatter-plot residuals against the linearly predicted values. Curved or non-horizontally spead cloud on such a plot is diagnostic for non-linearity.
+
+```{r}
+head(women)
+```
+
+```{r}
+plot(women$height,women$weight,xlab="Women's Heights",ylab="Women's Weights", main="Scatterplot of Women's Heights against their Weights")
+cor(women$height,women$weight)
+```
+
+In the next example, we will examine data set *Carseats* from ISLR library. There are 2 ways to assess a function from a particular library in R. One can either conjure up the library in advance
+
+```{r}
+library(ISLR)
+head(Carseats)
+```
+
+or one can also use double colons (::) to explicitly specify the library
+
+```{r}
+head(ISLR::Carseats)
+```
+
+To investigate the correlation among quantitative variables in this data set, let use eliminate qualitative variables (ShelveLoc, Urban, US) from the original data set and rename the altered data set to be **newdat**. One can get rid of the columns corresponding to aforementioned qualitative variables by their indices.
+
+```{r}
+newdat = ISLR::Carseats[,-c(7,10,11)]
+```
+
+Alternatively, the task can also be done by employing function `subset` and the column names as follows
+
+```{r}
+newdat = subset(ISLR::Carseats,select=-c(ShelveLoc, Urban, US))
+```
+
+Passing **newdat** into *cor* function, `cor(newdat)`, one will receive a correlation matrix for all possible pairs of variables in **newdat**.
+
+```{r}
+library(corrplot)
+cormat = cor(newdat)
+print(cormat)
+corrplot(cormat)
+```
+
+2.  **Constant variance** (homoscedasticity). This means that the variance of the errors does not depend on the values of the predictor variables. Thus the variability of the responses for given fixed values of the predictors is the same regardless of how large or small the responses are. The presence of heteroscedasticity will result in an overall "average" estimate of variance being used instead of one that takes into account the true variance structure. This leads to less precise (but in the case of ordinary least squares, not biased) parameter estimates and biased standard errors, resulting in misleading tests and interval estimates. The mean squared error for the model will also be wrong.
+
+    [*How to check:*]{.underline} Graphically, this assumption can be validated by a plot of residuals versus predicted values (or the values of each individual predictor) can be examined for a "tunnel effect" (i.e. increasing or decreasing vertical spread as one moves left to right on the plot). Formally, Breusch-Pagan test (or Koenker-Bassett test) can be used to assess this assumption. Bear in mind that the Breusch-Pagan test tends to be sensitive to departures from normality or small sample sizes.
+
+```{r, echo=TRUE,fig.keep='last'}
+data("women")
+model1 = lm(formula = women$height~ women$weight, data = women)
+summary(model1)
+plot(model1$fitted.values,resid(model1),xlab="Fitted Values",ylab="Residuals", main="Residuals versus Fitted Values Plot")
+abline(0,0)
+
+```
+
+There is a conspicuous pattern in residuals for the model $\hat{height} = a + b\times weight$. The curvilinear trajectory, as a matter of fact, suggests a quadratic relationship between womens' heights and their weights. It is reasonable to add a second order term into the model.
+
+```{r,fig.keep='last'}
+data("women")
+model2 = lm(formula = women$height~ women$weight + I(women$weight^2), data = women)
+summary(model2)
+
+plot(model2$fitted.values,resid(model2),xlab="Fitted Values",ylab="Residuals", main="Residuals versus Fitted Values Plot (Model 2)")
+abline(0,0)
+
+```
+
+
+3.  **Independence of errors**. This assumes that the errors of the response variables are uncorrelated with each other.
+
+    [*How to check:*]{.underline} To test for violations of independence, you can look at plots of the residuals versus predictor variables or plots of residuals versus row number in situations where the rows have been sorted or grouped in some way that depends (only) on the values of the predictor variables. The residuals should be randomly and symmetrically distributed around zero.
+
+4.  **Normally distributed errors** implies that the errors follow a Normal distribution.
+
+    Technically, the normal distribution assumption is not necessary if you are willing to assume the model equation is correct and your only goal is to estimate its coefficients and generate predictions in such a way as to minimize mean squared error. The formulas for estimating coefficients require no more than that, and some references on regression analysis do not list normally distributed errors among the key assumptions. But generally we are interested in making inferences about the model and/or estimating the probability that a given forecast error will exceed some threshold in a particular direction, in which case distributional assumptions are important. Also, a significant violation of the normal distribution assumption is often a "red flag" indicating that there is some other problem with the model assumptions and/or that there are a few unusual data points that should be studied closely and/or that a better model is still waiting out there somewhere.
+    
+```{r,fig.keep='last'}
+data("women")
+model = lm(formula = women$height~ women$weight, data = women)
+summary(model)
+res = resid(model)
+qqnorm(res)
+qqline(res)
+
+```    
+
+```{r,fig.keep='last'}
+data("women")
+model = lm(formula = women$height~ women$weight + I(women$weight^2), data = women)
+summary(model)
+res = resid(model)
+qqnorm(res)
+qqline(res)
+
+```
+
+5.  **Lack of perfect multicollinearity** in the predictors. Perfect multicollinearity refers to a situation where the predictive variables have an exact linear relationship. This can be caused by accidentally duplicating a variable in the data, using a linear transformation of a variable along with the original (e.g., the same temperature measurements expressed in Fahrenheit and Celsius), or including a linear combination of multiple variables in the model, such as their mean.
