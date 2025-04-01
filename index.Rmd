@@ -1,9 +1,113 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAME HERE"
+title: "datRtective"
+author: "Bao Maddux"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
-# Down the rabbit-hole
+# Data Wrangling in R
+Manipulation of data frames is a common task when you start exploring your data in R and dplyr is a package for making tabular data manipulation easier. `tidyverse` is an “umbrella-package” that installs a series of packages useful for data analysis which work together well. Some of them are considered core packages (among them `tidyr`, `dplyr`, `ggplot2`), because you are likely to use them in almost every analysis. Other packages, like `lubridate` (to work with dates) or `haven` (for SPSS, Stata, and SAS data) that you are likely to use not for every analysis are also installed.
+
+## Remove NA values
+The problem of missing data is relatively common in almost all research and can have a significant effect on the conclusions that can be drawn from the data. The best possible method of handling the missing data is to prevent the problem by well-planning the study and collecting the data carefully. By far the most common approach to the missing data is to simply omit those cases with the missing data and analyze the remaining data. This approach is known as the complete case (or available case) analysis or listwise deletion.
+```{r}
+data("airquality")
+head(airquality)
+```
+```{r}
+newdata = na.omit(airquality)
+print(newdata)
+```
+## Obtain the 5-number summary 
+
+```{r}
+data('women')
+summary(women)
+```
+
+## Select columns
+## Method 1: use the index/name of the column
+To extract the first column in *women* data set, one could insert the index of the column, which is 1, in between the square brackets, following the name of the data set.
+```{r}
+women[1]
+```
+Otherwise, one could also use the name of the column, in replacement of the its index, to extract the column from the data frame.
+```{r}
+women["height"]
+```
+To select multiple columns, a vector including the names of the desired columns needs passing in between the square brackets as follows.
+```{r}
+women[c("height","weight")]
+```
+### Method 2: `select` from `tidyverse` package
+
+The first argument of the `select()` command is the data frame you'd like to extract data from, and the subsequent arguments are the name of the columns you wish to keep. 
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+select(women,height)
+```
+In the event that more than one columns are of interest, one can list other column names after the first column, separated by a comma.
+```{r message=FALSE, warning=FALSE}
+select(women,height,weight)
+```
+### Method 3: `subset()`
+Alternatively, you can also carry out the same task by using `subset()` command. The first argument in `subset()` is the data frame to be subsetted, followed by a logical expression indicating elements or rows to keep, and subsequently, an expression to indicate which columns to select from the original data frame.
+```{r}
+subset(women,select = height)
+```
+To select more than one columns, one can pass a vector including the column names into *select* argument in `subset()`.
+```{r}
+subset(women,select = c(height,weight))
+```
+
+## Filter rows
+### Method 1: `filter()` from `tidyverse` package
+```{r}
+data("airquality")
+filter(airquality,Month==5 & Temp >60)
+```
+### Method 2: `subset()`
+```{r}
+data("airquality")
+subset(airquality,Month==5 & Temp >60)
+```
+## Pipes
+What if you wished to perform multiple consecutive procedures on the same data? For example, in the `airquality` data set, let's construct the 5-number summary the *Wind* column of days that are in May and have temperature above 60. There are three primary approaches to this problem: use intermediate steps, nested functions, or pipes.
+
+### Intermediate steps
+First and foremost, we will want to impose the restriction of month and temperature on the original data set by using `filter()`, assign this new data set a name, apply `select()` on it and lastly, use `summary` to construct the 5-number summary.
+```{r}
+new = filter(airquality,Month==5 & Temp >60)
+wind = select(new,Wind)
+summary(wind)
+```
+This is easy to interpret, but can clutter up your workspace with lots of objects that you have to name individually.
+
+### Nested functions
+```{r}
+summary(select(filter(airquality,Month==5 & Temp >60),Wind))
+```
+This second approach, on the other hand, appears more complicated to read as the problem involves more steps.
+
+## Pipes
+Pipes allow you to feed an object forward to a function or call expression, thereby allowing you to express a sequence of operations that transform an object. By default, the pipe passes the object on its left-hand side to the first argument of the function on the right-hand side.
+```{r}
+airquality %>% filter(Month==5 & Temp >60) %>% select(Wind) %>% summary
+```
+
+## Group data by a criterion
+`summarise()` creates a new data frame. It returns one row for each combination of grouping variables; if there are no grouping variables, the output will have a single row summarising all observations in the input. It will contain one column for each grouping variable and one column for each of the summary statistics that you have specified.
+```{r}
+airquality %>% group_by(Month) %>% summarise(Average = mean(Temp))
+```
+
+## Mutate
+```{r}
+airquality %>% mutate(Hot = ifelse(Temp > 70, "Yes","No"))
+```
+
+```{r}
+airquality %>% mutate(Hot = ifelse(Temp > 70, "Yes","No")) %>% group_by(Hot) %>% summarise("Average Temp" = mean(Temp))
+```
 

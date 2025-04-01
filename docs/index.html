@@ -4,26 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>YOUR TITLE HERE</title>
-  <meta name="description" content="YOUR TITLE HERE" />
+  <title>datRtective</title>
+  <meta name="description" content="datRtective" />
   <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="YOUR TITLE HERE" />
+  <meta property="og:title" content="datRtective" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="YOUR TITLE HERE" />
+  <meta name="twitter:title" content="datRtective" />
   
   
   
 
-<meta name="author" content="YOUR NAME HERE" />
+<meta name="author" content="Bao Maddux" />
 
 
-<meta name="date" content="2025-03-26" />
+<meta name="date" content="2025-04-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,7 +140,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Introduction to R Programming</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Down the rabbit-hole</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Data Wrangling in R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#remove-na-values"><i class="fa fa-check"></i><b>1.1</b> Remove NA values</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#obtain-the-5-number-summary"><i class="fa fa-check"></i><b>1.2</b> Obtain the 5-number summary</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#select-columns"><i class="fa fa-check"></i><b>1.3</b> Select columns</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#method-1-use-the-indexname-of-the-column"><i class="fa fa-check"></i><b>1.4</b> Method 1: use the index/name of the column</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="index.html"><a href="index.html#method-2-select-from-tidyverse-package"><i class="fa fa-check"></i><b>1.4.1</b> Method 2: <code>select</code> from <code>tidyverse</code> package</a></li>
+<li class="chapter" data-level="1.4.2" data-path="index.html"><a href="index.html#method-3-subset"><i class="fa fa-check"></i><b>1.4.2</b> Method 3: <code>subset()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#filter-rows"><i class="fa fa-check"></i><b>1.5</b> Filter rows</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#method-1-filter-from-tidyverse-package"><i class="fa fa-check"></i><b>1.5.1</b> Method 1: <code>filter()</code> from <code>tidyverse</code> package</a></li>
+<li class="chapter" data-level="1.5.2" data-path="index.html"><a href="index.html#method-2-subset"><i class="fa fa-check"></i><b>1.5.2</b> Method 2: <code>subset()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#pipes"><i class="fa fa-check"></i><b>1.6</b> Pipes</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="index.html"><a href="index.html#intermediate-steps"><i class="fa fa-check"></i><b>1.6.1</b> Intermediate steps</a></li>
+<li class="chapter" data-level="1.6.2" data-path="index.html"><a href="index.html#nested-functions"><i class="fa fa-check"></i><b>1.6.2</b> Nested functions</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#pipes-1"><i class="fa fa-check"></i><b>1.7</b> Pipes</a></li>
+<li class="chapter" data-level="1.8" data-path="index.html"><a href="index.html#group-data-by-a-criterion"><i class="fa fa-check"></i><b>1.8</b> Group data by a criterion</a></li>
+<li class="chapter" data-level="1.9" data-path="index.html"><a href="index.html#mutate"><i class="fa fa-check"></i><b>1.9</b> Mutate</a></li>
+</ul></li>
 <li class="chapter" data-level="2" data-path="how-to-ruin-a-regression-model.html"><a href="how-to-ruin-a-regression-model.html"><i class="fa fa-check"></i><b>2</b> How to Ruin a Regression Model</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="how-to-ruin-a-regression-model.html"><a href="how-to-ruin-a-regression-model.html#forgot-to-check-linear-regression-assumptions"><i class="fa fa-check"></i><b>2.1</b> Forgot to Check Linear Regression Assumptions</a></li>
@@ -158,7 +181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">YOUR TITLE HERE</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">datRtective</a>
           </h1>
         </div>
 
@@ -167,13 +190,573 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">YOUR TITLE HERE</h1>
-<p class="author"><em>YOUR NAME HERE</em></p>
-<p class="date"><em>2025-03-26</em></p>
+<h1 class="title">datRtective</h1>
+<p class="author"><em>Bao Maddux</em></p>
+<p class="date"><em>2025-04-01</em></p>
 </div>
-<div id="down-the-rabbit-hole" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Down the rabbit-hole<a href="index.html#down-the-rabbit-hole" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="data-wrangling-in-r" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Data Wrangling in R<a href="index.html#data-wrangling-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Manipulation of data frames is a common task when you start exploring your data in R and dplyr is a package for making tabular data manipulation easier. <code>tidyverse</code> is an “umbrella-package” that installs a series of packages useful for data analysis which work together well. Some of them are considered core packages (among them <code>tidyr</code>, <code>dplyr</code>, <code>ggplot2</code>), because you are likely to use them in almost every analysis. Other packages, like <code>lubridate</code> (to work with dates) or <code>haven</code> (for SPSS, Stata, and SAS data) that you are likely to use not for every analysis are also installed.</p>
+<div id="remove-na-values" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Remove NA values<a href="index.html#remove-na-values" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The problem of missing data is relatively common in almost all research and can have a significant effect on the conclusions that can be drawn from the data. The best possible method of handling the missing data is to prevent the problem by well-planning the study and collecting the data carefully. By far the most common approach to the missing data is to simply omit those cases with the missing data and analyze the remaining data. This approach is known as the complete case (or available case) analysis or listwise deletion.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;airquality&quot;</span>)</span>
+<span id="cb1-2"><a href="index.html#cb1-2" tabindex="-1"></a><span class="fu">head</span>(airquality)</span></code></pre></div>
+<pre><code>##   Ozone Solar.R Wind Temp Month Day
+## 1    41     190  7.4   67     5   1
+## 2    36     118  8.0   72     5   2
+## 3    12     149 12.6   74     5   3
+## 4    18     313 11.5   62     5   4
+## 5    NA      NA 14.3   56     5   5
+## 6    28      NA 14.9   66     5   6</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="index.html#cb3-1" tabindex="-1"></a>newdata <span class="ot">=</span> <span class="fu">na.omit</span>(airquality)</span>
+<span id="cb3-2"><a href="index.html#cb3-2" tabindex="-1"></a><span class="fu">print</span>(newdata)</span></code></pre></div>
+<pre><code>##     Ozone Solar.R Wind Temp Month Day
+## 1      41     190  7.4   67     5   1
+## 2      36     118  8.0   72     5   2
+## 3      12     149 12.6   74     5   3
+## 4      18     313 11.5   62     5   4
+## 7      23     299  8.6   65     5   7
+## 8      19      99 13.8   59     5   8
+## 9       8      19 20.1   61     5   9
+## 12     16     256  9.7   69     5  12
+## 13     11     290  9.2   66     5  13
+## 14     14     274 10.9   68     5  14
+## 15     18      65 13.2   58     5  15
+## 16     14     334 11.5   64     5  16
+## 17     34     307 12.0   66     5  17
+## 18      6      78 18.4   57     5  18
+## 19     30     322 11.5   68     5  19
+## 20     11      44  9.7   62     5  20
+## 21      1       8  9.7   59     5  21
+## 22     11     320 16.6   73     5  22
+## 23      4      25  9.7   61     5  23
+## 24     32      92 12.0   61     5  24
+## 28     23      13 12.0   67     5  28
+## 29     45     252 14.9   81     5  29
+## 30    115     223  5.7   79     5  30
+## 31     37     279  7.4   76     5  31
+## 38     29     127  9.7   82     6   7
+## 40     71     291 13.8   90     6   9
+## 41     39     323 11.5   87     6  10
+## 44     23     148  8.0   82     6  13
+## 47     21     191 14.9   77     6  16
+## 48     37     284 20.7   72     6  17
+## 49     20      37  9.2   65     6  18
+## 50     12     120 11.5   73     6  19
+## 51     13     137 10.3   76     6  20
+## 62    135     269  4.1   84     7   1
+## 63     49     248  9.2   85     7   2
+## 64     32     236  9.2   81     7   3
+## 66     64     175  4.6   83     7   5
+## 67     40     314 10.9   83     7   6
+## 68     77     276  5.1   88     7   7
+## 69     97     267  6.3   92     7   8
+## 70     97     272  5.7   92     7   9
+## 71     85     175  7.4   89     7  10
+## 73     10     264 14.3   73     7  12
+## 74     27     175 14.9   81     7  13
+## 76      7      48 14.3   80     7  15
+## 77     48     260  6.9   81     7  16
+## 78     35     274 10.3   82     7  17
+## 79     61     285  6.3   84     7  18
+## 80     79     187  5.1   87     7  19
+## 81     63     220 11.5   85     7  20
+## 82     16       7  6.9   74     7  21
+## 85     80     294  8.6   86     7  24
+## 86    108     223  8.0   85     7  25
+## 87     20      81  8.6   82     7  26
+## 88     52      82 12.0   86     7  27
+## 89     82     213  7.4   88     7  28
+## 90     50     275  7.4   86     7  29
+## 91     64     253  7.4   83     7  30
+## 92     59     254  9.2   81     7  31
+## 93     39      83  6.9   81     8   1
+## 94      9      24 13.8   81     8   2
+## 95     16      77  7.4   82     8   3
+## 99    122     255  4.0   89     8   7
+## 100    89     229 10.3   90     8   8
+## 101   110     207  8.0   90     8   9
+## 104    44     192 11.5   86     8  12
+## 105    28     273 11.5   82     8  13
+## 106    65     157  9.7   80     8  14
+## 108    22      71 10.3   77     8  16
+## 109    59      51  6.3   79     8  17
+## 110    23     115  7.4   76     8  18
+## 111    31     244 10.9   78     8  19
+## 112    44     190 10.3   78     8  20
+## 113    21     259 15.5   77     8  21
+## 114     9      36 14.3   72     8  22
+## 116    45     212  9.7   79     8  24
+## 117   168     238  3.4   81     8  25
+## 118    73     215  8.0   86     8  26
+## 120    76     203  9.7   97     8  28
+## 121   118     225  2.3   94     8  29
+## 122    84     237  6.3   96     8  30
+## 123    85     188  6.3   94     8  31
+## 124    96     167  6.9   91     9   1
+## 125    78     197  5.1   92     9   2
+## 126    73     183  2.8   93     9   3
+## 127    91     189  4.6   93     9   4
+## 128    47      95  7.4   87     9   5
+## 129    32      92 15.5   84     9   6
+## 130    20     252 10.9   80     9   7
+## 131    23     220 10.3   78     9   8
+## 132    21     230 10.9   75     9   9
+## 133    24     259  9.7   73     9  10
+## 134    44     236 14.9   81     9  11
+## 135    21     259 15.5   76     9  12
+## 136    28     238  6.3   77     9  13
+## 137     9      24 10.9   71     9  14
+## 138    13     112 11.5   71     9  15
+## 139    46     237  6.9   78     9  16
+## 140    18     224 13.8   67     9  17
+## 141    13      27 10.3   76     9  18
+## 142    24     238 10.3   68     9  19
+## 143    16     201  8.0   82     9  20
+## 144    13     238 12.6   64     9  21
+## 145    23      14  9.2   71     9  22
+## 146    36     139 10.3   81     9  23
+## 147     7      49 10.3   69     9  24
+## 148    14      20 16.6   63     9  25
+## 149    30     193  6.9   70     9  26
+## 151    14     191 14.3   75     9  28
+## 152    18     131  8.0   76     9  29
+## 153    20     223 11.5   68     9  30</code></pre>
+</div>
+<div id="obtain-the-5-number-summary" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Obtain the 5-number summary<a href="index.html#obtain-the-5-number-summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="index.html#cb5-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&#39;women&#39;</span>)</span>
+<span id="cb5-2"><a href="index.html#cb5-2" tabindex="-1"></a><span class="fu">summary</span>(women)</span></code></pre></div>
+<pre><code>##      height         weight     
+##  Min.   :58.0   Min.   :115.0  
+##  1st Qu.:61.5   1st Qu.:124.5  
+##  Median :65.0   Median :135.0  
+##  Mean   :65.0   Mean   :136.7  
+##  3rd Qu.:68.5   3rd Qu.:148.0  
+##  Max.   :72.0   Max.   :164.0</code></pre>
+</div>
+<div id="select-columns" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Select columns<a href="index.html#select-columns" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="method-1-use-the-indexname-of-the-column" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Method 1: use the index/name of the column<a href="index.html#method-1-use-the-indexname-of-the-column" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To extract the first column in <em>women</em> data set, one could insert the index of the column, which is 1, in between the square brackets, following the name of the data set.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="index.html#cb7-1" tabindex="-1"></a>women[<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>##    height
+## 1      58
+## 2      59
+## 3      60
+## 4      61
+## 5      62
+## 6      63
+## 7      64
+## 8      65
+## 9      66
+## 10     67
+## 11     68
+## 12     69
+## 13     70
+## 14     71
+## 15     72</code></pre>
+<p>Otherwise, one could also use the name of the column, in replacement of the its index, to extract the column from the data frame.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="index.html#cb9-1" tabindex="-1"></a>women[<span class="st">&quot;height&quot;</span>]</span></code></pre></div>
+<pre><code>##    height
+## 1      58
+## 2      59
+## 3      60
+## 4      61
+## 5      62
+## 6      63
+## 7      64
+## 8      65
+## 9      66
+## 10     67
+## 11     68
+## 12     69
+## 13     70
+## 14     71
+## 15     72</code></pre>
+<p>To select multiple columns, a vector including the names of the desired columns needs passing in between the square brackets as follows.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="index.html#cb11-1" tabindex="-1"></a>women[<span class="fu">c</span>(<span class="st">&quot;height&quot;</span>,<span class="st">&quot;weight&quot;</span>)]</span></code></pre></div>
+<pre><code>##    height weight
+## 1      58    115
+## 2      59    117
+## 3      60    120
+## 4      61    123
+## 5      62    126
+## 6      63    129
+## 7      64    132
+## 8      65    135
+## 9      66    139
+## 10     67    142
+## 11     68    146
+## 12     69    150
+## 13     70    154
+## 14     71    159
+## 15     72    164</code></pre>
+<div id="method-2-select-from-tidyverse-package" class="section level3 hasAnchor" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Method 2: <code>select</code> from <code>tidyverse</code> package<a href="index.html#method-2-select-from-tidyverse-package" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The first argument of the <code>select()</code> command is the data frame you’d like to extract data from, and the subsequent arguments are the name of the columns you wish to keep.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="index.html#cb13-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb13-2"><a href="index.html#cb13-2" tabindex="-1"></a><span class="fu">select</span>(women,height)</span></code></pre></div>
+<pre><code>##    height
+## 1      58
+## 2      59
+## 3      60
+## 4      61
+## 5      62
+## 6      63
+## 7      64
+## 8      65
+## 9      66
+## 10     67
+## 11     68
+## 12     69
+## 13     70
+## 14     71
+## 15     72</code></pre>
+<p>In the event that more than one columns are of interest, one can list other column names after the first column, separated by a comma.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="index.html#cb15-1" tabindex="-1"></a><span class="fu">select</span>(women,height,weight)</span></code></pre></div>
+<pre><code>##    height weight
+## 1      58    115
+## 2      59    117
+## 3      60    120
+## 4      61    123
+## 5      62    126
+## 6      63    129
+## 7      64    132
+## 8      65    135
+## 9      66    139
+## 10     67    142
+## 11     68    146
+## 12     69    150
+## 13     70    154
+## 14     71    159
+## 15     72    164</code></pre>
+</div>
+<div id="method-3-subset" class="section level3 hasAnchor" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Method 3: <code>subset()</code><a href="index.html#method-3-subset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Alternatively, you can also carry out the same task by using <code>subset()</code> command. The first argument in <code>subset()</code> is the data frame to be subsetted, followed by a logical expression indicating elements or rows to keep, and subsequently, an expression to indicate which columns to select from the original data frame.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="index.html#cb17-1" tabindex="-1"></a><span class="fu">subset</span>(women,<span class="at">select =</span> height)</span></code></pre></div>
+<pre><code>##    height
+## 1      58
+## 2      59
+## 3      60
+## 4      61
+## 5      62
+## 6      63
+## 7      64
+## 8      65
+## 9      66
+## 10     67
+## 11     68
+## 12     69
+## 13     70
+## 14     71
+## 15     72</code></pre>
+<p>To select more than one columns, one can pass a vector including the column names into <em>select</em> argument in <code>subset()</code>.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="index.html#cb19-1" tabindex="-1"></a><span class="fu">subset</span>(women,<span class="at">select =</span> <span class="fu">c</span>(height,weight))</span></code></pre></div>
+<pre><code>##    height weight
+## 1      58    115
+## 2      59    117
+## 3      60    120
+## 4      61    123
+## 5      62    126
+## 6      63    129
+## 7      64    132
+## 8      65    135
+## 9      66    139
+## 10     67    142
+## 11     68    146
+## 12     69    150
+## 13     70    154
+## 14     71    159
+## 15     72    164</code></pre>
+</div>
+</div>
+<div id="filter-rows" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Filter rows<a href="index.html#filter-rows" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="method-1-filter-from-tidyverse-package" class="section level3 hasAnchor" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Method 1: <code>filter()</code> from <code>tidyverse</code> package<a href="index.html#method-1-filter-from-tidyverse-package" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="index.html#cb21-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;airquality&quot;</span>)</span>
+<span id="cb21-2"><a href="index.html#cb21-2" tabindex="-1"></a><span class="fu">filter</span>(airquality,Month<span class="sc">==</span><span class="dv">5</span> <span class="sc">&amp;</span> Temp <span class="sc">&gt;</span><span class="dv">60</span>)</span></code></pre></div>
+<pre><code>##    Ozone Solar.R Wind Temp Month Day
+## 1     41     190  7.4   67     5   1
+## 2     36     118  8.0   72     5   2
+## 3     12     149 12.6   74     5   3
+## 4     18     313 11.5   62     5   4
+## 5     28      NA 14.9   66     5   6
+## 6     23     299  8.6   65     5   7
+## 7      8      19 20.1   61     5   9
+## 8     NA     194  8.6   69     5  10
+## 9      7      NA  6.9   74     5  11
+## 10    16     256  9.7   69     5  12
+## 11    11     290  9.2   66     5  13
+## 12    14     274 10.9   68     5  14
+## 13    14     334 11.5   64     5  16
+## 14    34     307 12.0   66     5  17
+## 15    30     322 11.5   68     5  19
+## 16    11      44  9.7   62     5  20
+## 17    11     320 16.6   73     5  22
+## 18     4      25  9.7   61     5  23
+## 19    32      92 12.0   61     5  24
+## 20    23      13 12.0   67     5  28
+## 21    45     252 14.9   81     5  29
+## 22   115     223  5.7   79     5  30
+## 23    37     279  7.4   76     5  31</code></pre>
+</div>
+<div id="method-2-subset" class="section level3 hasAnchor" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Method 2: <code>subset()</code><a href="index.html#method-2-subset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="index.html#cb23-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;airquality&quot;</span>)</span>
+<span id="cb23-2"><a href="index.html#cb23-2" tabindex="-1"></a><span class="fu">subset</span>(airquality,Month<span class="sc">==</span><span class="dv">5</span> <span class="sc">&amp;</span> Temp <span class="sc">&gt;</span><span class="dv">60</span>)</span></code></pre></div>
+<pre><code>##    Ozone Solar.R Wind Temp Month Day
+## 1     41     190  7.4   67     5   1
+## 2     36     118  8.0   72     5   2
+## 3     12     149 12.6   74     5   3
+## 4     18     313 11.5   62     5   4
+## 6     28      NA 14.9   66     5   6
+## 7     23     299  8.6   65     5   7
+## 9      8      19 20.1   61     5   9
+## 10    NA     194  8.6   69     5  10
+## 11     7      NA  6.9   74     5  11
+## 12    16     256  9.7   69     5  12
+## 13    11     290  9.2   66     5  13
+## 14    14     274 10.9   68     5  14
+## 16    14     334 11.5   64     5  16
+## 17    34     307 12.0   66     5  17
+## 19    30     322 11.5   68     5  19
+## 20    11      44  9.7   62     5  20
+## 22    11     320 16.6   73     5  22
+## 23     4      25  9.7   61     5  23
+## 24    32      92 12.0   61     5  24
+## 28    23      13 12.0   67     5  28
+## 29    45     252 14.9   81     5  29
+## 30   115     223  5.7   79     5  30
+## 31    37     279  7.4   76     5  31</code></pre>
+</div>
+</div>
+<div id="pipes" class="section level2 hasAnchor" number="1.6">
+<h2><span class="header-section-number">1.6</span> Pipes<a href="index.html#pipes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>What if you wished to perform multiple consecutive procedures on the same data? For example, in the <code>airquality</code> data set, let’s construct the 5-number summary the <em>Wind</em> column of days that are in May and have temperature above 60. There are three primary approaches to this problem: use intermediate steps, nested functions, or pipes.</p>
+<div id="intermediate-steps" class="section level3 hasAnchor" number="1.6.1">
+<h3><span class="header-section-number">1.6.1</span> Intermediate steps<a href="index.html#intermediate-steps" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First and foremost, we will want to impose the restriction of month and temperature on the original data set by using <code>filter()</code>, assign this new data set a name, apply <code>select()</code> on it and lastly, use <code>summary</code> to construct the 5-number summary.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="index.html#cb25-1" tabindex="-1"></a>new <span class="ot">=</span> <span class="fu">filter</span>(airquality,Month<span class="sc">==</span><span class="dv">5</span> <span class="sc">&amp;</span> Temp <span class="sc">&gt;</span><span class="dv">60</span>)</span>
+<span id="cb25-2"><a href="index.html#cb25-2" tabindex="-1"></a>wind <span class="ot">=</span> <span class="fu">select</span>(new,Wind)</span>
+<span id="cb25-3"><a href="index.html#cb25-3" tabindex="-1"></a><span class="fu">summary</span>(wind)</span></code></pre></div>
+<pre><code>##       Wind      
+##  Min.   : 5.70  
+##  1st Qu.: 8.60  
+##  Median :10.90  
+##  Mean   :10.93  
+##  3rd Qu.:12.00  
+##  Max.   :20.10</code></pre>
+<p>This is easy to interpret, but can clutter up your workspace with lots of objects that you have to name individually.</p>
+</div>
+<div id="nested-functions" class="section level3 hasAnchor" number="1.6.2">
+<h3><span class="header-section-number">1.6.2</span> Nested functions<a href="index.html#nested-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="index.html#cb27-1" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">select</span>(<span class="fu">filter</span>(airquality,Month<span class="sc">==</span><span class="dv">5</span> <span class="sc">&amp;</span> Temp <span class="sc">&gt;</span><span class="dv">60</span>),Wind))</span></code></pre></div>
+<pre><code>##       Wind      
+##  Min.   : 5.70  
+##  1st Qu.: 8.60  
+##  Median :10.90  
+##  Mean   :10.93  
+##  3rd Qu.:12.00  
+##  Max.   :20.10</code></pre>
+<p>This second approach, on the other hand, appears more complicated to read as the problem involves more steps.</p>
+</div>
+</div>
+<div id="pipes-1" class="section level2 hasAnchor" number="1.7">
+<h2><span class="header-section-number">1.7</span> Pipes<a href="index.html#pipes-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Pipes allow you to feed an object forward to a function or call expression, thereby allowing you to express a sequence of operations that transform an object. By default, the pipe passes the object on its left-hand side to the first argument of the function on the right-hand side.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="index.html#cb29-1" tabindex="-1"></a>airquality <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Month<span class="sc">==</span><span class="dv">5</span> <span class="sc">&amp;</span> Temp <span class="sc">&gt;</span><span class="dv">60</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Wind) <span class="sc">%&gt;%</span> summary</span></code></pre></div>
+<pre><code>##       Wind      
+##  Min.   : 5.70  
+##  1st Qu.: 8.60  
+##  Median :10.90  
+##  Mean   :10.93  
+##  3rd Qu.:12.00  
+##  Max.   :20.10</code></pre>
+</div>
+<div id="group-data-by-a-criterion" class="section level2 hasAnchor" number="1.8">
+<h2><span class="header-section-number">1.8</span> Group data by a criterion<a href="index.html#group-data-by-a-criterion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><code>summarise()</code> creates a new data frame. It returns one row for each combination of grouping variables; if there are no grouping variables, the output will have a single row summarising all observations in the input. It will contain one column for each grouping variable and one column for each of the summary statistics that you have specified.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="index.html#cb31-1" tabindex="-1"></a>airquality <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Month) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Average =</span> <span class="fu">mean</span>(Temp))</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 2
+##   Month Average
+##   &lt;int&gt;   &lt;dbl&gt;
+## 1     5    65.5
+## 2     6    79.1
+## 3     7    83.9
+## 4     8    84.0
+## 5     9    76.9</code></pre>
+</div>
+<div id="mutate" class="section level2 hasAnchor" number="1.9">
+<h2><span class="header-section-number">1.9</span> Mutate<a href="index.html#mutate" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="index.html#cb33-1" tabindex="-1"></a>airquality <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Hot =</span> <span class="fu">ifelse</span>(Temp <span class="sc">&gt;</span> <span class="dv">70</span>, <span class="st">&quot;Yes&quot;</span>,<span class="st">&quot;No&quot;</span>))</span></code></pre></div>
+<pre><code>##     Ozone Solar.R Wind Temp Month Day Hot
+## 1      41     190  7.4   67     5   1  No
+## 2      36     118  8.0   72     5   2 Yes
+## 3      12     149 12.6   74     5   3 Yes
+## 4      18     313 11.5   62     5   4  No
+## 5      NA      NA 14.3   56     5   5  No
+## 6      28      NA 14.9   66     5   6  No
+## 7      23     299  8.6   65     5   7  No
+## 8      19      99 13.8   59     5   8  No
+## 9       8      19 20.1   61     5   9  No
+## 10     NA     194  8.6   69     5  10  No
+## 11      7      NA  6.9   74     5  11 Yes
+## 12     16     256  9.7   69     5  12  No
+## 13     11     290  9.2   66     5  13  No
+## 14     14     274 10.9   68     5  14  No
+## 15     18      65 13.2   58     5  15  No
+## 16     14     334 11.5   64     5  16  No
+## 17     34     307 12.0   66     5  17  No
+## 18      6      78 18.4   57     5  18  No
+## 19     30     322 11.5   68     5  19  No
+## 20     11      44  9.7   62     5  20  No
+## 21      1       8  9.7   59     5  21  No
+## 22     11     320 16.6   73     5  22 Yes
+## 23      4      25  9.7   61     5  23  No
+## 24     32      92 12.0   61     5  24  No
+## 25     NA      66 16.6   57     5  25  No
+## 26     NA     266 14.9   58     5  26  No
+## 27     NA      NA  8.0   57     5  27  No
+## 28     23      13 12.0   67     5  28  No
+## 29     45     252 14.9   81     5  29 Yes
+## 30    115     223  5.7   79     5  30 Yes
+## 31     37     279  7.4   76     5  31 Yes
+## 32     NA     286  8.6   78     6   1 Yes
+## 33     NA     287  9.7   74     6   2 Yes
+## 34     NA     242 16.1   67     6   3  No
+## 35     NA     186  9.2   84     6   4 Yes
+## 36     NA     220  8.6   85     6   5 Yes
+## 37     NA     264 14.3   79     6   6 Yes
+## 38     29     127  9.7   82     6   7 Yes
+## 39     NA     273  6.9   87     6   8 Yes
+## 40     71     291 13.8   90     6   9 Yes
+## 41     39     323 11.5   87     6  10 Yes
+## 42     NA     259 10.9   93     6  11 Yes
+## 43     NA     250  9.2   92     6  12 Yes
+## 44     23     148  8.0   82     6  13 Yes
+## 45     NA     332 13.8   80     6  14 Yes
+## 46     NA     322 11.5   79     6  15 Yes
+## 47     21     191 14.9   77     6  16 Yes
+## 48     37     284 20.7   72     6  17 Yes
+## 49     20      37  9.2   65     6  18  No
+## 50     12     120 11.5   73     6  19 Yes
+## 51     13     137 10.3   76     6  20 Yes
+## 52     NA     150  6.3   77     6  21 Yes
+## 53     NA      59  1.7   76     6  22 Yes
+## 54     NA      91  4.6   76     6  23 Yes
+## 55     NA     250  6.3   76     6  24 Yes
+## 56     NA     135  8.0   75     6  25 Yes
+## 57     NA     127  8.0   78     6  26 Yes
+## 58     NA      47 10.3   73     6  27 Yes
+## 59     NA      98 11.5   80     6  28 Yes
+## 60     NA      31 14.9   77     6  29 Yes
+## 61     NA     138  8.0   83     6  30 Yes
+## 62    135     269  4.1   84     7   1 Yes
+## 63     49     248  9.2   85     7   2 Yes
+## 64     32     236  9.2   81     7   3 Yes
+## 65     NA     101 10.9   84     7   4 Yes
+## 66     64     175  4.6   83     7   5 Yes
+## 67     40     314 10.9   83     7   6 Yes
+## 68     77     276  5.1   88     7   7 Yes
+## 69     97     267  6.3   92     7   8 Yes
+## 70     97     272  5.7   92     7   9 Yes
+## 71     85     175  7.4   89     7  10 Yes
+## 72     NA     139  8.6   82     7  11 Yes
+## 73     10     264 14.3   73     7  12 Yes
+## 74     27     175 14.9   81     7  13 Yes
+## 75     NA     291 14.9   91     7  14 Yes
+## 76      7      48 14.3   80     7  15 Yes
+## 77     48     260  6.9   81     7  16 Yes
+## 78     35     274 10.3   82     7  17 Yes
+## 79     61     285  6.3   84     7  18 Yes
+## 80     79     187  5.1   87     7  19 Yes
+## 81     63     220 11.5   85     7  20 Yes
+## 82     16       7  6.9   74     7  21 Yes
+## 83     NA     258  9.7   81     7  22 Yes
+## 84     NA     295 11.5   82     7  23 Yes
+## 85     80     294  8.6   86     7  24 Yes
+## 86    108     223  8.0   85     7  25 Yes
+## 87     20      81  8.6   82     7  26 Yes
+## 88     52      82 12.0   86     7  27 Yes
+## 89     82     213  7.4   88     7  28 Yes
+## 90     50     275  7.4   86     7  29 Yes
+## 91     64     253  7.4   83     7  30 Yes
+## 92     59     254  9.2   81     7  31 Yes
+## 93     39      83  6.9   81     8   1 Yes
+## 94      9      24 13.8   81     8   2 Yes
+## 95     16      77  7.4   82     8   3 Yes
+## 96     78      NA  6.9   86     8   4 Yes
+## 97     35      NA  7.4   85     8   5 Yes
+## 98     66      NA  4.6   87     8   6 Yes
+## 99    122     255  4.0   89     8   7 Yes
+## 100    89     229 10.3   90     8   8 Yes
+## 101   110     207  8.0   90     8   9 Yes
+## 102    NA     222  8.6   92     8  10 Yes
+## 103    NA     137 11.5   86     8  11 Yes
+## 104    44     192 11.5   86     8  12 Yes
+## 105    28     273 11.5   82     8  13 Yes
+## 106    65     157  9.7   80     8  14 Yes
+## 107    NA      64 11.5   79     8  15 Yes
+## 108    22      71 10.3   77     8  16 Yes
+## 109    59      51  6.3   79     8  17 Yes
+## 110    23     115  7.4   76     8  18 Yes
+## 111    31     244 10.9   78     8  19 Yes
+## 112    44     190 10.3   78     8  20 Yes
+## 113    21     259 15.5   77     8  21 Yes
+## 114     9      36 14.3   72     8  22 Yes
+## 115    NA     255 12.6   75     8  23 Yes
+## 116    45     212  9.7   79     8  24 Yes
+## 117   168     238  3.4   81     8  25 Yes
+## 118    73     215  8.0   86     8  26 Yes
+## 119    NA     153  5.7   88     8  27 Yes
+## 120    76     203  9.7   97     8  28 Yes
+## 121   118     225  2.3   94     8  29 Yes
+## 122    84     237  6.3   96     8  30 Yes
+## 123    85     188  6.3   94     8  31 Yes
+## 124    96     167  6.9   91     9   1 Yes
+## 125    78     197  5.1   92     9   2 Yes
+## 126    73     183  2.8   93     9   3 Yes
+## 127    91     189  4.6   93     9   4 Yes
+## 128    47      95  7.4   87     9   5 Yes
+## 129    32      92 15.5   84     9   6 Yes
+## 130    20     252 10.9   80     9   7 Yes
+## 131    23     220 10.3   78     9   8 Yes
+## 132    21     230 10.9   75     9   9 Yes
+## 133    24     259  9.7   73     9  10 Yes
+## 134    44     236 14.9   81     9  11 Yes
+## 135    21     259 15.5   76     9  12 Yes
+## 136    28     238  6.3   77     9  13 Yes
+## 137     9      24 10.9   71     9  14 Yes
+## 138    13     112 11.5   71     9  15 Yes
+## 139    46     237  6.9   78     9  16 Yes
+## 140    18     224 13.8   67     9  17  No
+## 141    13      27 10.3   76     9  18 Yes
+## 142    24     238 10.3   68     9  19  No
+## 143    16     201  8.0   82     9  20 Yes
+## 144    13     238 12.6   64     9  21  No
+## 145    23      14  9.2   71     9  22 Yes
+## 146    36     139 10.3   81     9  23 Yes
+## 147     7      49 10.3   69     9  24  No
+## 148    14      20 16.6   63     9  25  No
+## 149    30     193  6.9   70     9  26  No
+## 150    NA     145 13.2   77     9  27 Yes
+## 151    14     191 14.3   75     9  28 Yes
+## 152    18     131  8.0   76     9  29 Yes
+## 153    20     223 11.5   68     9  30  No</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="index.html#cb35-1" tabindex="-1"></a>airquality <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Hot =</span> <span class="fu">ifelse</span>(Temp <span class="sc">&gt;</span> <span class="dv">70</span>, <span class="st">&quot;Yes&quot;</span>,<span class="st">&quot;No&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Hot) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="st">&quot;Average Temp&quot;</span> <span class="ot">=</span> <span class="fu">mean</span>(Temp))</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 2
+##   Hot   `Average Temp`
+##   &lt;chr&gt;          &lt;dbl&gt;
+## 1 No              63.8
+## 2 Yes             81.8</code></pre>
 
+</div>
 </div>
             </section>
 

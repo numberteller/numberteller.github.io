@@ -4,26 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 How to Ruin a Regression Model | YOUR TITLE HERE</title>
-  <meta name="description" content="Chapter 2 How to Ruin a Regression Model | YOUR TITLE HERE" />
+  <title>Chapter 2 How to Ruin a Regression Model | datRtective</title>
+  <meta name="description" content="Chapter 2 How to Ruin a Regression Model | datRtective" />
   <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 How to Ruin a Regression Model | YOUR TITLE HERE" />
+  <meta property="og:title" content="Chapter 2 How to Ruin a Regression Model | datRtective" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 How to Ruin a Regression Model | YOUR TITLE HERE" />
+  <meta name="twitter:title" content="Chapter 2 How to Ruin a Regression Model | datRtective" />
   
   
   
 
-<meta name="author" content="YOUR NAME HERE" />
+<meta name="author" content="Bao Maddux" />
 
 
-<meta name="date" content="2025-03-26" />
+<meta name="date" content="2025-04-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,7 +140,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Introduction to R Programming</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Down the rabbit-hole</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Data Wrangling in R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#remove-na-values"><i class="fa fa-check"></i><b>1.1</b> Remove NA values</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#obtain-the-5-number-summary"><i class="fa fa-check"></i><b>1.2</b> Obtain the 5-number summary</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#select-columns"><i class="fa fa-check"></i><b>1.3</b> Select columns</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#method-1-use-the-indexname-of-the-column"><i class="fa fa-check"></i><b>1.4</b> Method 1: use the index/name of the column</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="index.html"><a href="index.html#method-2-select-from-tidyverse-package"><i class="fa fa-check"></i><b>1.4.1</b> Method 2: <code>select</code> from <code>tidyverse</code> package</a></li>
+<li class="chapter" data-level="1.4.2" data-path="index.html"><a href="index.html#method-3-subset"><i class="fa fa-check"></i><b>1.4.2</b> Method 3: <code>subset()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#filter-rows"><i class="fa fa-check"></i><b>1.5</b> Filter rows</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#method-1-filter-from-tidyverse-package"><i class="fa fa-check"></i><b>1.5.1</b> Method 1: <code>filter()</code> from <code>tidyverse</code> package</a></li>
+<li class="chapter" data-level="1.5.2" data-path="index.html"><a href="index.html#method-2-subset"><i class="fa fa-check"></i><b>1.5.2</b> Method 2: <code>subset()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#pipes"><i class="fa fa-check"></i><b>1.6</b> Pipes</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="index.html"><a href="index.html#intermediate-steps"><i class="fa fa-check"></i><b>1.6.1</b> Intermediate steps</a></li>
+<li class="chapter" data-level="1.6.2" data-path="index.html"><a href="index.html#nested-functions"><i class="fa fa-check"></i><b>1.6.2</b> Nested functions</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#pipes-1"><i class="fa fa-check"></i><b>1.7</b> Pipes</a></li>
+<li class="chapter" data-level="1.8" data-path="index.html"><a href="index.html#group-data-by-a-criterion"><i class="fa fa-check"></i><b>1.8</b> Group data by a criterion</a></li>
+<li class="chapter" data-level="1.9" data-path="index.html"><a href="index.html#mutate"><i class="fa fa-check"></i><b>1.9</b> Mutate</a></li>
+</ul></li>
 <li class="chapter" data-level="2" data-path="how-to-ruin-a-regression-model.html"><a href="how-to-ruin-a-regression-model.html"><i class="fa fa-check"></i><b>2</b> How to Ruin a Regression Model</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="how-to-ruin-a-regression-model.html"><a href="how-to-ruin-a-regression-model.html#forgot-to-check-linear-regression-assumptions"><i class="fa fa-check"></i><b>2.1</b> Forgot to Check Linear Regression Assumptions</a></li>
@@ -158,7 +181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">YOUR TITLE HERE</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">datRtective</a>
           </h1>
         </div>
 
@@ -174,7 +197,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><strong>Linearity</strong>. This means that the mean of the response variable is a linear combination of the parameters (regression coefficients) and the predictor variables. Note that this assumption puts restriction on the <em>parameters</em> only and the predictor variables are treated as fixed values (see above). The predictor variables themselves can be arbitrarily transformed.</p>
 <p><u><em>How to check:</em></u> One can verify this assumption visually by a scatterplot of the response variable against the predictor variable, or numerically by the correlation coefficient. However, in the event of multiple predictor variables, individual correlation coefficients or individual scatterplots are no longer feasible. The most common way to check linearity in this case is to scatter-plot residuals against the linearly predicted values. Curved or non-horizontally spead cloud on such a plot is diagnostic for non-linearity.</p></li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="how-to-ruin-a-regression-model.html#cb1-1" tabindex="-1"></a><span class="fu">head</span>(women)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="how-to-ruin-a-regression-model.html#cb37-1" tabindex="-1"></a><span class="fu">head</span>(women)</span></code></pre></div>
 <pre><code>##   height weight
 ## 1     58    115
 ## 2     59    117
@@ -182,14 +205,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4     61    123
 ## 5     62    126
 ## 6     63    129</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="how-to-ruin-a-regression-model.html#cb3-1" tabindex="-1"></a><span class="fu">plot</span>(women<span class="sc">$</span>height,women<span class="sc">$</span>weight,<span class="at">xlab=</span><span class="st">&quot;Women&#39;s Heights&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;Women&#39;s Weights&quot;</span>, <span class="at">main=</span><span class="st">&quot;Scatterplot of Women&#39;s Heights against their Weights&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="how-to-ruin-a-regression-model.html#cb4-1" tabindex="-1"></a><span class="fu">cor</span>(women<span class="sc">$</span>height,women<span class="sc">$</span>weight)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="how-to-ruin-a-regression-model.html#cb39-1" tabindex="-1"></a><span class="fu">plot</span>(women<span class="sc">$</span>height,women<span class="sc">$</span>weight,<span class="at">xlab=</span><span class="st">&quot;Women&#39;s Heights&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;Women&#39;s Weights&quot;</span>, <span class="at">main=</span><span class="st">&quot;Scatterplot of Women&#39;s Heights against their Weights&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="how-to-ruin-a-regression-model.html#cb40-1" tabindex="-1"></a><span class="fu">cor</span>(women<span class="sc">$</span>height,women<span class="sc">$</span>weight)</span></code></pre></div>
 <pre><code>## [1] 0.9954948</code></pre>
 <p>In the next example, we will examine data set <em>Carseats</em> from ISLR library. There are 2 ways to assess a function from a particular library in R. One can either conjure up the library in advance</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="how-to-ruin-a-regression-model.html#cb6-1" tabindex="-1"></a><span class="fu">library</span>(ISLR)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="how-to-ruin-a-regression-model.html#cb42-1" tabindex="-1"></a><span class="fu">library</span>(ISLR)</span></code></pre></div>
 <pre><code>## Warning: package &#39;ISLR&#39; was built under R version 4.3.3</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="how-to-ruin-a-regression-model.html#cb8-1" tabindex="-1"></a><span class="fu">head</span>(Carseats)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="how-to-ruin-a-regression-model.html#cb44-1" tabindex="-1"></a><span class="fu">head</span>(Carseats)</span></code></pre></div>
 <pre><code>##   Sales CompPrice Income Advertising Population Price ShelveLoc Age Education
 ## 1  9.50       138     73          11        276   120       Bad  42        17
 ## 2 11.22       111     48          16        260    83      Good  65        10
@@ -205,7 +228,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5   Yes  No
 ## 6    No Yes</code></pre>
 <p>or one can also use double colons (::) to explicitly specify the library</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="how-to-ruin-a-regression-model.html#cb10-1" tabindex="-1"></a><span class="fu">head</span>(ISLR<span class="sc">::</span>Carseats)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="how-to-ruin-a-regression-model.html#cb46-1" tabindex="-1"></a><span class="fu">head</span>(ISLR<span class="sc">::</span>Carseats)</span></code></pre></div>
 <pre><code>##   Sales CompPrice Income Advertising Population Price ShelveLoc Age Education
 ## 1  9.50       138     73          11        276   120       Bad  42        17
 ## 2 11.22       111     48          16        260    83      Good  65        10
@@ -221,15 +244,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5   Yes  No
 ## 6    No Yes</code></pre>
 <p>To investigate the correlation among quantitative variables in this data set, let use eliminate qualitative variables (ShelveLoc, Urban, US) from the original data set and rename the altered data set to be <strong>newdat</strong>. One can get rid of the columns corresponding to aforementioned qualitative variables by their indices.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="how-to-ruin-a-regression-model.html#cb12-1" tabindex="-1"></a>newdat <span class="ot">=</span> ISLR<span class="sc">::</span>Carseats[,<span class="sc">-</span><span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">10</span>,<span class="dv">11</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="how-to-ruin-a-regression-model.html#cb48-1" tabindex="-1"></a>newdat <span class="ot">=</span> ISLR<span class="sc">::</span>Carseats[,<span class="sc">-</span><span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">10</span>,<span class="dv">11</span>)]</span></code></pre></div>
 <p>Alternatively, the task can also be done by employing function <code>subset</code> and the column names as follows</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="how-to-ruin-a-regression-model.html#cb13-1" tabindex="-1"></a>newdat <span class="ot">=</span> <span class="fu">subset</span>(ISLR<span class="sc">::</span>Carseats,<span class="at">select=</span><span class="sc">-</span><span class="fu">c</span>(ShelveLoc, Urban, US))</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="how-to-ruin-a-regression-model.html#cb49-1" tabindex="-1"></a>newdat <span class="ot">=</span> <span class="fu">subset</span>(ISLR<span class="sc">::</span>Carseats,<span class="at">select=</span><span class="sc">-</span><span class="fu">c</span>(ShelveLoc, Urban, US))</span></code></pre></div>
 <p>Passing <strong>newdat</strong> into <em>cor</em> function, <code>cor(newdat)</code>, one will receive a correlation matrix for all possible pairs of variables in <strong>newdat</strong>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="how-to-ruin-a-regression-model.html#cb14-1" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="how-to-ruin-a-regression-model.html#cb50-1" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span></code></pre></div>
 <pre><code>## Warning: package &#39;corrplot&#39; was built under R version 4.3.3</code></pre>
 <pre><code>## corrplot 0.95 loaded</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="how-to-ruin-a-regression-model.html#cb17-1" tabindex="-1"></a>cormat <span class="ot">=</span> <span class="fu">cor</span>(newdat)</span>
-<span id="cb17-2"><a href="how-to-ruin-a-regression-model.html#cb17-2" tabindex="-1"></a><span class="fu">print</span>(cormat)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="how-to-ruin-a-regression-model.html#cb53-1" tabindex="-1"></a>cormat <span class="ot">=</span> <span class="fu">cor</span>(newdat)</span>
+<span id="cb53-2"><a href="how-to-ruin-a-regression-model.html#cb53-2" tabindex="-1"></a><span class="fu">print</span>(cormat)</span></code></pre></div>
 <pre><code>##                   Sales   CompPrice       Income  Advertising   Population
 ## Sales        1.00000000  0.06407873  0.151950979  0.269506781  0.050470984
 ## CompPrice    0.06407873  1.00000000 -0.080653423 -0.024198788 -0.094706516
@@ -248,15 +271,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Price        1.00000000 -0.102176839  0.011746599
 ## Age         -0.10217684  1.000000000  0.006488032
 ## Education    0.01174660  0.006488032  1.000000000</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="how-to-ruin-a-regression-model.html#cb19-1" tabindex="-1"></a><span class="fu">corrplot</span>(cormat)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="how-to-ruin-a-regression-model.html#cb55-1" tabindex="-1"></a><span class="fu">corrplot</span>(cormat)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li><p><strong>Constant variance</strong> (homoscedasticity). This means that the variance of the errors does not depend on the values of the predictor variables. Thus the variability of the responses for given fixed values of the predictors is the same regardless of how large or small the responses are. The presence of heteroscedasticity will result in an overall “average” estimate of variance being used instead of one that takes into account the true variance structure. This leads to less precise (but in the case of ordinary least squares, not biased) parameter estimates and biased standard errors, resulting in misleading tests and interval estimates. The mean squared error for the model will also be wrong.</p>
 <p><u><em>How to check:</em></u> Graphically, this assumption can be validated by a plot of residuals versus predicted values (or the values of each individual predictor) can be examined for a “tunnel effect” (i.e. increasing or decreasing vertical spread as one moves left to right on the plot). Formally, Breusch-Pagan test (or Koenker-Bassett test) can be used to assess this assumption. Bear in mind that the Breusch-Pagan test tends to be sensitive to departures from normality or small sample sizes.</p></li>
 </ol>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="how-to-ruin-a-regression-model.html#cb20-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;women&quot;</span>)</span>
-<span id="cb20-2"><a href="how-to-ruin-a-regression-model.html#cb20-2" tabindex="-1"></a>model1 <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">formula =</span> women<span class="sc">$</span>height<span class="sc">~</span> women<span class="sc">$</span>weight, <span class="at">data =</span> women)</span>
-<span id="cb20-3"><a href="how-to-ruin-a-regression-model.html#cb20-3" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="how-to-ruin-a-regression-model.html#cb56-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;women&quot;</span>)</span>
+<span id="cb56-2"><a href="how-to-ruin-a-regression-model.html#cb56-2" tabindex="-1"></a>model1 <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">formula =</span> women<span class="sc">$</span>height<span class="sc">~</span> women<span class="sc">$</span>weight, <span class="at">data =</span> women)</span>
+<span id="cb56-3"><a href="how-to-ruin-a-regression-model.html#cb56-3" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = women$height ~ women$weight, data = women)
@@ -275,13 +298,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 0.44 on 13 degrees of freedom
 ## Multiple R-squared:  0.991,  Adjusted R-squared:  0.9903 
 ## F-statistic:  1433 on 1 and 13 DF,  p-value: 1.091e-14</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="how-to-ruin-a-regression-model.html#cb22-1" tabindex="-1"></a><span class="fu">plot</span>(model1<span class="sc">$</span>fitted.values,<span class="fu">resid</span>(model1),<span class="at">xlab=</span><span class="st">&quot;Fitted Values&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;Residuals&quot;</span>, <span class="at">main=</span><span class="st">&quot;Residuals versus Fitted Values Plot&quot;</span>)</span>
-<span id="cb22-2"><a href="how-to-ruin-a-regression-model.html#cb22-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="how-to-ruin-a-regression-model.html#cb58-1" tabindex="-1"></a><span class="fu">plot</span>(model1<span class="sc">$</span>fitted.values,<span class="fu">resid</span>(model1),<span class="at">xlab=</span><span class="st">&quot;Fitted Values&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;Residuals&quot;</span>, <span class="at">main=</span><span class="st">&quot;Residuals versus Fitted Values Plot&quot;</span>)</span>
+<span id="cb58-2"><a href="how-to-ruin-a-regression-model.html#cb58-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>There is a conspicuous pattern in residuals for the model <span class="math inline">\(\hat{height} = a + b\times weight\)</span>. The curvilinear trajectory, as a matter of fact, suggests a quadratic relationship between womens’ heights and their weights. It is reasonable to add a second order term into the model.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="how-to-ruin-a-regression-model.html#cb23-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;women&quot;</span>)</span>
-<span id="cb23-2"><a href="how-to-ruin-a-regression-model.html#cb23-2" tabindex="-1"></a>model2 <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">formula =</span> women<span class="sc">$</span>height<span class="sc">~</span> women<span class="sc">$</span>weight <span class="sc">+</span> <span class="fu">I</span>(women<span class="sc">$</span>weight<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> women)</span>
-<span id="cb23-3"><a href="how-to-ruin-a-regression-model.html#cb23-3" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="how-to-ruin-a-regression-model.html#cb59-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;women&quot;</span>)</span>
+<span id="cb59-2"><a href="how-to-ruin-a-regression-model.html#cb59-2" tabindex="-1"></a>model2 <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">formula =</span> women<span class="sc">$</span>height<span class="sc">~</span> women<span class="sc">$</span>weight <span class="sc">+</span> <span class="fu">I</span>(women<span class="sc">$</span>weight<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> women)</span>
+<span id="cb59-3"><a href="how-to-ruin-a-regression-model.html#cb59-3" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = women$height ~ women$weight + I(women$weight^2), 
@@ -302,18 +325,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 0.07158 on 12 degrees of freedom
 ## Multiple R-squared:  0.9998, Adjusted R-squared:  0.9997 
 ## F-statistic: 2.732e+04 on 2 and 12 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="how-to-ruin-a-regression-model.html#cb25-1" tabindex="-1"></a><span class="fu">plot</span>(model2<span class="sc">$</span>fitted.values,<span class="fu">resid</span>(model2),<span class="at">xlab=</span><span class="st">&quot;Fitted Values&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;Residuals&quot;</span>, <span class="at">main=</span><span class="st">&quot;Residuals versus Fitted Values Plot (Model 2)&quot;</span>)</span>
-<span id="cb25-2"><a href="how-to-ruin-a-regression-model.html#cb25-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="how-to-ruin-a-regression-model.html#cb61-1" tabindex="-1"></a><span class="fu">plot</span>(model2<span class="sc">$</span>fitted.values,<span class="fu">resid</span>(model2),<span class="at">xlab=</span><span class="st">&quot;Fitted Values&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;Residuals&quot;</span>, <span class="at">main=</span><span class="st">&quot;Residuals versus Fitted Values Plot (Model 2)&quot;</span>)</span>
+<span id="cb61-2"><a href="how-to-ruin-a-regression-model.html#cb61-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <ol start="3" style="list-style-type: decimal">
 <li><p><strong>Independence of errors</strong>. This assumes that the errors of the response variables are uncorrelated with each other.</p>
 <p><u><em>How to check:</em></u> To test for violations of independence, you can look at plots of the residuals versus predictor variables or plots of residuals versus row number in situations where the rows have been sorted or grouped in some way that depends (only) on the values of the predictor variables. The residuals should be randomly and symmetrically distributed around zero.</p></li>
 <li><p><strong>Normally distributed errors</strong> implies that the errors follow a Normal distribution.</p>
 <p>Technically, the normal distribution assumption is not necessary if you are willing to assume the model equation is correct and your only goal is to estimate its coefficients and generate predictions in such a way as to minimize mean squared error. The formulas for estimating coefficients require no more than that, and some references on regression analysis do not list normally distributed errors among the key assumptions. But generally we are interested in making inferences about the model and/or estimating the probability that a given forecast error will exceed some threshold in a particular direction, in which case distributional assumptions are important. Also, a significant violation of the normal distribution assumption is often a “red flag” indicating that there is some other problem with the model assumptions and/or that there are a few unusual data points that should be studied closely and/or that a better model is still waiting out there somewhere.</p></li>
 </ol>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="how-to-ruin-a-regression-model.html#cb26-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;women&quot;</span>)</span>
-<span id="cb26-2"><a href="how-to-ruin-a-regression-model.html#cb26-2" tabindex="-1"></a>model <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">formula =</span> women<span class="sc">$</span>height<span class="sc">~</span> women<span class="sc">$</span>weight, <span class="at">data =</span> women)</span>
-<span id="cb26-3"><a href="how-to-ruin-a-regression-model.html#cb26-3" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="how-to-ruin-a-regression-model.html#cb62-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;women&quot;</span>)</span>
+<span id="cb62-2"><a href="how-to-ruin-a-regression-model.html#cb62-2" tabindex="-1"></a>model <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">formula =</span> women<span class="sc">$</span>height<span class="sc">~</span> women<span class="sc">$</span>weight, <span class="at">data =</span> women)</span>
+<span id="cb62-3"><a href="how-to-ruin-a-regression-model.html#cb62-3" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = women$height ~ women$weight, data = women)
@@ -332,13 +355,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 0.44 on 13 degrees of freedom
 ## Multiple R-squared:  0.991,  Adjusted R-squared:  0.9903 
 ## F-statistic:  1433 on 1 and 13 DF,  p-value: 1.091e-14</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="how-to-ruin-a-regression-model.html#cb28-1" tabindex="-1"></a>res <span class="ot">=</span> <span class="fu">resid</span>(model)</span>
-<span id="cb28-2"><a href="how-to-ruin-a-regression-model.html#cb28-2" tabindex="-1"></a><span class="fu">qqnorm</span>(res)</span>
-<span id="cb28-3"><a href="how-to-ruin-a-regression-model.html#cb28-3" tabindex="-1"></a><span class="fu">qqline</span>(res)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="how-to-ruin-a-regression-model.html#cb29-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;women&quot;</span>)</span>
-<span id="cb29-2"><a href="how-to-ruin-a-regression-model.html#cb29-2" tabindex="-1"></a>model <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">formula =</span> women<span class="sc">$</span>height<span class="sc">~</span> women<span class="sc">$</span>weight <span class="sc">+</span> <span class="fu">I</span>(women<span class="sc">$</span>weight<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> women)</span>
-<span id="cb29-3"><a href="how-to-ruin-a-regression-model.html#cb29-3" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="how-to-ruin-a-regression-model.html#cb64-1" tabindex="-1"></a>res <span class="ot">=</span> <span class="fu">resid</span>(model)</span>
+<span id="cb64-2"><a href="how-to-ruin-a-regression-model.html#cb64-2" tabindex="-1"></a><span class="fu">qqnorm</span>(res)</span>
+<span id="cb64-3"><a href="how-to-ruin-a-regression-model.html#cb64-3" tabindex="-1"></a><span class="fu">qqline</span>(res)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="how-to-ruin-a-regression-model.html#cb65-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;women&quot;</span>)</span>
+<span id="cb65-2"><a href="how-to-ruin-a-regression-model.html#cb65-2" tabindex="-1"></a>model <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">formula =</span> women<span class="sc">$</span>height<span class="sc">~</span> women<span class="sc">$</span>weight <span class="sc">+</span> <span class="fu">I</span>(women<span class="sc">$</span>weight<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> women)</span>
+<span id="cb65-3"><a href="how-to-ruin-a-regression-model.html#cb65-3" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = women$height ~ women$weight + I(women$weight^2), 
@@ -359,10 +382,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 0.07158 on 12 degrees of freedom
 ## Multiple R-squared:  0.9998, Adjusted R-squared:  0.9997 
 ## F-statistic: 2.732e+04 on 2 and 12 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="how-to-ruin-a-regression-model.html#cb31-1" tabindex="-1"></a>res <span class="ot">=</span> <span class="fu">resid</span>(model)</span>
-<span id="cb31-2"><a href="how-to-ruin-a-regression-model.html#cb31-2" tabindex="-1"></a><span class="fu">qqnorm</span>(res)</span>
-<span id="cb31-3"><a href="how-to-ruin-a-regression-model.html#cb31-3" tabindex="-1"></a><span class="fu">qqline</span>(res)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="how-to-ruin-a-regression-model.html#cb67-1" tabindex="-1"></a>res <span class="ot">=</span> <span class="fu">resid</span>(model)</span>
+<span id="cb67-2"><a href="how-to-ruin-a-regression-model.html#cb67-2" tabindex="-1"></a><span class="fu">qqnorm</span>(res)</span>
+<span id="cb67-3"><a href="how-to-ruin-a-regression-model.html#cb67-3" tabindex="-1"></a><span class="fu">qqline</span>(res)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <ol start="5" style="list-style-type: decimal">
 <li><strong>Lack of perfect multicollinearity</strong> in the predictors. Perfect multicollinearity refers to a situation where the predictive variables have an exact linear relationship. This can be caused by accidentally duplicating a variable in the data, using a linear transformation of a variable along with the original (e.g., the same temperature measurements expressed in Fahrenheit and Celsius), or including a linear combination of multiple variables in the model, such as their mean.</li>
 </ol>
