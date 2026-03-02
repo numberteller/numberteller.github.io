@@ -1,8 +1,5 @@
 
 # How to Ruin a Regression Model
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## Forgot to Check Linear Regression Assumptions
 

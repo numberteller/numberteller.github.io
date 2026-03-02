@@ -4,7 +4,9 @@ author: "Bao Maddux"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
-
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 # Data Wrangling in R
 Manipulation of data frames is a common task when you start exploring your data in R and dplyr is a package for making tabular data manipulation easier. `tidyverse` is an “umbrella-package” that installs a series of packages useful for data analysis which work together well. Some of them are considered core packages (among them `tidyr`, `dplyr`, `ggplot2`), because you are likely to use them in almost every analysis. Other packages, like `lubridate` (to work with dates) or `haven` (for SPSS, Stata, and SAS data) that you are likely to use not for every analysis are also installed.
 

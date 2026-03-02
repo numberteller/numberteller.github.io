@@ -41,3 +41,4 @@ factors
 ordered-factors
 changing-factor-levels
 factors-in-data-frames
+summary-table
