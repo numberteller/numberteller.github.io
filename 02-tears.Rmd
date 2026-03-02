@@ -1,16 +1,3 @@
----
-title: "Lesson 01 - Data Structures and Data Types"
-author: "Bao Maddux"
-date: "2026-01-26"
-output:   
-  html_document:
-    number_sections: true
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 # Data Structures in R Overview
 
 A *data structure* is a particular way of organizing data in a computer so that it can be used effectively. The idea is to reduce the space and time complexities of different tasks. Data structures in R programming are tools for holding multiple values.
