@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Data Wrangling with dplyr | datRtective</title>
+  <meta name="description" content="Chapter 3 Data Wrangling with dplyr | datRtective" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Data Wrangling with dplyr | datRtective" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Data Wrangling with dplyr | datRtective" />
+  
+  
+  
+
+<meta name="author" content="Bao Maddux" />
+
+
+<meta name="date" content="2026-03-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-structures-in-r-overview-1.html"/>
+<link rel="next" href="how-to-ruin-a-regression-model.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to R Programming</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Data Structures in R Overview</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#vector"><i class="fa fa-check"></i><b>1.1</b> Vector</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#vectorized-operations"><i class="fa fa-check"></i><b>1.1.1</b> Vectorized Operations</a></li>
+<li class="chapter" data-level="1.1.2" data-path="index.html"><a href="index.html#accessing-vector-elements"><i class="fa fa-check"></i><b>1.1.2</b> Accessing Vector Elements</a></li>
+<li class="chapter" data-level="1.1.3" data-path="index.html"><a href="index.html#remove-vector-elements"><i class="fa fa-check"></i><b>1.1.3</b> Remove Vector Elements</a></li>
+<li class="chapter" data-level="1.1.4" data-path="index.html"><a href="index.html#coercion-in-a-vector"><i class="fa fa-check"></i><b>1.1.4</b> Coercion in a Vector</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#lists"><i class="fa fa-check"></i><b>1.2</b> Lists</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#matrices"><i class="fa fa-check"></i><b>1.3</b> Matrices</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#naming-rows-and-columns"><i class="fa fa-check"></i><b>1.3.1</b> Naming Rows and Columns</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#accessing-matrix-elements"><i class="fa fa-check"></i><b>1.3.2</b> Accessing Matrix Elements</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#matrix-operations"><i class="fa fa-check"></i><b>1.3.3</b> Matrix Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#arrays"><i class="fa fa-check"></i><b>1.4</b> Arrays</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="index.html"><a href="index.html#accessing-array-elements"><i class="fa fa-check"></i><b>1.4.1</b> Accessing Array Elements</a></li>
+<li class="chapter" data-level="1.4.2" data-path="index.html"><a href="index.html#naming-array-dimensions"><i class="fa fa-check"></i><b>1.4.2</b> Naming Array Dimensions</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#data-frames"><i class="fa fa-check"></i><b>1.5</b> Data Frames</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#examining-data-frame-structure"><i class="fa fa-check"></i><b>1.5.1</b> Examining Data Frame Structure</a></li>
+<li class="chapter" data-level="1.5.2" data-path="index.html"><a href="index.html#accessing-data-frame-elements"><i class="fa fa-check"></i><b>1.5.2</b> Accessing Data Frame Elements</a></li>
+<li class="chapter" data-level="1.5.3" data-path="index.html"><a href="index.html#adding-and-modifying-columns"><i class="fa fa-check"></i><b>1.5.3</b> Adding and Modifying Columns</a></li>
+<li class="chapter" data-level="1.5.4" data-path="index.html"><a href="index.html#useful-data-frame-functions"><i class="fa fa-check"></i><b>1.5.4</b> Useful Data Frame Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#factors"><i class="fa fa-check"></i><b>1.6</b> Factors</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="index.html"><a href="index.html#ordered-factors"><i class="fa fa-check"></i><b>1.6.1</b> Ordered Factors</a></li>
+<li class="chapter" data-level="1.6.2" data-path="index.html"><a href="index.html#changing-factor-levels"><i class="fa fa-check"></i><b>1.6.2</b> Changing Factor Levels</a></li>
+<li class="chapter" data-level="1.6.3" data-path="index.html"><a href="index.html#factors-in-data-frames"><i class="fa fa-check"></i><b>1.6.3</b> Factors in Data Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#summary-table"><i class="fa fa-check"></i><b>1.7</b> Summary Table</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html"><i class="fa fa-check"></i><b>2</b> Data Structures in R Overview</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#vector-1"><i class="fa fa-check"></i><b>2.1</b> Vector</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#vectorized-operations-1"><i class="fa fa-check"></i><b>2.1.1</b> Vectorized Operations</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#accessing-vector-elements-1"><i class="fa fa-check"></i><b>2.1.2</b> Accessing Vector Elements</a></li>
+<li class="chapter" data-level="2.1.3" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#remove-vector-elements-1"><i class="fa fa-check"></i><b>2.1.3</b> Remove Vector Elements</a></li>
+<li class="chapter" data-level="2.1.4" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#coercion-in-a-vector-1"><i class="fa fa-check"></i><b>2.1.4</b> Coercion in a Vector</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#lists-1"><i class="fa fa-check"></i><b>2.2</b> Lists</a></li>
+<li class="chapter" data-level="2.3" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#matrices-1"><i class="fa fa-check"></i><b>2.3</b> Matrices</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#naming-rows-and-columns-1"><i class="fa fa-check"></i><b>2.3.1</b> Naming Rows and Columns</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#accessing-matrix-elements-1"><i class="fa fa-check"></i><b>2.3.2</b> Accessing Matrix Elements</a></li>
+<li class="chapter" data-level="2.3.3" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#matrix-operations-1"><i class="fa fa-check"></i><b>2.3.3</b> Matrix Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#arrays-1"><i class="fa fa-check"></i><b>2.4</b> Arrays</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#accessing-array-elements-1"><i class="fa fa-check"></i><b>2.4.1</b> Accessing Array Elements</a></li>
+<li class="chapter" data-level="2.4.2" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#naming-array-dimensions-1"><i class="fa fa-check"></i><b>2.4.2</b> Naming Array Dimensions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#data-frames-1"><i class="fa fa-check"></i><b>2.5</b> Data Frames</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#examining-data-frame-structure-1"><i class="fa fa-check"></i><b>2.5.1</b> Examining Data Frame Structure</a></li>
+<li class="chapter" data-level="2.5.2" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#accessing-data-frame-elements-1"><i class="fa fa-check"></i><b>2.5.2</b> Accessing Data Frame Elements</a></li>
+<li class="chapter" data-level="2.5.3" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#adding-and-modifying-columns-1"><i class="fa fa-check"></i><b>2.5.3</b> Adding and Modifying Columns</a></li>
+<li class="chapter" data-level="2.5.4" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#useful-data-frame-functions-1"><i class="fa fa-check"></i><b>2.5.4</b> Useful Data Frame Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#factors-1"><i class="fa fa-check"></i><b>2.6</b> Factors</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#ordered-factors-1"><i class="fa fa-check"></i><b>2.6.1</b> Ordered Factors</a></li>
+<li class="chapter" data-level="2.6.2" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#changing-factor-levels-1"><i class="fa fa-check"></i><b>2.6.2</b> Changing Factor Levels</a></li>
+<li class="chapter" data-level="2.6.3" data-path="data-structures-in-r-overview-1.html"><a href="data-structures-in-r-overview-1.html#factors-in-data-frames-1"><i class="fa fa-check"></i><b>2.6.3</b> Factors in Data Frames</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html"><i class="fa fa-check"></i><b>3</b> Data Wrangling with dplyr</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#what-is-dplyr"><i class="fa fa-check"></i><b>3.1</b> What is dplyr?</a></li>
+<li class="chapter" data-level="3.2" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#installing-and-loading-dplyr-and-tidyr"><i class="fa fa-check"></i><b>3.2</b> Installing and Loading dplyr and tidyr</a></li>
+<li class="chapter" data-level="3.3" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#core-dplyr-verbs"><i class="fa fa-check"></i><b>3.3</b> Core dplyr Verbs</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#rename-rename-columns"><i class="fa fa-check"></i><b>3.3.1</b> <code>rename()</code>: Rename Columns</a></li>
+<li class="chapter" data-level="3.3.2" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#select-choose-columns"><i class="fa fa-check"></i><b>3.3.2</b> <code>select()</code>: Choose Columns</a></li>
+<li class="chapter" data-level="3.3.3" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#filter-choose-rows"><i class="fa fa-check"></i><b>3.3.3</b> <code>filter()</code>: Choose Rows</a></li>
+<li class="chapter" data-level="3.3.4" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#arrange-sort-rows"><i class="fa fa-check"></i><b>3.3.4</b> <code>arrange()</code>: Sort Rows</a></li>
+<li class="chapter" data-level="3.3.5" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#mutate-create-new-variables"><i class="fa fa-check"></i><b>3.3.5</b> <code>mutate()</code>: Create New Variables</a></li>
+<li class="chapter" data-level="3.3.6" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#summarize-calculate-summary-statistics"><i class="fa fa-check"></i><b>3.3.6</b> <code>summarize()</code>: Calculate Summary Statistics</a></li>
+<li class="chapter" data-level="3.3.7" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#group_by-group-operations"><i class="fa fa-check"></i><b>3.3.7</b> <code>group_by()</code>: Group Operations</a></li>
+<li class="chapter" data-level="3.3.8" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#pivot_longer-reshape-from-wide-to-long"><i class="fa fa-check"></i><b>3.3.8</b> <code>pivot_longer()</code>: Reshape from Wide to Long</a></li>
+<li class="chapter" data-level="3.3.9" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#pivot_wider-reshape-from-long-to-wide"><i class="fa fa-check"></i><b>3.3.9</b> <code>pivot_wider()</code>: Reshape from Long to Wide</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#the-pipe-operator"><i class="fa fa-check"></i><b>3.4</b> The Pipe Operator: <code>%&gt;%</code></a></li>
+<li class="chapter" data-level="3.5" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#combining-multiple-operations"><i class="fa fa-check"></i><b>3.5</b> Combining Multiple Operations</a></li>
+<li class="chapter" data-level="3.6" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#useful-helper-functions"><i class="fa fa-check"></i><b>3.6</b> Useful Helper Functions</a></li>
+<li class="chapter" data-level="3.7" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#summary"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#references"><i class="fa fa-check"></i><b>3.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="how-to-ruin-a-regression-model.html"><a href="how-to-ruin-a-regression-model.html"><i class="fa fa-check"></i><b>4</b> How to Ruin a Regression Model</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="how-to-ruin-a-regression-model.html"><a href="how-to-ruin-a-regression-model.html#forgot-to-check-linear-regression-assumptions"><i class="fa fa-check"></i><b>4.1</b> Forgot to Check Linear Regression Assumptions</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">datRtective</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-wrangling-with-dplyr" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Data Wrangling with dplyr<a href="data-wrangling-with-dplyr.html#data-wrangling-with-dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>For this lecture, we will use the built-in <code>mtcars</code> dataset and save it as a CSV to demonstrate the import process:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="data-wrangling-with-dplyr.html#cb1-1" tabindex="-1"></a><span class="co"># First, let&#39;s save mtcars as a CSV file for demonstration</span></span>
+<span id="cb1-2"><a href="data-wrangling-with-dplyr.html#cb1-2" tabindex="-1"></a><span class="fu">write.csv</span>(mtcars, <span class="st">&quot;mtcars_example.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-3"><a href="data-wrangling-with-dplyr.html#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="data-wrangling-with-dplyr.html#cb1-4" tabindex="-1"></a><span class="co"># Now import it back</span></span>
+<span id="cb1-5"><a href="data-wrangling-with-dplyr.html#cb1-5" tabindex="-1"></a>car_data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;mtcars_example.csv&quot;</span>)</span></code></pre></div>
+<div id="what-is-dplyr" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> What is dplyr?<a href="data-wrangling-with-dplyr.html#what-is-dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>dplyr</strong> is a powerful R package that provides a consistent set of functions (called “verbs”) for manipulating data frames. It is part of the <strong>tidyverse</strong>, a collection of R packages designed for data science.</p>
+<p>The key advantages of dplyr include:</p>
+<ul>
+<li><strong>Readable syntax</strong>: Functions are named as verbs that describe what they do</li>
+<li><strong>Consistent interface</strong>: All functions work the same way</li>
+<li><strong>Speed</strong>: Optimized for performance on large datasets</li>
+<li><strong>Pipe operator</strong>: Allows chaining multiple operations together</li>
+</ul>
+<p>We will also introduce <strong>tidyr</strong>, another tidyverse package that provides functions for reshaping data between wide and long formats.</p>
+</div>
+<div id="installing-and-loading-dplyr-and-tidyr" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Installing and Loading dplyr and tidyr<a href="data-wrangling-with-dplyr.html#installing-and-loading-dplyr-and-tidyr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="data-wrangling-with-dplyr.html#cb2-1" tabindex="-1"></a><span class="co"># Install packages (only need to do this once)</span></span>
+<span id="cb2-2"><a href="data-wrangling-with-dplyr.html#cb2-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span>
+<span id="cb2-3"><a href="data-wrangling-with-dplyr.html#cb2-3" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyr&quot;</span>)</span>
+<span id="cb2-4"><a href="data-wrangling-with-dplyr.html#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="data-wrangling-with-dplyr.html#cb2-5" tabindex="-1"></a><span class="co"># Or install the entire tidyverse (includes both)</span></span>
+<span id="cb2-6"><a href="data-wrangling-with-dplyr.html#cb2-6" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="data-wrangling-with-dplyr.html#cb3-1" tabindex="-1"></a><span class="co"># Load tidyverse (includes dplyr and tidyr)</span></span>
+<span id="cb3-2"><a href="data-wrangling-with-dplyr.html#cb3-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<pre><code>## Warning: package &#39;tidyverse&#39; was built under R version 4.3.3</code></pre>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.3.3</code></pre>
+<pre><code>## Warning: package &#39;tibble&#39; was built under R version 4.3.2</code></pre>
+<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 4.3.2</code></pre>
+<pre><code>## Warning: package &#39;readr&#39; was built under R version 4.3.3</code></pre>
+<pre><code>## Warning: package &#39;purrr&#39; was built under R version 4.3.3</code></pre>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.3.2</code></pre>
+<pre><code>## Warning: package &#39;forcats&#39; was built under R version 4.3.3</code></pre>
+<pre><code>## Warning: package &#39;lubridate&#39; was built under R version 4.3.2</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+## ✔ forcats   1.0.0     ✔ stringr   1.5.0
+## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+## ✔ purrr     1.0.2     
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div id="core-dplyr-verbs" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Core dplyr Verbs<a href="data-wrangling-with-dplyr.html#core-dplyr-verbs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="rename-rename-columns" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> <code>rename()</code>: Rename Columns<a href="data-wrangling-with-dplyr.html#rename-rename-columns" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>rename()</code> function changes the names of columns in a data frame. This is useful when column names are unclear, too long, or inconsistent with your naming conventions.</p>
+<p><strong>Syntax:</strong></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="data-wrangling-with-dplyr.html#cb14-1" tabindex="-1"></a><span class="fu">rename</span>(data, <span class="at">new_name =</span> old_name, ...)</span></code></pre></div>
+<p><strong>Key arguments:</strong></p>
+<ul>
+<li><code>new_name = old_name</code>: The new column name on the left, the existing column name on the right</li>
+<li>Can rename multiple columns in one call</li>
+<li>Column names with spaces or special characters need backticks: <code>`old name`</code></li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="data-wrangling-with-dplyr.html#cb15-1" tabindex="-1"></a><span class="co"># Rename a single column</span></span>
+<span id="cb15-2"><a href="data-wrangling-with-dplyr.html#cb15-2" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rename</span>(car_data, <span class="at">miles_per_gallon =</span> mpg), <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##               X miles_per_gallon cyl disp  hp drat    wt  qsec vs am gear carb
+## 1     Mazda RX4             21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## 2 Mazda RX4 Wag             21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## 3    Datsun 710             22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="data-wrangling-with-dplyr.html#cb17-1" tabindex="-1"></a><span class="co"># Rename multiple columns</span></span>
+<span id="cb17-2"><a href="data-wrangling-with-dplyr.html#cb17-2" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rename</span>(car_data, </span>
+<span id="cb17-3"><a href="data-wrangling-with-dplyr.html#cb17-3" tabindex="-1"></a>            <span class="at">miles_per_gallon =</span> mpg, </span>
+<span id="cb17-4"><a href="data-wrangling-with-dplyr.html#cb17-4" tabindex="-1"></a>            <span class="at">horsepower =</span> hp,</span>
+<span id="cb17-5"><a href="data-wrangling-with-dplyr.html#cb17-5" tabindex="-1"></a>            <span class="at">weight =</span> wt), <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##               X miles_per_gallon cyl disp horsepower drat weight  qsec vs am
+## 1     Mazda RX4             21.0   6  160        110 3.90  2.620 16.46  0  1
+## 2 Mazda RX4 Wag             21.0   6  160        110 3.90  2.875 17.02  0  1
+## 3    Datsun 710             22.8   4  108         93 3.85  2.320 18.61  1  1
+##   gear carb
+## 1    4    4
+## 2    4    4
+## 3    4    1</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="data-wrangling-with-dplyr.html#cb19-1" tabindex="-1"></a><span class="co"># Save renamed data to a new variable</span></span>
+<span id="cb19-2"><a href="data-wrangling-with-dplyr.html#cb19-2" tabindex="-1"></a>car_renamed <span class="ot">=</span> <span class="fu">rename</span>(car_data, <span class="at">cylinders =</span> cyl, <span class="at">gear_count =</span> gear)</span>
+<span id="cb19-3"><a href="data-wrangling-with-dplyr.html#cb19-3" tabindex="-1"></a><span class="fu">head</span>(car_renamed, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##               X  mpg cylinders disp  hp drat    wt  qsec vs am gear_count carb
+## 1     Mazda RX4 21.0         6  160 110 3.90 2.620 16.46  0  1          4    4
+## 2 Mazda RX4 Wag 21.0         6  160 110 3.90 2.875 17.02  0  1          4    4
+## 3    Datsun 710 22.8         4  108  93 3.85 2.320 18.61  1  1          4    1</code></pre>
+</div>
+<div id="select-choose-columns" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> <code>select()</code>: Choose Columns<a href="data-wrangling-with-dplyr.html#select-choose-columns" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>select()</code> function is used to choose which columns (variables) to keep in your data frame. This is useful when you have a dataset with many variables but only need a few for your analysis.</p>
+<p><strong>Syntax:</strong></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="data-wrangling-with-dplyr.html#cb21-1" tabindex="-1"></a><span class="fu">select</span>(data, column1, column2, ...)</span></code></pre></div>
+<p><strong>Key arguments:</strong></p>
+<ul>
+<li>Column names (unquoted)</li>
+<li>Column indices (numbers)</li>
+<li>Helper functions: <code>starts_with()</code>, <code>ends_with()</code>, <code>contains()</code>, <code>matches()</code></li>
+<li>Use <code>-</code> to exclude columns</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="data-wrangling-with-dplyr.html#cb22-1" tabindex="-1"></a><span class="co"># Select specific columns by name</span></span>
+<span id="cb22-2"><a href="data-wrangling-with-dplyr.html#cb22-2" tabindex="-1"></a><span class="fu">select</span>(car_data, mpg, hp, wt)</span></code></pre></div>
+<pre><code>##     mpg  hp    wt
+## 1  21.0 110 2.620
+## 2  21.0 110 2.875
+## 3  22.8  93 2.320
+## 4  21.4 110 3.215
+## 5  18.7 175 3.440
+## 6  18.1 105 3.460
+## 7  14.3 245 3.570
+## 8  24.4  62 3.190
+## 9  22.8  95 3.150
+## 10 19.2 123 3.440
+## 11 17.8 123 3.440
+## 12 16.4 180 4.070
+## 13 17.3 180 3.730
+## 14 15.2 180 3.780
+## 15 10.4 205 5.250
+## 16 10.4 215 5.424
+## 17 14.7 230 5.345
+## 18 32.4  66 2.200
+## 19 30.4  52 1.615
+## 20 33.9  65 1.835
+## 21 21.5  97 2.465
+## 22 15.5 150 3.520
+## 23 15.2 150 3.435
+## 24 13.3 245 3.840
+## 25 19.2 175 3.845
+## 26 27.3  66 1.935
+## 27 26.0  91 2.140
+## 28 30.4 113 1.513
+## 29 15.8 264 3.170
+## 30 19.7 175 2.770
+## 31 15.0 335 3.570
+## 32 21.4 109 2.780</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="data-wrangling-with-dplyr.html#cb24-1" tabindex="-1"></a><span class="co"># Select columns 2 through 5</span></span>
+<span id="cb24-2"><a href="data-wrangling-with-dplyr.html#cb24-2" tabindex="-1"></a><span class="fu">select</span>(car_data, <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##     mpg cyl  disp  hp
+## 1  21.0   6 160.0 110
+## 2  21.0   6 160.0 110
+## 3  22.8   4 108.0  93
+## 4  21.4   6 258.0 110
+## 5  18.7   8 360.0 175
+## 6  18.1   6 225.0 105
+## 7  14.3   8 360.0 245
+## 8  24.4   4 146.7  62
+## 9  22.8   4 140.8  95
+## 10 19.2   6 167.6 123
+## 11 17.8   6 167.6 123
+## 12 16.4   8 275.8 180
+## 13 17.3   8 275.8 180
+## 14 15.2   8 275.8 180
+## 15 10.4   8 472.0 205
+## 16 10.4   8 460.0 215
+## 17 14.7   8 440.0 230
+## 18 32.4   4  78.7  66
+## 19 30.4   4  75.7  52
+## 20 33.9   4  71.1  65
+## 21 21.5   4 120.1  97
+## 22 15.5   8 318.0 150
+## 23 15.2   8 304.0 150
+## 24 13.3   8 350.0 245
+## 25 19.2   8 400.0 175
+## 26 27.3   4  79.0  66
+## 27 26.0   4 120.3  91
+## 28 30.4   4  95.1 113
+## 29 15.8   8 351.0 264
+## 30 19.7   6 145.0 175
+## 31 15.0   8 301.0 335
+## 32 21.4   4 121.0 109</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-wrangling-with-dplyr.html#cb26-1" tabindex="-1"></a><span class="co"># Remove columns using minus sign</span></span>
+<span id="cb26-2"><a href="data-wrangling-with-dplyr.html#cb26-2" tabindex="-1"></a><span class="fu">select</span>(car_data, <span class="sc">-</span>X, <span class="sc">-</span>vs, <span class="sc">-</span>am)</span></code></pre></div>
+<pre><code>##     mpg cyl  disp  hp drat    wt  qsec gear carb
+## 1  21.0   6 160.0 110 3.90 2.620 16.46    4    4
+## 2  21.0   6 160.0 110 3.90 2.875 17.02    4    4
+## 3  22.8   4 108.0  93 3.85 2.320 18.61    4    1
+## 4  21.4   6 258.0 110 3.08 3.215 19.44    3    1
+## 5  18.7   8 360.0 175 3.15 3.440 17.02    3    2
+## 6  18.1   6 225.0 105 2.76 3.460 20.22    3    1
+## 7  14.3   8 360.0 245 3.21 3.570 15.84    3    4
+## 8  24.4   4 146.7  62 3.69 3.190 20.00    4    2
+## 9  22.8   4 140.8  95 3.92 3.150 22.90    4    2
+## 10 19.2   6 167.6 123 3.92 3.440 18.30    4    4
+## 11 17.8   6 167.6 123 3.92 3.440 18.90    4    4
+## 12 16.4   8 275.8 180 3.07 4.070 17.40    3    3
+## 13 17.3   8 275.8 180 3.07 3.730 17.60    3    3
+## 14 15.2   8 275.8 180 3.07 3.780 18.00    3    3
+## 15 10.4   8 472.0 205 2.93 5.250 17.98    3    4
+## 16 10.4   8 460.0 215 3.00 5.424 17.82    3    4
+## 17 14.7   8 440.0 230 3.23 5.345 17.42    3    4
+## 18 32.4   4  78.7  66 4.08 2.200 19.47    4    1
+## 19 30.4   4  75.7  52 4.93 1.615 18.52    4    2
+## 20 33.9   4  71.1  65 4.22 1.835 19.90    4    1
+## 21 21.5   4 120.1  97 3.70 2.465 20.01    3    1
+## 22 15.5   8 318.0 150 2.76 3.520 16.87    3    2
+## 23 15.2   8 304.0 150 3.15 3.435 17.30    3    2
+## 24 13.3   8 350.0 245 3.73 3.840 15.41    3    4
+## 25 19.2   8 400.0 175 3.08 3.845 17.05    3    2
+## 26 27.3   4  79.0  66 4.08 1.935 18.90    4    1
+## 27 26.0   4 120.3  91 4.43 2.140 16.70    5    2
+## 28 30.4   4  95.1 113 3.77 1.513 16.90    5    2
+## 29 15.8   8 351.0 264 4.22 3.170 14.50    5    4
+## 30 19.7   6 145.0 175 3.62 2.770 15.50    5    6
+## 31 15.0   8 301.0 335 3.54 3.570 14.60    5    8
+## 32 21.4   4 121.0 109 4.11 2.780 18.60    4    2</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="data-wrangling-with-dplyr.html#cb28-1" tabindex="-1"></a><span class="co"># Select columns that start with a pattern</span></span>
+<span id="cb28-2"><a href="data-wrangling-with-dplyr.html#cb28-2" tabindex="-1"></a><span class="fu">select</span>(car_data, <span class="fu">starts_with</span>(<span class="st">&quot;c&quot;</span>))</span></code></pre></div>
+<pre><code>##    cyl carb
+## 1    6    4
+## 2    6    4
+## 3    4    1
+## 4    6    1
+## 5    8    2
+## 6    6    1
+## 7    8    4
+## 8    4    2
+## 9    4    2
+## 10   6    4
+## 11   6    4
+## 12   8    3
+## 13   8    3
+## 14   8    3
+## 15   8    4
+## 16   8    4
+## 17   8    4
+## 18   4    1
+## 19   4    2
+## 20   4    1
+## 21   4    1
+## 22   8    2
+## 23   8    2
+## 24   8    4
+## 25   8    2
+## 26   4    1
+## 27   4    2
+## 28   4    2
+## 29   8    4
+## 30   6    6
+## 31   8    8
+## 32   4    2</code></pre>
+</div>
+<div id="filter-choose-rows" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> <code>filter()</code>: Choose Rows<a href="data-wrangling-with-dplyr.html#filter-choose-rows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>filter()</code> function is used to subset rows based on logical conditions. Only rows where the condition evaluates to <code>TRUE</code> are kept. This is equivalent to the <code>WHERE</code> clause in SQL.</p>
+<p><strong>Syntax:</strong></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="data-wrangling-with-dplyr.html#cb30-1" tabindex="-1"></a><span class="fu">filter</span>(data, condition1, condition2, ...)</span></code></pre></div>
+<p><strong>Key arguments:</strong></p>
+<ul>
+<li>Logical conditions using comparison operators: <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></li>
+<li>Combine conditions with <code>&amp;</code> (AND) or <code>,</code> (also AND), <code>|</code> (OR)</li>
+<li>Use <code>%in%</code> to match multiple values</li>
+<li>Use <code>!</code> to negate conditions</li>
+</ul>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="data-wrangling-with-dplyr.html#cb31-1" tabindex="-1"></a><span class="co"># Filter rows where mpg &gt; 25</span></span>
+<span id="cb31-2"><a href="data-wrangling-with-dplyr.html#cb31-2" tabindex="-1"></a><span class="fu">filter</span>(car_data, mpg <span class="sc">&gt;</span> <span class="dv">25</span>)</span></code></pre></div>
+<pre><code>##                X  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 1       Fiat 128 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 2    Honda Civic 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## 3 Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## 4      Fiat X1-9 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## 5  Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## 6   Lotus Europa 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="data-wrangling-with-dplyr.html#cb33-1" tabindex="-1"></a><span class="co"># Multiple conditions (AND)</span></span>
+<span id="cb33-2"><a href="data-wrangling-with-dplyr.html#cb33-2" tabindex="-1"></a><span class="fu">filter</span>(car_data, mpg <span class="sc">&gt;</span> <span class="dv">20</span>, cyl <span class="sc">==</span> <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##                 X  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 1      Datsun 710 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## 2       Merc 240D 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 3        Merc 230 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## 4        Fiat 128 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 5     Honda Civic 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## 6  Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## 7   Toyota Corona 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## 8       Fiat X1-9 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## 9   Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## 10   Lotus Europa 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## 11     Volvo 142E 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="data-wrangling-with-dplyr.html#cb35-1" tabindex="-1"></a><span class="co"># Multiple conditions (OR)</span></span>
+<span id="cb35-2"><a href="data-wrangling-with-dplyr.html#cb35-2" tabindex="-1"></a><span class="fu">filter</span>(car_data, cyl <span class="sc">==</span> <span class="dv">4</span> <span class="sc">|</span> cyl <span class="sc">==</span> <span class="dv">6</span>)</span></code></pre></div>
+<pre><code>##                 X  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 1       Mazda RX4 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## 2   Mazda RX4 Wag 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## 3      Datsun 710 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## 4  Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## 5         Valiant 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## 6       Merc 240D 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 7        Merc 230 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## 8        Merc 280 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## 9       Merc 280C 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## 10       Fiat 128 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 11    Honda Civic 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## 12 Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## 13  Toyota Corona 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## 14      Fiat X1-9 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## 15  Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## 16   Lotus Europa 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## 17   Ferrari Dino 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## 18     Volvo 142E 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="data-wrangling-with-dplyr.html#cb37-1" tabindex="-1"></a><span class="co"># Using %in% for multiple values</span></span>
+<span id="cb37-2"><a href="data-wrangling-with-dplyr.html#cb37-2" tabindex="-1"></a><span class="fu">filter</span>(car_data, cyl <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">6</span>))</span></code></pre></div>
+<pre><code>##                 X  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 1       Mazda RX4 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## 2   Mazda RX4 Wag 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## 3      Datsun 710 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## 4  Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## 5         Valiant 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## 6       Merc 240D 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 7        Merc 230 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## 8        Merc 280 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## 9       Merc 280C 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## 10       Fiat 128 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 11    Honda Civic 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## 12 Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## 13  Toyota Corona 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## 14      Fiat X1-9 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## 15  Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## 16   Lotus Europa 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## 17   Ferrari Dino 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## 18     Volvo 142E 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+</div>
+<div id="arrange-sort-rows" class="section level3 hasAnchor" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> <code>arrange()</code>: Sort Rows<a href="data-wrangling-with-dplyr.html#arrange-sort-rows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>arrange()</code> function reorders rows based on the values of one or more columns. By default, it sorts in ascending order. Use <code>desc()</code> to sort in descending order. This is equivalent to <code>ORDER BY</code> in SQL.</p>
+<p><strong>Syntax:</strong></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="data-wrangling-with-dplyr.html#cb39-1" tabindex="-1"></a><span class="fu">arrange</span>(data, column1, column2, ...)</span></code></pre></div>
+<p><strong>Key arguments:</strong></p>
+<ul>
+<li>Column names to sort by (unquoted)</li>
+<li>Wrap column name in <code>desc()</code> for descending order</li>
+<li>Multiple columns: sorts by first column, then by second within ties, etc.</li>
+</ul>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="data-wrangling-with-dplyr.html#cb40-1" tabindex="-1"></a><span class="co"># Sort by mpg (ascending)</span></span>
+<span id="cb40-2"><a href="data-wrangling-with-dplyr.html#cb40-2" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">arrange</span>(car_data, mpg), <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##                     X  mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## 1  Cadillac Fleetwood 10.4   8  472 205 2.93 5.250 17.98  0  0    3    4
+## 2 Lincoln Continental 10.4   8  460 215 3.00 5.424 17.82  0  0    3    4
+## 3          Camaro Z28 13.3   8  350 245 3.73 3.840 15.41  0  0    3    4
+## 4          Duster 360 14.3   8  360 245 3.21 3.570 15.84  0  0    3    4
+## 5   Chrysler Imperial 14.7   8  440 230 3.23 5.345 17.42  0  0    3    4</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="data-wrangling-with-dplyr.html#cb42-1" tabindex="-1"></a><span class="co"># Sort by mpg (descending)</span></span>
+<span id="cb42-2"><a href="data-wrangling-with-dplyr.html#cb42-2" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">arrange</span>(car_data, <span class="fu">desc</span>(mpg)), <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##                X  mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## 1 Toyota Corolla 33.9   4 71.1  65 4.22 1.835 19.90  1  1    4    1
+## 2       Fiat 128 32.4   4 78.7  66 4.08 2.200 19.47  1  1    4    1
+## 3    Honda Civic 30.4   4 75.7  52 4.93 1.615 18.52  1  1    4    2
+## 4   Lotus Europa 30.4   4 95.1 113 3.77 1.513 16.90  1  1    5    2
+## 5      Fiat X1-9 27.3   4 79.0  66 4.08 1.935 18.90  1  1    4    1</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="data-wrangling-with-dplyr.html#cb44-1" tabindex="-1"></a><span class="co"># Sort by multiple columns</span></span>
+<span id="cb44-2"><a href="data-wrangling-with-dplyr.html#cb44-2" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">arrange</span>(car_data, cyl, <span class="fu">desc</span>(mpg)), <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##                 X  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 1  Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## 2        Fiat 128 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 3     Honda Civic 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## 4    Lotus Europa 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## 5       Fiat X1-9 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## 6   Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## 7       Merc 240D 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 8      Datsun 710 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## 9        Merc 230 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## 10  Toyota Corona 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1</code></pre>
+</div>
+<div id="mutate-create-new-variables" class="section level3 hasAnchor" number="3.3.5">
+<h3><span class="header-section-number">3.3.5</span> <code>mutate()</code>: Create New Variables<a href="data-wrangling-with-dplyr.html#mutate-create-new-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>mutate()</code> function creates new columns (variables) or modifies existing ones. The new variables are added to the end of the data frame. You can reference other columns in the same <code>mutate()</code> call, including ones you just created.</p>
+<p><strong>Syntax:</strong></p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="data-wrangling-with-dplyr.html#cb46-1" tabindex="-1"></a><span class="fu">mutate</span>(data, <span class="at">new_column =</span> expression, ...)</span></code></pre></div>
+<p><strong>Key arguments:</strong></p>
+<ul>
+<li><code>new_column = expression</code>: Name of new column and how to calculate it</li>
+<li>Can use arithmetic operators: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code></li>
+<li>Can use functions: <code>log()</code>, <code>sqrt()</code>, <code>abs()</code>, <code>round()</code>, etc.</li>
+<li>Can reference existing columns and newly created columns</li>
+</ul>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="data-wrangling-with-dplyr.html#cb47-1" tabindex="-1"></a><span class="co"># Create a new variable (kilometers per liter)</span></span>
+<span id="cb47-2"><a href="data-wrangling-with-dplyr.html#cb47-2" tabindex="-1"></a>car_data_new <span class="ot">=</span> <span class="fu">mutate</span>(car_data, <span class="at">kpl =</span> mpg <span class="sc">*</span> <span class="fl">0.425</span>)</span>
+<span id="cb47-3"><a href="data-wrangling-with-dplyr.html#cb47-3" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">select</span>(car_data_new, X, mpg, kpl), <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##                   X  mpg    kpl
+## 1         Mazda RX4 21.0 8.9250
+## 2     Mazda RX4 Wag 21.0 8.9250
+## 3        Datsun 710 22.8 9.6900
+## 4    Hornet 4 Drive 21.4 9.0950
+## 5 Hornet Sportabout 18.7 7.9475</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="data-wrangling-with-dplyr.html#cb49-1" tabindex="-1"></a><span class="co"># Create multiple new variables</span></span>
+<span id="cb49-2"><a href="data-wrangling-with-dplyr.html#cb49-2" tabindex="-1"></a>car_data_new <span class="ot">=</span> <span class="fu">mutate</span>(car_data, </span>
+<span id="cb49-3"><a href="data-wrangling-with-dplyr.html#cb49-3" tabindex="-1"></a>                       <span class="at">hp_per_cyl =</span> hp <span class="sc">/</span> cyl,</span>
+<span id="cb49-4"><a href="data-wrangling-with-dplyr.html#cb49-4" tabindex="-1"></a>                       <span class="at">weight_kg =</span> wt <span class="sc">*</span> <span class="fl">453.592</span>)</span>
+<span id="cb49-5"><a href="data-wrangling-with-dplyr.html#cb49-5" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">select</span>(car_data_new, X, hp, cyl, hp_per_cyl, wt, weight_kg), <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##                   X  hp cyl hp_per_cyl    wt weight_kg
+## 1         Mazda RX4 110   6   18.33333 2.620  1188.411
+## 2     Mazda RX4 Wag 110   6   18.33333 2.875  1304.077
+## 3        Datsun 710  93   4   23.25000 2.320  1052.333
+## 4    Hornet 4 Drive 110   6   18.33333 3.215  1458.298
+## 5 Hornet Sportabout 175   8   21.87500 3.440  1560.356</code></pre>
+</div>
+<div id="summarize-calculate-summary-statistics" class="section level3 hasAnchor" number="3.3.6">
+<h3><span class="header-section-number">3.3.6</span> <code>summarize()</code>: Calculate Summary Statistics<a href="data-wrangling-with-dplyr.html#summarize-calculate-summary-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>summarize()</code> function (also spelled <code>summarise()</code>) collapses a data frame into a single row of summary statistics. It is most powerful when combined with <code>group_by()</code> to calculate summaries for each group.</p>
+<p><strong>Syntax:</strong></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="data-wrangling-with-dplyr.html#cb51-1" tabindex="-1"></a><span class="fu">summarize</span>(data, <span class="at">summary_name =</span> <span class="fu">summary_function</span>(column), ...)</span></code></pre></div>
+<p><strong>Key arguments:</strong></p>
+<ul>
+<li><code>summary_name = function(column)</code>: Name for the summary and how to calculate it</li>
+<li>Common summary functions: <code>mean()</code>, <code>median()</code>, <code>sd()</code>, <code>var()</code>, <code>min()</code>, <code>max()</code>, <code>sum()</code>, <code>n()</code> (count)</li>
+<li>Use <code>na.rm = TRUE</code> inside functions to handle missing values</li>
+</ul>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="data-wrangling-with-dplyr.html#cb52-1" tabindex="-1"></a><span class="co"># Calculate summary statistics</span></span>
+<span id="cb52-2"><a href="data-wrangling-with-dplyr.html#cb52-2" tabindex="-1"></a><span class="fu">summarize</span>(car_data,</span>
+<span id="cb52-3"><a href="data-wrangling-with-dplyr.html#cb52-3" tabindex="-1"></a>          <span class="at">mean_mpg =</span> <span class="fu">mean</span>(mpg),</span>
+<span id="cb52-4"><a href="data-wrangling-with-dplyr.html#cb52-4" tabindex="-1"></a>          <span class="at">median_mpg =</span> <span class="fu">median</span>(mpg),</span>
+<span id="cb52-5"><a href="data-wrangling-with-dplyr.html#cb52-5" tabindex="-1"></a>          <span class="at">sd_mpg =</span> <span class="fu">sd</span>(mpg),</span>
+<span id="cb52-6"><a href="data-wrangling-with-dplyr.html#cb52-6" tabindex="-1"></a>          <span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div>
+<pre><code>##   mean_mpg median_mpg   sd_mpg  n
+## 1 20.09062       19.2 6.026948 32</code></pre>
+</div>
+<div id="group_by-group-operations" class="section level3 hasAnchor" number="3.3.7">
+<h3><span class="header-section-number">3.3.7</span> <code>group_by()</code>: Group Operations<a href="data-wrangling-with-dplyr.html#group_by-group-operations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>group_by()</code> function groups the data frame by one or more variables. Subsequent operations (especially <code>summarize()</code> and <code>mutate()</code>) are then performed separately for each group. This is similar to <code>GROUP BY</code> in SQL.</p>
+<p><strong>Syntax:</strong></p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="data-wrangling-with-dplyr.html#cb54-1" tabindex="-1"></a><span class="fu">group_by</span>(data, grouping_column1, grouping_column2, ...)</span></code></pre></div>
+<p><strong>Key arguments:</strong></p>
+<ul>
+<li>Column names to group by (unquoted)</li>
+<li>Multiple columns create nested groups</li>
+<li>Use <code>ungroup()</code> to remove grouping</li>
+<li>Use <code>.groups = "drop"</code> in <code>summarize()</code> to automatically ungroup</li>
+</ul>
+<p>The real power of <code>summarize()</code> comes when combined with <code>group_by()</code>:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="data-wrangling-with-dplyr.html#cb55-1" tabindex="-1"></a><span class="co"># Summary statistics by group</span></span>
+<span id="cb55-2"><a href="data-wrangling-with-dplyr.html#cb55-2" tabindex="-1"></a>grouped_data <span class="ot">=</span> <span class="fu">group_by</span>(car_data, cyl)</span>
+<span id="cb55-3"><a href="data-wrangling-with-dplyr.html#cb55-3" tabindex="-1"></a><span class="fu">summarize</span>(grouped_data,</span>
+<span id="cb55-4"><a href="data-wrangling-with-dplyr.html#cb55-4" tabindex="-1"></a>          <span class="at">mean_mpg =</span> <span class="fu">mean</span>(mpg),</span>
+<span id="cb55-5"><a href="data-wrangling-with-dplyr.html#cb55-5" tabindex="-1"></a>          <span class="at">median_mpg =</span> <span class="fu">median</span>(mpg),</span>
+<span id="cb55-6"><a href="data-wrangling-with-dplyr.html#cb55-6" tabindex="-1"></a>          <span class="at">sd_mpg =</span> <span class="fu">sd</span>(mpg),</span>
+<span id="cb55-7"><a href="data-wrangling-with-dplyr.html#cb55-7" tabindex="-1"></a>          <span class="at">count =</span> <span class="fu">n</span>())</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 5
+##     cyl mean_mpg median_mpg sd_mpg count
+##   &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;
+## 1     4     26.7       26     4.51    11
+## 2     6     19.7       19.7   1.45     7
+## 3     8     15.1       15.2   2.56    14</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="data-wrangling-with-dplyr.html#cb57-1" tabindex="-1"></a><span class="co"># Group by multiple variables</span></span>
+<span id="cb57-2"><a href="data-wrangling-with-dplyr.html#cb57-2" tabindex="-1"></a>grouped_data <span class="ot">=</span> <span class="fu">group_by</span>(car_data, cyl, am)</span>
+<span id="cb57-3"><a href="data-wrangling-with-dplyr.html#cb57-3" tabindex="-1"></a><span class="fu">summarize</span>(grouped_data,</span>
+<span id="cb57-4"><a href="data-wrangling-with-dplyr.html#cb57-4" tabindex="-1"></a>          <span class="at">mean_mpg =</span> <span class="fu">mean</span>(mpg),</span>
+<span id="cb57-5"><a href="data-wrangling-with-dplyr.html#cb57-5" tabindex="-1"></a>          <span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb57-6"><a href="data-wrangling-with-dplyr.html#cb57-6" tabindex="-1"></a>          <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 4
+##     cyl    am mean_mpg count
+##   &lt;int&gt; &lt;int&gt;    &lt;dbl&gt; &lt;int&gt;
+## 1     4     0     22.9     3
+## 2     4     1     28.1     8
+## 3     6     0     19.1     4
+## 4     6     1     20.6     3
+## 5     8     0     15.0    12
+## 6     8     1     15.4     2</code></pre>
+</div>
+<div id="pivot_longer-reshape-from-wide-to-long" class="section level3 hasAnchor" number="3.3.8">
+<h3><span class="header-section-number">3.3.8</span> <code>pivot_longer()</code>: Reshape from Wide to Long<a href="data-wrangling-with-dplyr.html#pivot_longer-reshape-from-wide-to-long" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>pivot_longer()</code> function (from the <code>tidyr</code> package, also part of tidyverse) transforms data from wide format to long format. This means taking multiple columns and collapsing them into two columns: one for the variable names and one for the values.</p>
+<p><strong>Syntax:</strong></p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="data-wrangling-with-dplyr.html#cb59-1" tabindex="-1"></a><span class="fu">pivot_longer</span>(data, cols, <span class="at">names_to =</span> <span class="st">&quot;name&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>)</span></code></pre></div>
+<p><strong>Key arguments:</strong></p>
+<ul>
+<li><code>cols</code>: Columns to pivot (can use helper functions like <code>starts_with()</code>, or ranges like <code>col1:col5</code>)</li>
+<li><code>names_to</code>: Name of the new column that will contain the original column names</li>
+<li><code>values_to</code>: Name of the new column that will contain the values</li>
+</ul>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="data-wrangling-with-dplyr.html#cb60-1" tabindex="-1"></a><span class="co"># Create example wide data</span></span>
+<span id="cb60-2"><a href="data-wrangling-with-dplyr.html#cb60-2" tabindex="-1"></a>wide_data <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
+<span id="cb60-3"><a href="data-wrangling-with-dplyr.html#cb60-3" tabindex="-1"></a>  <span class="at">car =</span> <span class="fu">c</span>(<span class="st">&quot;Mazda RX4&quot;</span>, <span class="st">&quot;Datsun 710&quot;</span>, <span class="st">&quot;Hornet 4 Drive&quot;</span>),</span>
+<span id="cb60-4"><a href="data-wrangling-with-dplyr.html#cb60-4" tabindex="-1"></a>  <span class="at">mpg =</span> <span class="fu">c</span>(<span class="fl">21.0</span>, <span class="fl">22.8</span>, <span class="fl">21.4</span>),</span>
+<span id="cb60-5"><a href="data-wrangling-with-dplyr.html#cb60-5" tabindex="-1"></a>  <span class="at">hp =</span> <span class="fu">c</span>(<span class="dv">110</span>, <span class="dv">93</span>, <span class="dv">110</span>),</span>
+<span id="cb60-6"><a href="data-wrangling-with-dplyr.html#cb60-6" tabindex="-1"></a>  <span class="at">wt =</span> <span class="fu">c</span>(<span class="fl">2.62</span>, <span class="fl">2.32</span>, <span class="fl">3.21</span>)</span>
+<span id="cb60-7"><a href="data-wrangling-with-dplyr.html#cb60-7" tabindex="-1"></a>)</span>
+<span id="cb60-8"><a href="data-wrangling-with-dplyr.html#cb60-8" tabindex="-1"></a>wide_data</span></code></pre></div>
+<pre><code>##              car  mpg  hp   wt
+## 1      Mazda RX4 21.0 110 2.62
+## 2     Datsun 710 22.8  93 2.32
+## 3 Hornet 4 Drive 21.4 110 3.21</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="data-wrangling-with-dplyr.html#cb62-1" tabindex="-1"></a><span class="co"># Pivot from wide to long format</span></span>
+<span id="cb62-2"><a href="data-wrangling-with-dplyr.html#cb62-2" tabindex="-1"></a>long_data <span class="ot">=</span> <span class="fu">pivot_longer</span>(wide_data,</span>
+<span id="cb62-3"><a href="data-wrangling-with-dplyr.html#cb62-3" tabindex="-1"></a>                          <span class="at">cols =</span> <span class="fu">c</span>(mpg, hp, wt),</span>
+<span id="cb62-4"><a href="data-wrangling-with-dplyr.html#cb62-4" tabindex="-1"></a>                          <span class="at">names_to =</span> <span class="st">&quot;measurement&quot;</span>,</span>
+<span id="cb62-5"><a href="data-wrangling-with-dplyr.html#cb62-5" tabindex="-1"></a>                          <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>)</span>
+<span id="cb62-6"><a href="data-wrangling-with-dplyr.html#cb62-6" tabindex="-1"></a>long_data</span></code></pre></div>
+<pre><code>## # A tibble: 9 × 3
+##   car            measurement  value
+##   &lt;chr&gt;          &lt;chr&gt;        &lt;dbl&gt;
+## 1 Mazda RX4      mpg          21   
+## 2 Mazda RX4      hp          110   
+## 3 Mazda RX4      wt            2.62
+## 4 Datsun 710     mpg          22.8 
+## 5 Datsun 710     hp           93   
+## 6 Datsun 710     wt            2.32
+## 7 Hornet 4 Drive mpg          21.4 
+## 8 Hornet 4 Drive hp          110   
+## 9 Hornet 4 Drive wt            3.21</code></pre>
+</div>
+<div id="pivot_wider-reshape-from-long-to-wide" class="section level3 hasAnchor" number="3.3.9">
+<h3><span class="header-section-number">3.3.9</span> <code>pivot_wider()</code>: Reshape from Long to Wide<a href="data-wrangling-with-dplyr.html#pivot_wider-reshape-from-long-to-wide" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>pivot_wider()</code> function (from the <code>tidyr</code> package) transforms data from long format to wide format. This means spreading values from one column across multiple new columns.</p>
+<p><strong>Syntax:</strong></p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="data-wrangling-with-dplyr.html#cb64-1" tabindex="-1"></a><span class="fu">pivot_wider</span>(data, <span class="at">names_from =</span> <span class="st">&quot;name_column&quot;</span>, <span class="at">values_from =</span> <span class="st">&quot;value_column&quot;</span>)</span></code></pre></div>
+<p><strong>Key arguments:</strong></p>
+<ul>
+<li><code>names_from</code>: Column whose values will become new column names</li>
+<li><code>values_from</code>: Column whose values will fill the new columns</li>
+<li><code>values_fill</code>: Value to use for missing combinations (optional)</li>
+</ul>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="data-wrangling-with-dplyr.html#cb65-1" tabindex="-1"></a><span class="co"># Pivot from long back to wide format</span></span>
+<span id="cb65-2"><a href="data-wrangling-with-dplyr.html#cb65-2" tabindex="-1"></a><span class="fu">pivot_wider</span>(long_data,</span>
+<span id="cb65-3"><a href="data-wrangling-with-dplyr.html#cb65-3" tabindex="-1"></a>            <span class="at">names_from =</span> measurement,</span>
+<span id="cb65-4"><a href="data-wrangling-with-dplyr.html#cb65-4" tabindex="-1"></a>            <span class="at">values_from =</span> value)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 4
+##   car              mpg    hp    wt
+##   &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 Mazda RX4       21     110  2.62
+## 2 Datsun 710      22.8    93  2.32
+## 3 Hornet 4 Drive  21.4   110  3.21</code></pre>
+</div>
+</div>
+<div id="the-pipe-operator" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> The Pipe Operator: <code>%&gt;%</code><a href="data-wrangling-with-dplyr.html#the-pipe-operator" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The pipe operator <code>%&gt;%</code> takes the output of one function and passes it as the first argument to the next function. This allows you to chain operations together in a readable way, reading left to right instead of inside out.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="data-wrangling-with-dplyr.html#cb67-1" tabindex="-1"></a><span class="co"># Without pipe: nested functions (read inside out)</span></span>
+<span id="cb67-2"><a href="data-wrangling-with-dplyr.html#cb67-2" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">arrange</span>(car_data, mpg), <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##                     X  mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## 1  Cadillac Fleetwood 10.4   8  472 205 2.93 5.250 17.98  0  0    3    4
+## 2 Lincoln Continental 10.4   8  460 215 3.00 5.424 17.82  0  0    3    4
+## 3          Camaro Z28 13.3   8  350 245 3.73 3.840 15.41  0  0    3    4
+## 4          Duster 360 14.3   8  360 245 3.21 3.570 15.84  0  0    3    4
+## 5   Chrysler Imperial 14.7   8  440 230 3.23 5.345 17.42  0  0    3    4</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="data-wrangling-with-dplyr.html#cb69-1" tabindex="-1"></a><span class="co"># With pipe: read left to right</span></span>
+<span id="cb69-2"><a href="data-wrangling-with-dplyr.html#cb69-2" tabindex="-1"></a>car_data <span class="sc">%&gt;%</span> </span>
+<span id="cb69-3"><a href="data-wrangling-with-dplyr.html#cb69-3" tabindex="-1"></a>  <span class="fu">arrange</span>(mpg) <span class="sc">%&gt;%</span> </span>
+<span id="cb69-4"><a href="data-wrangling-with-dplyr.html#cb69-4" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##                     X  mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## 1  Cadillac Fleetwood 10.4   8  472 205 2.93 5.250 17.98  0  0    3    4
+## 2 Lincoln Continental 10.4   8  460 215 3.00 5.424 17.82  0  0    3    4
+## 3          Camaro Z28 13.3   8  350 245 3.73 3.840 15.41  0  0    3    4
+## 4          Duster 360 14.3   8  360 245 3.21 3.570 15.84  0  0    3    4
+## 5   Chrysler Imperial 14.7   8  440 230 3.23 5.345 17.42  0  0    3    4</code></pre>
+</div>
+<div id="combining-multiple-operations" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Combining Multiple Operations<a href="data-wrangling-with-dplyr.html#combining-multiple-operations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The pipe operator allows us to chain multiple operations together into a data manipulation pipeline:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="data-wrangling-with-dplyr.html#cb71-1" tabindex="-1"></a><span class="co"># Complex data manipulation pipeline</span></span>
+<span id="cb71-2"><a href="data-wrangling-with-dplyr.html#cb71-2" tabindex="-1"></a>car_data <span class="sc">%&gt;%</span> </span>
+<span id="cb71-3"><a href="data-wrangling-with-dplyr.html#cb71-3" tabindex="-1"></a>  <span class="fu">filter</span>(hp <span class="sc">&gt;</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb71-4"><a href="data-wrangling-with-dplyr.html#cb71-4" tabindex="-1"></a>  <span class="fu">select</span>(X, mpg, hp, wt, cyl) <span class="sc">%&gt;%</span></span>
+<span id="cb71-5"><a href="data-wrangling-with-dplyr.html#cb71-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">power_to_weight =</span> hp <span class="sc">/</span> wt) <span class="sc">%&gt;%</span></span>
+<span id="cb71-6"><a href="data-wrangling-with-dplyr.html#cb71-6" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(power_to_weight)) <span class="sc">%&gt;%</span></span>
+<span id="cb71-7"><a href="data-wrangling-with-dplyr.html#cb71-7" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##                    X  mpg  hp    wt cyl power_to_weight
+## 1      Maserati Bora 15.0 335 3.570   8        93.83754
+## 2     Ford Pantera L 15.8 264 3.170   8        83.28076
+## 3       Lotus Europa 30.4 113 1.513   4        74.68605
+## 4         Duster 360 14.3 245 3.570   8        68.62745
+## 5         Camaro Z28 13.3 245 3.840   8        63.80208
+## 6       Ferrari Dino 19.7 175 2.770   6        63.17690
+## 7  Hornet Sportabout 18.7 175 3.440   8        50.87209
+## 8         Merc 450SL 17.3 180 3.730   8        48.25737
+## 9        Merc 450SLC 15.2 180 3.780   8        47.61905
+## 10  Pontiac Firebird 19.2 175 3.845   8        45.51365</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="data-wrangling-with-dplyr.html#cb73-1" tabindex="-1"></a><span class="co"># Summary statistics by group using pipes</span></span>
+<span id="cb73-2"><a href="data-wrangling-with-dplyr.html#cb73-2" tabindex="-1"></a>car_data <span class="sc">%&gt;%</span> </span>
+<span id="cb73-3"><a href="data-wrangling-with-dplyr.html#cb73-3" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span> </span>
+<span id="cb73-4"><a href="data-wrangling-with-dplyr.html#cb73-4" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb73-5"><a href="data-wrangling-with-dplyr.html#cb73-5" tabindex="-1"></a>    <span class="at">mean_mpg =</span> <span class="fu">mean</span>(mpg),</span>
+<span id="cb73-6"><a href="data-wrangling-with-dplyr.html#cb73-6" tabindex="-1"></a>    <span class="at">median_mpg =</span> <span class="fu">median</span>(mpg),</span>
+<span id="cb73-7"><a href="data-wrangling-with-dplyr.html#cb73-7" tabindex="-1"></a>    <span class="at">sd_mpg =</span> <span class="fu">sd</span>(mpg),</span>
+<span id="cb73-8"><a href="data-wrangling-with-dplyr.html#cb73-8" tabindex="-1"></a>    <span class="at">count =</span> <span class="fu">n</span>()</span>
+<span id="cb73-9"><a href="data-wrangling-with-dplyr.html#cb73-9" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 5
+##     cyl mean_mpg median_mpg sd_mpg count
+##   &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;
+## 1     4     26.7       26     4.51    11
+## 2     6     19.7       19.7   1.45     7
+## 3     8     15.1       15.2   2.56    14</code></pre>
+</div>
+<div id="useful-helper-functions" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Useful Helper Functions<a href="data-wrangling-with-dplyr.html#useful-helper-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="data-wrangling-with-dplyr.html#cb75-1" tabindex="-1"></a><span class="co"># Count observations by group</span></span>
+<span id="cb75-2"><a href="data-wrangling-with-dplyr.html#cb75-2" tabindex="-1"></a><span class="fu">count</span>(car_data, cyl)</span></code></pre></div>
+<pre><code>##   cyl  n
+## 1   4 11
+## 2   6  7
+## 3   8 14</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="data-wrangling-with-dplyr.html#cb77-1" tabindex="-1"></a><span class="co"># Rename columns</span></span>
+<span id="cb77-2"><a href="data-wrangling-with-dplyr.html#cb77-2" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rename</span>(car_data, <span class="at">miles_per_gallon =</span> mpg, <span class="at">horsepower =</span> hp), <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##               X miles_per_gallon cyl disp horsepower drat    wt  qsec vs am
+## 1     Mazda RX4             21.0   6  160        110 3.90 2.620 16.46  0  1
+## 2 Mazda RX4 Wag             21.0   6  160        110 3.90 2.875 17.02  0  1
+## 3    Datsun 710             22.8   4  108         93 3.85 2.320 18.61  1  1
+##   gear carb
+## 1    4    4
+## 2    4    4
+## 3    4    1</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="data-wrangling-with-dplyr.html#cb79-1" tabindex="-1"></a><span class="co"># Get distinct values</span></span>
+<span id="cb79-2"><a href="data-wrangling-with-dplyr.html#cb79-2" tabindex="-1"></a><span class="fu">distinct</span>(car_data, cyl)</span></code></pre></div>
+<pre><code>##   cyl
+## 1   6
+## 2   4
+## 3   8</code></pre>
+</div>
+<div id="summary" class="section level2 hasAnchor" number="3.7">
+<h2><span class="header-section-number">3.7</span> Summary<a href="data-wrangling-with-dplyr.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this lecture, we covered:</p>
+<ul>
+<li><strong>dplyr and tidyr</strong>: Using core verbs (<code>select()</code>, <code>filter()</code>, <code>arrange()</code>, <code>mutate()</code>, <code>summarize()</code>, <code>group_by()</code>, <code>pivot_longer()</code>, <code>pivot_wider()</code>) and the pipe operator for chaining operations</li>
+</ul>
+</div>
+<div id="references" class="section level2 hasAnchor" number="3.8">
+<h2><span class="header-section-number">3.8</span> References<a href="data-wrangling-with-dplyr.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Wickham, H., &amp; Grolemund, G. (2017). <em>R for Data Science</em>. O’Reilly Media. Available free online at <a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a></li>
+<li>dplyr documentation: <a href="https://dplyr.tidyverse.org/" class="uri">https://dplyr.tidyverse.org/</a></li>
+<li>tidyr documentation: <a href="https://tidyr.tidyverse.org/" class="uri">https://tidyr.tidyverse.org/</a></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-structures-in-r-overview-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="how-to-ruin-a-regression-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/numberteller/numberteller.github.io/edit/main/02-datawrangling.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/numberteller/numberteller.github.io/blob/main/02-datawrangling.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

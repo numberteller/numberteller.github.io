@@ -1,0 +1,409 @@
+# Data Wrangling with dplyr
+
+For this lecture, we will use the built-in `mtcars` dataset and save it as a CSV to demonstrate the import process:
+
+```{r}
+# First, let's save mtcars as a CSV file for demonstration
+write.csv(mtcars, "mtcars_example.csv", row.names = TRUE)
+
+# Now import it back
+car_data = read.csv("mtcars_example.csv")
+```
+
+## What is dplyr?
+
+**dplyr** is a powerful R package that provides a consistent set of functions (called "verbs") for manipulating data frames. It is part of the **tidyverse**, a collection of R packages designed for data science.
+
+The key advantages of dplyr include:
+
+-   **Readable syntax**: Functions are named as verbs that describe what they do
+-   **Consistent interface**: All functions work the same way
+-   **Speed**: Optimized for performance on large datasets
+-   **Pipe operator**: Allows chaining multiple operations together
+
+We will also introduce **tidyr**, another tidyverse package that provides functions for reshaping data between wide and long formats.
+
+## Installing and Loading dplyr and tidyr
+
+```{r, eval=FALSE}
+# Install packages (only need to do this once)
+install.packages("dplyr")
+install.packages("tidyr")
+
+# Or install the entire tidyverse (includes both)
+install.packages("tidyverse")
+```
+
+```{r}
+# Load tidyverse (includes dplyr and tidyr)
+library(tidyverse)
+```
+
+## Core dplyr Verbs
+### `rename()`: Rename Columns
+The `rename()` function changes the names of columns in a data frame. This is useful when column names are unclear, too long, or inconsistent with your naming conventions.
+
+**Syntax:**
+
+```{r, eval=FALSE}
+rename(data, new_name = old_name, ...)
+```
+
+**Key arguments:**
+
+-   `new_name = old_name`: The new column name on the left, the existing column name on the right
+-   Can rename multiple columns in one call
+-   Column names with spaces or special characters need backticks: `` `old name` ``
+
+```{r}
+# Rename a single column
+head(rename(car_data, miles_per_gallon = mpg), 3)
+```
+
+```{r}
+# Rename multiple columns
+head(rename(car_data, 
+            miles_per_gallon = mpg, 
+            horsepower = hp,
+            weight = wt), 3)
+```
+
+```{r}
+# Save renamed data to a new variable
+car_renamed = rename(car_data, cylinders = cyl, gear_count = gear)
+head(car_renamed, 3)
+```
+
+
+### `select()`: Choose Columns
+
+The `select()` function is used to choose which columns (variables) to keep in your data frame. This is useful when you have a dataset with many variables but only need a few for your analysis.
+
+**Syntax:**
+
+```{r, eval=FALSE}
+select(data, column1, column2, ...)
+```
+
+**Key arguments:**
+
+-   Column names (unquoted)
+-   Column indices (numbers)
+-   Helper functions: `starts_with()`, `ends_with()`, `contains()`, `matches()`
+-   Use `-` to exclude columns
+
+```{r}
+# Select specific columns by name
+select(car_data, mpg, hp, wt)
+```
+
+```{r}
+# Select columns 2 through 5
+select(car_data, 2:5)
+```
+
+```{r}
+# Remove columns using minus sign
+select(car_data, -X, -vs, -am)
+```
+
+```{r}
+# Select columns that start with a pattern
+select(car_data, starts_with("c"))
+```
+
+### `filter()`: Choose Rows
+
+The `filter()` function is used to subset rows based on logical conditions. Only rows where the condition evaluates to `TRUE` are kept. This is equivalent to the `WHERE` clause in SQL.
+
+**Syntax:**
+
+```{r, eval=FALSE}
+filter(data, condition1, condition2, ...)
+```
+
+**Key arguments:**
+
+-   Logical conditions using comparison operators: `==`, `!=`, `<`, `>`, `<=`, `>=`
+-   Combine conditions with `&` (AND) or `,` (also AND), `|` (OR)
+-   Use `%in%` to match multiple values
+-   Use `!` to negate conditions
+
+```{r}
+# Filter rows where mpg > 25
+filter(car_data, mpg > 25)
+```
+
+```{r}
+# Multiple conditions (AND)
+filter(car_data, mpg > 20, cyl == 4)
+```
+
+```{r}
+# Multiple conditions (OR)
+filter(car_data, cyl == 4 | cyl == 6)
+```
+
+```{r}
+# Using %in% for multiple values
+filter(car_data, cyl %in% c(4, 6))
+```
+
+### `arrange()`: Sort Rows
+
+The `arrange()` function reorders rows based on the values of one or more columns. By default, it sorts in ascending order. Use `desc()` to sort in descending order. This is equivalent to `ORDER BY` in SQL.
+
+**Syntax:**
+
+```{r, eval=FALSE}
+arrange(data, column1, column2, ...)
+```
+
+**Key arguments:**
+
+-   Column names to sort by (unquoted)
+-   Wrap column name in `desc()` for descending order
+-   Multiple columns: sorts by first column, then by second within ties, etc.
+
+```{r}
+# Sort by mpg (ascending)
+head(arrange(car_data, mpg), 5)
+```
+
+```{r}
+# Sort by mpg (descending)
+head(arrange(car_data, desc(mpg)), 5)
+```
+
+```{r}
+# Sort by multiple columns
+head(arrange(car_data, cyl, desc(mpg)), 10)
+```
+
+### `mutate()`: Create New Variables
+
+The `mutate()` function creates new columns (variables) or modifies existing ones. The new variables are added to the end of the data frame. You can reference other columns in the same `mutate()` call, including ones you just created.
+
+**Syntax:**
+
+```{r, eval=FALSE}
+mutate(data, new_column = expression, ...)
+```
+
+**Key arguments:**
+
+-   `new_column = expression`: Name of new column and how to calculate it
+-   Can use arithmetic operators: `+`, `-`, `*`, `/`, `^`
+-   Can use functions: `log()`, `sqrt()`, `abs()`, `round()`, etc.
+-   Can reference existing columns and newly created columns
+
+```{r}
+# Create a new variable (kilometers per liter)
+car_data_new = mutate(car_data, kpl = mpg * 0.425)
+head(select(car_data_new, X, mpg, kpl), 5)
+```
+
+```{r}
+# Create multiple new variables
+car_data_new = mutate(car_data, 
+                       hp_per_cyl = hp / cyl,
+                       weight_kg = wt * 453.592)
+head(select(car_data_new, X, hp, cyl, hp_per_cyl, wt, weight_kg), 5)
+```
+
+### `summarize()`: Calculate Summary Statistics
+
+The `summarize()` function (also spelled `summarise()`) collapses a data frame into a single row of summary statistics. It is most powerful when combined with `group_by()` to calculate summaries for each group.
+
+**Syntax:**
+
+```{r, eval=FALSE}
+summarize(data, summary_name = summary_function(column), ...)
+```
+
+**Key arguments:**
+
+-   `summary_name = function(column)`: Name for the summary and how to calculate it
+-   Common summary functions: `mean()`, `median()`, `sd()`, `var()`, `min()`, `max()`, `sum()`, `n()` (count)
+-   Use `na.rm = TRUE` inside functions to handle missing values
+
+```{r}
+# Calculate summary statistics
+summarize(car_data,
+          mean_mpg = mean(mpg),
+          median_mpg = median(mpg),
+          sd_mpg = sd(mpg),
+          n = n())
+```
+
+### `group_by()`: Group Operations
+
+The `group_by()` function groups the data frame by one or more variables. Subsequent operations (especially `summarize()` and `mutate()`) are then performed separately for each group. This is similar to `GROUP BY` in SQL.
+
+**Syntax:**
+
+```{r, eval=FALSE}
+group_by(data, grouping_column1, grouping_column2, ...)
+```
+
+**Key arguments:**
+
+-   Column names to group by (unquoted)
+-   Multiple columns create nested groups
+-   Use `ungroup()` to remove grouping
+-   Use `.groups = "drop"` in `summarize()` to automatically ungroup
+
+The real power of `summarize()` comes when combined with `group_by()`:
+
+```{r}
+# Summary statistics by group
+grouped_data = group_by(car_data, cyl)
+summarize(grouped_data,
+          mean_mpg = mean(mpg),
+          median_mpg = median(mpg),
+          sd_mpg = sd(mpg),
+          count = n())
+```
+
+```{r}
+# Group by multiple variables
+grouped_data = group_by(car_data, cyl, am)
+summarize(grouped_data,
+          mean_mpg = mean(mpg),
+          count = n(),
+          .groups = "drop")
+```
+
+### `pivot_longer()`: Reshape from Wide to Long
+
+The `pivot_longer()` function (from the `tidyr` package, also part of tidyverse) transforms data from wide format to long format. This means taking multiple columns and collapsing them into two columns: one for the variable names and one for the values.
+
+**Syntax:**
+
+```{r, eval=FALSE}
+pivot_longer(data, cols, names_to = "name", values_to = "value")
+```
+
+**Key arguments:**
+
+-   `cols`: Columns to pivot (can use helper functions like `starts_with()`, or ranges like `col1:col5`)
+-   `names_to`: Name of the new column that will contain the original column names
+-   `values_to`: Name of the new column that will contain the values
+
+```{r}
+# Create example wide data
+wide_data = data.frame(
+  car = c("Mazda RX4", "Datsun 710", "Hornet 4 Drive"),
+  mpg = c(21.0, 22.8, 21.4),
+  hp = c(110, 93, 110),
+  wt = c(2.62, 2.32, 3.21)
+)
+wide_data
+```
+
+```{r}
+# Pivot from wide to long format
+long_data = pivot_longer(wide_data,
+                          cols = c(mpg, hp, wt),
+                          names_to = "measurement",
+                          values_to = "value")
+long_data
+```
+
+### `pivot_wider()`: Reshape from Long to Wide
+
+The `pivot_wider()` function (from the `tidyr` package) transforms data from long format to wide format. This means spreading values from one column across multiple new columns.
+
+**Syntax:**
+
+```{r, eval=FALSE}
+pivot_wider(data, names_from = "name_column", values_from = "value_column")
+```
+
+**Key arguments:**
+
+-   `names_from`: Column whose values will become new column names
+-   `values_from`: Column whose values will fill the new columns
+-   `values_fill`: Value to use for missing combinations (optional)
+
+```{r}
+# Pivot from long back to wide format
+pivot_wider(long_data,
+            names_from = measurement,
+            values_from = value)
+```
+
+## The Pipe Operator: `%>%`
+
+The pipe operator `%>%` takes the output of one function and passes it as the first argument to the next function. This allows you to chain operations together in a readable way, reading left to right instead of inside out.
+
+```{r}
+# Without pipe: nested functions (read inside out)
+head(arrange(car_data, mpg), 5)
+
+# With pipe: read left to right
+car_data %>% 
+  arrange(mpg) %>% 
+  head(5)
+```
+
+## Combining Multiple Operations
+
+The pipe operator allows us to chain multiple operations together into a data manipulation pipeline:
+
+```{r}
+# Complex data manipulation pipeline
+car_data %>% 
+  filter(hp > 100) %>%
+  select(X, mpg, hp, wt, cyl) %>%
+  mutate(power_to_weight = hp / wt) %>%
+  arrange(desc(power_to_weight)) %>%
+  head(10)
+```
+
+```{r}
+# Summary statistics by group using pipes
+car_data %>% 
+  group_by(cyl) %>% 
+  summarize(
+    mean_mpg = mean(mpg),
+    median_mpg = median(mpg),
+    sd_mpg = sd(mpg),
+    count = n()
+  )
+```
+
+## Useful Helper Functions
+
+```{r}
+# Count observations by group
+count(car_data, cyl)
+```
+
+```{r}
+# Rename columns
+head(rename(car_data, miles_per_gallon = mpg, horsepower = hp), 3)
+```
+
+```{r}
+# Get distinct values
+distinct(car_data, cyl)
+```
+
+## Summary
+
+In this lecture, we covered:
+
+-   **dplyr and tidyr**: Using core verbs (`select()`, `filter()`, `arrange()`, `mutate()`, `summarize()`, `group_by()`, `pivot_longer()`, `pivot_wider()`) and the pipe operator for chaining operations
+
+## References
+
+-   Wickham, H., & Grolemund, G. (2017). *R for Data Science*. O'Reilly Media. Available free online at <https://r4ds.had.co.nz/>
+-   dplyr documentation: <https://dplyr.tidyverse.org/>
+-   tidyr documentation: <https://tidyr.tidyverse.org/>
+
+```{r cleanup, include=FALSE}
+if (file.exists("mtcars_example.csv")) {
+  file.remove("mtcars_example.csv")
+}
+```
