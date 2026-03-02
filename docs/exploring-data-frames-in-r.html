@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Exploring Data Frames in R | datRtective</title>
+  <meta name="description" content="Chapter 2 Exploring Data Frames in R | datRtective" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Exploring Data Frames in R | datRtective" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Exploring Data Frames in R | datRtective" />
+  
+  
+  
+
+<meta name="author" content="Bao Maddux" />
+
+
+<meta name="date" content="2026-03-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="data-wrangling-with-dplyr.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to R Programming</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Data Structures in R Overview</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#vector"><i class="fa fa-check"></i><b>1.1</b> Vector</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#vectorized-operations"><i class="fa fa-check"></i><b>1.1.1</b> Vectorized Operations</a></li>
+<li class="chapter" data-level="1.1.2" data-path="index.html"><a href="index.html#accessing-vector-elements"><i class="fa fa-check"></i><b>1.1.2</b> Accessing Vector Elements</a></li>
+<li class="chapter" data-level="1.1.3" data-path="index.html"><a href="index.html#remove-vector-elements"><i class="fa fa-check"></i><b>1.1.3</b> Remove Vector Elements</a></li>
+<li class="chapter" data-level="1.1.4" data-path="index.html"><a href="index.html#coercion-in-a-vector"><i class="fa fa-check"></i><b>1.1.4</b> Coercion in a Vector</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#lists"><i class="fa fa-check"></i><b>1.2</b> Lists</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#matrices"><i class="fa fa-check"></i><b>1.3</b> Matrices</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#naming-rows-and-columns"><i class="fa fa-check"></i><b>1.3.1</b> Naming Rows and Columns</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#accessing-matrix-elements"><i class="fa fa-check"></i><b>1.3.2</b> Accessing Matrix Elements</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#matrix-operations"><i class="fa fa-check"></i><b>1.3.3</b> Matrix Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#arrays"><i class="fa fa-check"></i><b>1.4</b> Arrays</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="index.html"><a href="index.html#accessing-array-elements"><i class="fa fa-check"></i><b>1.4.1</b> Accessing Array Elements</a></li>
+<li class="chapter" data-level="1.4.2" data-path="index.html"><a href="index.html#naming-array-dimensions"><i class="fa fa-check"></i><b>1.4.2</b> Naming Array Dimensions</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#data-frames"><i class="fa fa-check"></i><b>1.5</b> Data Frames</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#examining-data-frame-structure"><i class="fa fa-check"></i><b>1.5.1</b> Examining Data Frame Structure</a></li>
+<li class="chapter" data-level="1.5.2" data-path="index.html"><a href="index.html#accessing-data-frame-elements"><i class="fa fa-check"></i><b>1.5.2</b> Accessing Data Frame Elements</a></li>
+<li class="chapter" data-level="1.5.3" data-path="index.html"><a href="index.html#adding-and-modifying-columns"><i class="fa fa-check"></i><b>1.5.3</b> Adding and Modifying Columns</a></li>
+<li class="chapter" data-level="1.5.4" data-path="index.html"><a href="index.html#useful-data-frame-functions"><i class="fa fa-check"></i><b>1.5.4</b> Useful Data Frame Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#factors"><i class="fa fa-check"></i><b>1.6</b> Factors</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="index.html"><a href="index.html#ordered-factors"><i class="fa fa-check"></i><b>1.6.1</b> Ordered Factors</a></li>
+<li class="chapter" data-level="1.6.2" data-path="index.html"><a href="index.html#changing-factor-levels"><i class="fa fa-check"></i><b>1.6.2</b> Changing Factor Levels</a></li>
+<li class="chapter" data-level="1.6.3" data-path="index.html"><a href="index.html#factors-in-data-frames"><i class="fa fa-check"></i><b>1.6.3</b> Factors in Data Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#summary-table"><i class="fa fa-check"></i><b>1.7</b> Summary Table</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html"><i class="fa fa-check"></i><b>2</b> Exploring Data Frames in R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#importing-data-into-r"><i class="fa fa-check"></i><b>2.1</b> Importing Data into R</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#setting-your-working-directory"><i class="fa fa-check"></i><b>2.1.1</b> Setting Your Working Directory</a></li>
+<li class="chapter" data-level="2.1.2" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#importing-a-csv-file"><i class="fa fa-check"></i><b>2.1.2</b> Importing a CSV File</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#examining-a-data-frame"><i class="fa fa-check"></i><b>2.2</b> Examining a Data Frame</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#viewing-the-data"><i class="fa fa-check"></i><b>2.2.1</b> Viewing the Data</a></li>
+<li class="chapter" data-level="2.2.2" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#dimensions-of-the-data-frame"><i class="fa fa-check"></i><b>2.2.2</b> Dimensions of the Data Frame</a></li>
+<li class="chapter" data-level="2.2.3" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#column-names"><i class="fa fa-check"></i><b>2.2.3</b> Column Names</a></li>
+<li class="chapter" data-level="2.2.4" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#structure-of-the-data-frame"><i class="fa fa-check"></i><b>2.2.4</b> Structure of the Data Frame</a></li>
+<li class="chapter" data-level="2.2.5" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#summary-of-the-data-frame"><i class="fa fa-check"></i><b>2.2.5</b> Summary of the Data Frame</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#basic-numerical-summaries"><i class="fa fa-check"></i><b>2.3</b> Basic Numerical Summaries</a></li>
+<li class="chapter" data-level="2.4" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#measures-of-central-tendency"><i class="fa fa-check"></i><b>2.4</b> Measures of Central Tendency</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#mean-average"><i class="fa fa-check"></i><b>2.4.1</b> Mean (Average)</a></li>
+<li class="chapter" data-level="2.4.2" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#measures-of-spread"><i class="fa fa-check"></i><b>2.4.2</b> Measures of Spread</a></li>
+<li class="chapter" data-level="2.4.3" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#quartiles-and-percentiles"><i class="fa fa-check"></i><b>2.4.3</b> Quartiles and Percentiles</a></li>
+<li class="chapter" data-level="2.4.4" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#the-five-number-summary"><i class="fa fa-check"></i><b>2.4.4</b> The Five-Number Summary</a></li>
+<li class="chapter" data-level="2.4.5" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#handling-missing-values"><i class="fa fa-check"></i><b>2.4.5</b> Handling Missing Values</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#summaries-for-categorical-variables"><i class="fa fa-check"></i><b>2.5</b> Summaries for Categorical Variables</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#frequency-tables"><i class="fa fa-check"></i><b>2.5.1</b> Frequency Tables</a></li>
+<li class="chapter" data-level="2.5.2" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#proportions"><i class="fa fa-check"></i><b>2.5.2</b> Proportions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#extracting-columns-and-rows"><i class="fa fa-check"></i><b>2.6</b> Extracting Columns and Rows</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#extracting-columns"><i class="fa fa-check"></i><b>2.6.1</b> Extracting Columns</a></li>
+<li class="chapter" data-level="2.6.2" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#extracting-rows"><i class="fa fa-check"></i><b>2.6.2</b> Extracting Rows</a></li>
+<li class="chapter" data-level="2.6.3" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#extracting-specific-cells"><i class="fa fa-check"></i><b>2.6.3</b> Extracting Specific Cells</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="exploring-data-frames-in-r.html"><a href="exploring-data-frames-in-r.html#references"><i class="fa fa-check"></i><b>2.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html"><i class="fa fa-check"></i><b>3</b> Data Wrangling with dplyr</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#what-is-dplyr"><i class="fa fa-check"></i><b>3.1</b> What is dplyr?</a></li>
+<li class="chapter" data-level="3.2" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#installing-and-loading-dplyr-and-tidyr"><i class="fa fa-check"></i><b>3.2</b> Installing and Loading dplyr and tidyr</a></li>
+<li class="chapter" data-level="3.3" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#core-dplyr-verbs"><i class="fa fa-check"></i><b>3.3</b> Core dplyr Verbs</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#rename-rename-columns"><i class="fa fa-check"></i><b>3.3.1</b> <code>rename()</code>: Rename Columns</a></li>
+<li class="chapter" data-level="3.3.2" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#select-choose-columns"><i class="fa fa-check"></i><b>3.3.2</b> <code>select()</code>: Choose Columns</a></li>
+<li class="chapter" data-level="3.3.3" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#filter-choose-rows"><i class="fa fa-check"></i><b>3.3.3</b> <code>filter()</code>: Choose Rows</a></li>
+<li class="chapter" data-level="3.3.4" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#arrange-sort-rows"><i class="fa fa-check"></i><b>3.3.4</b> <code>arrange()</code>: Sort Rows</a></li>
+<li class="chapter" data-level="3.3.5" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#mutate-create-new-variables"><i class="fa fa-check"></i><b>3.3.5</b> <code>mutate()</code>: Create New Variables</a></li>
+<li class="chapter" data-level="3.3.6" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#summarize-calculate-summary-statistics"><i class="fa fa-check"></i><b>3.3.6</b> <code>summarize()</code>: Calculate Summary Statistics</a></li>
+<li class="chapter" data-level="3.3.7" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#group_by-group-operations"><i class="fa fa-check"></i><b>3.3.7</b> <code>group_by()</code>: Group Operations</a></li>
+<li class="chapter" data-level="3.3.8" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#pivot_longer-reshape-from-wide-to-long"><i class="fa fa-check"></i><b>3.3.8</b> <code>pivot_longer()</code>: Reshape from Wide to Long</a></li>
+<li class="chapter" data-level="3.3.9" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#pivot_wider-reshape-from-long-to-wide"><i class="fa fa-check"></i><b>3.3.9</b> <code>pivot_wider()</code>: Reshape from Long to Wide</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#the-pipe-operator"><i class="fa fa-check"></i><b>3.4</b> The Pipe Operator: <code>%&gt;%</code></a></li>
+<li class="chapter" data-level="3.5" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#combining-multiple-operations"><i class="fa fa-check"></i><b>3.5</b> Combining Multiple Operations</a></li>
+<li class="chapter" data-level="3.6" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#useful-helper-functions"><i class="fa fa-check"></i><b>3.6</b> Useful Helper Functions</a></li>
+<li class="chapter" data-level="3.7" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#summary"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="data-wrangling-with-dplyr.html"><a href="data-wrangling-with-dplyr.html#references-1"><i class="fa fa-check"></i><b>3.8</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="how-to-ruin-a-regression-model.html"><a href="how-to-ruin-a-regression-model.html"><i class="fa fa-check"></i><b>4</b> How to Ruin a Regression Model</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="how-to-ruin-a-regression-model.html"><a href="how-to-ruin-a-regression-model.html#forgot-to-check-linear-regression-assumptions"><i class="fa fa-check"></i><b>4.1</b> Forgot to Check Linear Regression Assumptions</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">datRtective</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exploring-data-frames-in-r" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Exploring Data Frames in R<a href="exploring-data-frames-in-r.html#exploring-data-frames-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this lecture, we will learn how to work with data frames, which are the most common data structure for storing datasets in R. A data frame is essentially a table where each column represents a variable and each row represents an observation. Think of it like a spreadsheet in Excel, but with much more powerful capabilities for analysis.</p>
+<div id="importing-data-into-r" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Importing Data into R<a href="exploring-data-frames-in-r.html#importing-data-into-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="setting-your-working-directory" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Setting Your Working Directory<a href="exploring-data-frames-in-r.html#setting-your-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Prior to importing data, it is necessary to specify the file path from which R will read data files. This location is referred to as the <strong>working directory</strong>. Properly configuring the working directory is essential importing data files.</p>
+<div id="checking-your-current-working-directory" class="section level4 hasAnchor" number="2.1.1.1">
+<h4><span class="header-section-number">2.1.1.1</span> Checking Your Current Working Directory<a href="exploring-data-frames-in-r.html#checking-your-current-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To see your current working directory, use:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="exploring-data-frames-in-r.html#cb1-1" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;C:/Users/Bao Bao/Documents/numberteller&quot;</code></pre>
+</div>
+<div id="setting-the-working-directory-on-windows" class="section level4 hasAnchor" number="2.1.1.2">
+<h4><span class="header-section-number">2.1.1.2</span> Setting the Working Directory on Windows<a href="exploring-data-frames-in-r.html#setting-the-working-directory-on-windows" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>On Windows, file paths use backslashes (<code>\</code>), but R requires either forward slashes (<code>/</code>) or double backslashes (<code>\\</code>).</p>
+<p><strong>Method 1: Using <code>setwd()</code> with forward slashes</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="exploring-data-frames-in-r.html#cb3-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/YourUsername/Documents/R_Course&quot;</span>)</span></code></pre></div>
+<p><strong>Method 2: Using <code>setwd()</code> with double backslashes</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="exploring-data-frames-in-r.html#cb4-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">YourUsername</span><span class="sc">\\</span><span class="st">Documents</span><span class="sc">\\</span><span class="st">R_Course&quot;</span>)</span></code></pre></div>
+<p><strong>Method 3: Using RStudio’s menu</strong></p>
+<ol style="list-style-type: decimal">
+<li>Go to <strong>Session</strong> → <strong>Set Working Directory</strong> → <strong>Choose Directory…</strong></li>
+<li>Navigate to your desired folder</li>
+<li>Click <strong>Select Folder</strong></li>
+</ol>
+</div>
+<div id="setting-the-working-directory-on-mac" class="section level4 hasAnchor" number="2.1.1.3">
+<h4><span class="header-section-number">2.1.1.3</span> Setting the Working Directory on Mac<a href="exploring-data-frames-in-r.html#setting-the-working-directory-on-mac" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>On Mac, file paths use forward slashes (<code>/</code>), which is the same format R expects.</p>
+<p><strong>Method 1: Using <code>setwd()</code></strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="exploring-data-frames-in-r.html#cb5-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/Users/YourUsername/Documents/R_Course&quot;</span>)</span></code></pre></div>
+<p><strong>Method 2: Using the tilde shortcut for home directory</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="exploring-data-frames-in-r.html#cb6-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;~/Documents/R_Course&quot;</span>)</span></code></pre></div>
+<p><strong>Method 3: Using RStudio’s menu</strong></p>
+<ol style="list-style-type: decimal">
+<li>Go to <strong>Session</strong> → <strong>Set Working Directory</strong> → <strong>Choose Directory…</strong></li>
+<li>Navigate to your desired folder</li>
+<li>Click <strong>Open</strong></li>
+</ol>
+</div>
+</div>
+<div id="importing-a-csv-file" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Importing a CSV File<a href="exploring-data-frames-in-r.html#importing-a-csv-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>CSV (Comma-Separated Values) files are one of the most common formats for storing tabular data. To import a CSV file, we use the <code>read.csv()</code> function.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="exploring-data-frames-in-r.html#cb7-1" tabindex="-1"></a><span class="co"># Basic syntax</span></span>
+<span id="cb7-2"><a href="exploring-data-frames-in-r.html#cb7-2" tabindex="-1"></a>my_data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;filename.csv&quot;</span>)</span></code></pre></div>
+<p>For this lecture, we will use the built-in <code>mtcars</code> dataset and save it as a CSV to demonstrate the import process:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="exploring-data-frames-in-r.html#cb8-1" tabindex="-1"></a><span class="co"># First, let&#39;s save mtcars as a CSV file for demonstration</span></span>
+<span id="cb8-2"><a href="exploring-data-frames-in-r.html#cb8-2" tabindex="-1"></a><span class="fu">write.csv</span>(mtcars, <span class="st">&quot;mtcars_example.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-3"><a href="exploring-data-frames-in-r.html#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="exploring-data-frames-in-r.html#cb8-4" tabindex="-1"></a><span class="co"># Now import it back</span></span>
+<span id="cb8-5"><a href="exploring-data-frames-in-r.html#cb8-5" tabindex="-1"></a>car_data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;mtcars_example.csv&quot;</span>)</span></code></pre></div>
+<div id="common-read.csv-options" class="section level4 hasAnchor" number="2.1.2.1">
+<h4><span class="header-section-number">2.1.2.1</span> Common <code>read.csv()</code> Options<a href="exploring-data-frames-in-r.html#common-read.csv-options" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The <code>read.csv()</code> function has several useful parameters:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="exploring-data-frames-in-r.html#cb9-1" tabindex="-1"></a><span class="co"># Full path (if file is not in working directory)</span></span>
+<span id="cb9-2"><a href="exploring-data-frames-in-r.html#cb9-2" tabindex="-1"></a>my_data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;C:/Users/YourUsername/Data/myfile.csv&quot;</span>)</span>
+<span id="cb9-3"><a href="exploring-data-frames-in-r.html#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="exploring-data-frames-in-r.html#cb9-4" tabindex="-1"></a><span class="co"># If your CSV uses a different separator (e.g., semicolon)</span></span>
+<span id="cb9-5"><a href="exploring-data-frames-in-r.html#cb9-5" tabindex="-1"></a>my_data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;filename.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>)</span>
+<span id="cb9-6"><a href="exploring-data-frames-in-r.html#cb9-6" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="exploring-data-frames-in-r.html#cb9-7" tabindex="-1"></a><span class="co"># If your CSV doesn&#39;t have column headers</span></span>
+<span id="cb9-8"><a href="exploring-data-frames-in-r.html#cb9-8" tabindex="-1"></a>my_data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;filename.csv&quot;</span>, <span class="at">header =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb9-9"><a href="exploring-data-frames-in-r.html#cb9-9" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="exploring-data-frames-in-r.html#cb9-10" tabindex="-1"></a><span class="co"># If you want to keep strings as characters (not factors)</span></span>
+<span id="cb9-11"><a href="exploring-data-frames-in-r.html#cb9-11" tabindex="-1"></a>my_data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;filename.csv&quot;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb9-12"><a href="exploring-data-frames-in-r.html#cb9-12" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="exploring-data-frames-in-r.html#cb9-13" tabindex="-1"></a><span class="co"># If you want to skip the first few rows</span></span>
+<span id="cb9-14"><a href="exploring-data-frames-in-r.html#cb9-14" tabindex="-1"></a>my_data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;filename.csv&quot;</span>, <span class="at">skip =</span> <span class="dv">2</span>)</span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="examining-a-data-frame" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Examining a Data Frame<a href="exploring-data-frames-in-r.html#examining-a-data-frame" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Once you have imported your data, you should always examine it to understand its structure and contents.</p>
+<div id="viewing-the-data" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Viewing the Data<a href="exploring-data-frames-in-r.html#viewing-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="exploring-data-frames-in-r.html#cb10-1" tabindex="-1"></a><span class="co"># View the first 6 rows (default)</span></span>
+<span id="cb10-2"><a href="exploring-data-frames-in-r.html#cb10-2" tabindex="-1"></a><span class="fu">head</span>(car_data)</span></code></pre></div>
+<pre><code>##                   X  mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## 1         Mazda RX4 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## 2     Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## 3        Datsun 710 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## 4    Hornet 4 Drive 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## 5 Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## 6           Valiant 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="exploring-data-frames-in-r.html#cb12-1" tabindex="-1"></a><span class="co"># View the first 10 rows</span></span>
+<span id="cb12-2"><a href="exploring-data-frames-in-r.html#cb12-2" tabindex="-1"></a><span class="fu">head</span>(car_data, <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##                    X  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 1          Mazda RX4 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## 2      Mazda RX4 Wag 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## 3         Datsun 710 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## 4     Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## 5  Hornet Sportabout 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## 6            Valiant 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## 7         Duster 360 14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## 8          Merc 240D 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 9           Merc 230 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## 10          Merc 280 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="exploring-data-frames-in-r.html#cb14-1" tabindex="-1"></a><span class="co"># View the last 6 rows</span></span>
+<span id="cb14-2"><a href="exploring-data-frames-in-r.html#cb14-2" tabindex="-1"></a><span class="fu">tail</span>(car_data)</span></code></pre></div>
+<pre><code>##                 X  mpg cyl  disp  hp drat    wt qsec vs am gear carb
+## 27  Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.7  0  1    5    2
+## 28   Lotus Europa 30.4   4  95.1 113 3.77 1.513 16.9  1  1    5    2
+## 29 Ford Pantera L 15.8   8 351.0 264 4.22 3.170 14.5  0  1    5    4
+## 30   Ferrari Dino 19.7   6 145.0 175 3.62 2.770 15.5  0  1    5    6
+## 31  Maserati Bora 15.0   8 301.0 335 3.54 3.570 14.6  0  1    5    8
+## 32     Volvo 142E 21.4   4 121.0 109 4.11 2.780 18.6  1  1    4    2</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="exploring-data-frames-in-r.html#cb16-1" tabindex="-1"></a><span class="co"># Open the data in a spreadsheet-like viewer (in RStudio)</span></span>
+<span id="cb16-2"><a href="exploring-data-frames-in-r.html#cb16-2" tabindex="-1"></a><span class="fu">View</span>(car_data)</span></code></pre></div>
+</div>
+<div id="dimensions-of-the-data-frame" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Dimensions of the Data Frame<a href="exploring-data-frames-in-r.html#dimensions-of-the-data-frame" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="exploring-data-frames-in-r.html#cb17-1" tabindex="-1"></a><span class="co"># Number of rows (observations)</span></span>
+<span id="cb17-2"><a href="exploring-data-frames-in-r.html#cb17-2" tabindex="-1"></a><span class="fu">nrow</span>(car_data)</span></code></pre></div>
+<pre><code>## [1] 32</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="exploring-data-frames-in-r.html#cb19-1" tabindex="-1"></a><span class="co"># Number of columns (variables)</span></span>
+<span id="cb19-2"><a href="exploring-data-frames-in-r.html#cb19-2" tabindex="-1"></a><span class="fu">ncol</span>(car_data)</span></code></pre></div>
+<pre><code>## [1] 12</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="exploring-data-frames-in-r.html#cb21-1" tabindex="-1"></a><span class="co"># Both dimensions at once: rows, columns</span></span>
+<span id="cb21-2"><a href="exploring-data-frames-in-r.html#cb21-2" tabindex="-1"></a><span class="fu">dim</span>(car_data)</span></code></pre></div>
+<pre><code>## [1] 32 12</code></pre>
+</div>
+<div id="column-names" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Column Names<a href="exploring-data-frames-in-r.html#column-names" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="exploring-data-frames-in-r.html#cb23-1" tabindex="-1"></a><span class="co"># Get all column names</span></span>
+<span id="cb23-2"><a href="exploring-data-frames-in-r.html#cb23-2" tabindex="-1"></a><span class="fu">names</span>(car_data)</span></code></pre></div>
+<pre><code>##  [1] &quot;X&quot;    &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;  
+## [11] &quot;gear&quot; &quot;carb&quot;</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="exploring-data-frames-in-r.html#cb25-1" tabindex="-1"></a><span class="co"># Alternative function for column names</span></span>
+<span id="cb25-2"><a href="exploring-data-frames-in-r.html#cb25-2" tabindex="-1"></a><span class="fu">colnames</span>(car_data)</span></code></pre></div>
+<pre><code>##  [1] &quot;X&quot;    &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;  
+## [11] &quot;gear&quot; &quot;carb&quot;</code></pre>
+</div>
+<div id="structure-of-the-data-frame" class="section level3 hasAnchor" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> Structure of the Data Frame<a href="exploring-data-frames-in-r.html#structure-of-the-data-frame" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>str()</code> function provides a compact display of the internal structure of an R object:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="exploring-data-frames-in-r.html#cb27-1" tabindex="-1"></a><span class="fu">str</span>(car_data)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    32 obs. of  12 variables:
+##  $ X   : chr  &quot;Mazda RX4&quot; &quot;Mazda RX4 Wag&quot; &quot;Datsun 710&quot; &quot;Hornet 4 Drive&quot; ...
+##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+##  $ cyl : int  6 6 4 6 8 6 8 4 4 6 ...
+##  $ disp: num  160 160 108 258 360 ...
+##  $ hp  : int  110 110 93 110 175 105 245 62 95 123 ...
+##  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+##  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+##  $ qsec: num  16.5 17 18.6 19.4 17 ...
+##  $ vs  : int  0 0 1 1 0 1 0 1 1 1 ...
+##  $ am  : int  1 1 1 0 0 0 0 0 0 0 ...
+##  $ gear: int  4 4 4 3 3 3 3 4 4 4 ...
+##  $ carb: int  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
+<p>This shows us the data type of each variable (e.g., <code>num</code> for numeric, <code>int</code> for integer, <code>chr</code> for character).</p>
+</div>
+<div id="summary-of-the-data-frame" class="section level3 hasAnchor" number="2.2.5">
+<h3><span class="header-section-number">2.2.5</span> Summary of the Data Frame<a href="exploring-data-frames-in-r.html#summary-of-the-data-frame" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>summary()</code> function provides a statistical summary of each variable:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="exploring-data-frames-in-r.html#cb29-1" tabindex="-1"></a><span class="fu">summary</span>(car_data)</span></code></pre></div>
+<pre><code>##       X                  mpg             cyl             disp      
+##  Length:32          Min.   :10.40   Min.   :4.000   Min.   : 71.1  
+##  Class :character   1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8  
+##  Mode  :character   Median :19.20   Median :6.000   Median :196.3  
+##                     Mean   :20.09   Mean   :6.188   Mean   :230.7  
+##                     3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0  
+##                     Max.   :33.90   Max.   :8.000   Max.   :472.0  
+##        hp             drat             wt             qsec      
+##  Min.   : 52.0   Min.   :2.760   Min.   :1.513   Min.   :14.50  
+##  1st Qu.: 96.5   1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89  
+##  Median :123.0   Median :3.695   Median :3.325   Median :17.71  
+##  Mean   :146.7   Mean   :3.597   Mean   :3.217   Mean   :17.85  
+##  3rd Qu.:180.0   3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90  
+##  Max.   :335.0   Max.   :4.930   Max.   :5.424   Max.   :22.90  
+##        vs               am              gear            carb      
+##  Min.   :0.0000   Min.   :0.0000   Min.   :3.000   Min.   :1.000  
+##  1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  
+##  Median :0.0000   Median :0.0000   Median :4.000   Median :2.000  
+##  Mean   :0.4375   Mean   :0.4062   Mean   :3.688   Mean   :2.812  
+##  3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  
+##  Max.   :1.0000   Max.   :1.0000   Max.   :5.000   Max.   :8.000</code></pre>
+<p>For numeric variables, <code>summary()</code> provides the minimum, 1st quartile, median, mean, 3rd quartile, and maximum. For categorical variables, it shows the frequency of each level.</p>
+</div>
+</div>
+<div id="basic-numerical-summaries" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Basic Numerical Summaries<a href="exploring-data-frames-in-r.html#basic-numerical-summaries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R provides many functions for calculating summary statistics on numeric data.</p>
+</div>
+<div id="measures-of-central-tendency" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Measures of Central Tendency<a href="exploring-data-frames-in-r.html#measures-of-central-tendency" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="mean-average" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Mean (Average)<a href="exploring-data-frames-in-r.html#mean-average" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The mean is the sum of all values divided by the number of values.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="exploring-data-frames-in-r.html#cb31-1" tabindex="-1"></a><span class="co"># Mean of miles per gallon</span></span>
+<span id="cb31-2"><a href="exploring-data-frames-in-r.html#cb31-2" tabindex="-1"></a><span class="fu">mean</span>(car_data<span class="sc">$</span>mpg)</span></code></pre></div>
+<pre><code>## [1] 20.09062</code></pre>
+<div id="median" class="section level4 hasAnchor" number="2.4.1.1">
+<h4><span class="header-section-number">2.4.1.1</span> Median<a href="exploring-data-frames-in-r.html#median" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The median is the middle value when data is sorted. It is more robust to outliers than the mean.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="exploring-data-frames-in-r.html#cb33-1" tabindex="-1"></a><span class="co"># Median of miles per gallon</span></span>
+<span id="cb33-2"><a href="exploring-data-frames-in-r.html#cb33-2" tabindex="-1"></a><span class="fu">median</span>(car_data<span class="sc">$</span>mpg)</span></code></pre></div>
+<pre><code>## [1] 19.2</code></pre>
+</div>
+</div>
+<div id="measures-of-spread" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Measures of Spread<a href="exploring-data-frames-in-r.html#measures-of-spread" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="variance-and-standard-deviation" class="section level4 hasAnchor" number="2.4.2.1">
+<h4><span class="header-section-number">2.4.2.1</span> Variance and Standard Deviation<a href="exploring-data-frames-in-r.html#variance-and-standard-deviation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="exploring-data-frames-in-r.html#cb35-1" tabindex="-1"></a><span class="co"># Variance</span></span>
+<span id="cb35-2"><a href="exploring-data-frames-in-r.html#cb35-2" tabindex="-1"></a><span class="fu">var</span>(car_data<span class="sc">$</span>mpg)</span></code></pre></div>
+<pre><code>## [1] 36.3241</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="exploring-data-frames-in-r.html#cb37-1" tabindex="-1"></a><span class="co"># Standard deviation</span></span>
+<span id="cb37-2"><a href="exploring-data-frames-in-r.html#cb37-2" tabindex="-1"></a><span class="fu">sd</span>(car_data<span class="sc">$</span>mpg)</span></code></pre></div>
+<pre><code>## [1] 6.026948</code></pre>
+</div>
+<div id="range" class="section level4 hasAnchor" number="2.4.2.2">
+<h4><span class="header-section-number">2.4.2.2</span> Range<a href="exploring-data-frames-in-r.html#range" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="exploring-data-frames-in-r.html#cb39-1" tabindex="-1"></a><span class="co"># Minimum value</span></span>
+<span id="cb39-2"><a href="exploring-data-frames-in-r.html#cb39-2" tabindex="-1"></a><span class="fu">min</span>(car_data<span class="sc">$</span>mpg)</span></code></pre></div>
+<pre><code>## [1] 10.4</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="exploring-data-frames-in-r.html#cb41-1" tabindex="-1"></a><span class="co"># Maximum value</span></span>
+<span id="cb41-2"><a href="exploring-data-frames-in-r.html#cb41-2" tabindex="-1"></a><span class="fu">max</span>(car_data<span class="sc">$</span>mpg)</span></code></pre></div>
+<pre><code>## [1] 33.9</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="exploring-data-frames-in-r.html#cb43-1" tabindex="-1"></a><span class="co"># Range (returns min and max)</span></span>
+<span id="cb43-2"><a href="exploring-data-frames-in-r.html#cb43-2" tabindex="-1"></a><span class="fu">range</span>(car_data<span class="sc">$</span>mpg)</span></code></pre></div>
+<pre><code>## [1] 10.4 33.9</code></pre>
+</div>
+</div>
+<div id="quartiles-and-percentiles" class="section level3 hasAnchor" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> Quartiles and Percentiles<a href="exploring-data-frames-in-r.html#quartiles-and-percentiles" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Quartiles divide the data into four equal parts.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="exploring-data-frames-in-r.html#cb45-1" tabindex="-1"></a><span class="co"># Default quartiles (0%, 25%, 50%, 75%, 100%)</span></span>
+<span id="cb45-2"><a href="exploring-data-frames-in-r.html#cb45-2" tabindex="-1"></a><span class="fu">quantile</span>(car_data<span class="sc">$</span>mpg)</span></code></pre></div>
+<pre><code>##     0%    25%    50%    75%   100% 
+## 10.400 15.425 19.200 22.800 33.900</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="exploring-data-frames-in-r.html#cb47-1" tabindex="-1"></a><span class="co"># Specific percentiles</span></span>
+<span id="cb47-2"><a href="exploring-data-frames-in-r.html#cb47-2" tabindex="-1"></a><span class="fu">quantile</span>(car_data<span class="sc">$</span>mpg, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.10</span>, <span class="fl">0.25</span>, <span class="fl">0.50</span>, <span class="fl">0.75</span>, <span class="fl">0.90</span>))</span></code></pre></div>
+<pre><code>##    10%    25%    50%    75%    90% 
+## 14.340 15.425 19.200 22.800 30.090</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="exploring-data-frames-in-r.html#cb49-1" tabindex="-1"></a><span class="co"># Interquartile range (Q3 - Q1)</span></span>
+<span id="cb49-2"><a href="exploring-data-frames-in-r.html#cb49-2" tabindex="-1"></a><span class="fu">IQR</span>(car_data<span class="sc">$</span>mpg)</span></code></pre></div>
+<pre><code>## [1] 7.375</code></pre>
+</div>
+<div id="the-five-number-summary" class="section level3 hasAnchor" number="2.4.4">
+<h3><span class="header-section-number">2.4.4</span> The Five-Number Summary<a href="exploring-data-frames-in-r.html#the-five-number-summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The five-number summary consists of the minimum, Q1, median, Q3, and maximum:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="exploring-data-frames-in-r.html#cb51-1" tabindex="-1"></a><span class="fu">fivenum</span>(car_data<span class="sc">$</span>mpg)</span></code></pre></div>
+<pre><code>## [1] 10.40 15.35 19.20 22.80 33.90</code></pre>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Measurement</th>
+<th>Interpretation</th>
+<th>Syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mean (Average, Expected value, Expectation)</td>
+<td>A quantity representing the “center” of a collection of numbers, calculated as the sum of the values divided by the number of values.</td>
+<td><code>mean()</code></td>
+</tr>
+<tr class="even">
+<td>Median</td>
+<td>The middle value in an ordered dataset, separating the higher half from the lower half. More resistant to outliers, compared to mean.</td>
+<td><code>median()</code></td>
+</tr>
+<tr class="odd">
+<td>Variance</td>
+<td>The expected value of the squared deviation from the mean of a data set.</td>
+<td><code>var()</code></td>
+</tr>
+<tr class="even">
+<td>Standard Deviation</td>
+<td>Is obtained as the square root of the variance.</td>
+<td><code>sd()</code></td>
+</tr>
+<tr class="odd">
+<td>Range</td>
+<td>The difference between the maximum value in a data set and its minimum value.</td>
+<td><code>range()</code>, however, gives you the minimum value and the maximum value of a data set, not their difference.</td>
+</tr>
+<tr class="even">
+<td>Quartiles</td>
+<td>A <em>k</em>-th percentile is a value below which there is a <em>k</em>-percent of the population. The first quartile (Q1) is a 25-th percentile. The second quartile (Q2) is a 50-th percentile, and the third quartile (Q3) is a 75-th percentile.</td>
+<td><code>quantile()</code> for the first, second and third quartiles; <code>quantile(,probs = c())</code> with predetermined percentages for any other percentiles.</td>
+</tr>
+<tr class="odd">
+<td>Interquartile Range (IQR)</td>
+<td>The difference between the third quartile (Q3) and the first quartile (Q1).</td>
+<td><code>IQR()</code></td>
+</tr>
+<tr class="even">
+<td>Five-Number Summary</td>
+<td>The five-number summary consists of the minimum, the first quartile (Q1), the second quartile (Q2, or also known as the median), the third quartile (Q3), and maximum.</td>
+<td><code>fivenum()</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="handling-missing-values" class="section level3 hasAnchor" number="2.4.5">
+<h3><span class="header-section-number">2.4.5</span> Handling Missing Values<a href="exploring-data-frames-in-r.html#handling-missing-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When your data contains missing values (<code>NA</code>), many summary functions will return <code>NA</code> by default. Use the <code>na.rm = TRUE</code> argument to remove missing values before calculation:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="exploring-data-frames-in-r.html#cb53-1" tabindex="-1"></a><span class="co"># Create a vector with missing values for demonstration</span></span>
+<span id="cb53-2"><a href="exploring-data-frames-in-r.html#cb53-2" tabindex="-1"></a>mpg_with_na <span class="ot">=</span> <span class="fu">c</span>(car_data<span class="sc">$</span>mpg, <span class="cn">NA</span>, <span class="cn">NA</span>)</span>
+<span id="cb53-3"><a href="exploring-data-frames-in-r.html#cb53-3" tabindex="-1"></a></span>
+<span id="cb53-4"><a href="exploring-data-frames-in-r.html#cb53-4" tabindex="-1"></a><span class="co"># Without na.rm, returns NA</span></span>
+<span id="cb53-5"><a href="exploring-data-frames-in-r.html#cb53-5" tabindex="-1"></a><span class="fu">mean</span>(mpg_with_na)</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="exploring-data-frames-in-r.html#cb55-1" tabindex="-1"></a><span class="co"># With na.rm = TRUE, ignores NA values</span></span>
+<span id="cb55-2"><a href="exploring-data-frames-in-r.html#cb55-2" tabindex="-1"></a><span class="fu">mean</span>(mpg_with_na, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 20.09062</code></pre>
+</div>
+</div>
+<div id="summaries-for-categorical-variables" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Summaries for Categorical Variables<a href="exploring-data-frames-in-r.html#summaries-for-categorical-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Categorical variables (also called factor variables) represent groups or categories. Let’s create a categorical example using the <code>mtcars</code> data.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="exploring-data-frames-in-r.html#cb57-1" tabindex="-1"></a><span class="co"># Create a copy with categorical variables</span></span>
+<span id="cb57-2"><a href="exploring-data-frames-in-r.html#cb57-2" tabindex="-1"></a>car_data<span class="sc">$</span>cyl_factor <span class="ot">=</span> <span class="fu">factor</span>(car_data<span class="sc">$</span>cyl, </span>
+<span id="cb57-3"><a href="exploring-data-frames-in-r.html#cb57-3" tabindex="-1"></a>                               <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;4-cylinder&quot;</span>, <span class="st">&quot;6-cylinder&quot;</span>, <span class="st">&quot;8-cylinder&quot;</span>))</span>
+<span id="cb57-4"><a href="exploring-data-frames-in-r.html#cb57-4" tabindex="-1"></a>car_data<span class="sc">$</span>am_factor <span class="ot">=</span> <span class="fu">factor</span>(car_data<span class="sc">$</span>am, </span>
+<span id="cb57-5"><a href="exploring-data-frames-in-r.html#cb57-5" tabindex="-1"></a>                              <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Automatic&quot;</span>, <span class="st">&quot;Manual&quot;</span>))</span></code></pre></div>
+<div id="frequency-tables" class="section level3 hasAnchor" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> Frequency Tables<a href="exploring-data-frames-in-r.html#frequency-tables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="exploring-data-frames-in-r.html#cb58-1" tabindex="-1"></a><span class="co"># Count observations in each category</span></span>
+<span id="cb58-2"><a href="exploring-data-frames-in-r.html#cb58-2" tabindex="-1"></a><span class="fu">table</span>(car_data<span class="sc">$</span>cyl_factor)</span></code></pre></div>
+<pre><code>## 
+## 4-cylinder 6-cylinder 8-cylinder 
+##         11          7         14</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="exploring-data-frames-in-r.html#cb60-1" tabindex="-1"></a><span class="co"># Two-way frequency table (cross-tabulation)</span></span>
+<span id="cb60-2"><a href="exploring-data-frames-in-r.html#cb60-2" tabindex="-1"></a><span class="fu">table</span>(car_data<span class="sc">$</span>cyl_factor, car_data<span class="sc">$</span>am_factor)</span></code></pre></div>
+<pre><code>##             
+##              Automatic Manual
+##   4-cylinder         3      8
+##   6-cylinder         4      3
+##   8-cylinder        12      2</code></pre>
+</div>
+<div id="proportions" class="section level3 hasAnchor" number="2.5.2">
+<h3><span class="header-section-number">2.5.2</span> Proportions<a href="exploring-data-frames-in-r.html#proportions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="exploring-data-frames-in-r.html#cb62-1" tabindex="-1"></a><span class="co"># Proportion table</span></span>
+<span id="cb62-2"><a href="exploring-data-frames-in-r.html#cb62-2" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(car_data<span class="sc">$</span>cyl_factor))</span></code></pre></div>
+<pre><code>## 
+## 4-cylinder 6-cylinder 8-cylinder 
+##    0.34375    0.21875    0.43750</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="exploring-data-frames-in-r.html#cb64-1" tabindex="-1"></a><span class="co"># Proportions as percentages (rounded to 1 decimal)</span></span>
+<span id="cb64-2"><a href="exploring-data-frames-in-r.html#cb64-2" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(car_data<span class="sc">$</span>cyl_factor)) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## 
+## 4-cylinder 6-cylinder 8-cylinder 
+##       34.4       21.9       43.8</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="exploring-data-frames-in-r.html#cb66-1" tabindex="-1"></a><span class="co"># Row proportions for two-way table</span></span>
+<span id="cb66-2"><a href="exploring-data-frames-in-r.html#cb66-2" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(car_data<span class="sc">$</span>cyl_factor, car_data<span class="sc">$</span>am_factor), <span class="at">margin =</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>##             
+##              Automatic    Manual
+##   4-cylinder 0.2727273 0.7272727
+##   6-cylinder 0.5714286 0.4285714
+##   8-cylinder 0.8571429 0.1428571</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="exploring-data-frames-in-r.html#cb68-1" tabindex="-1"></a><span class="co"># Column proportions for two-way table</span></span>
+<span id="cb68-2"><a href="exploring-data-frames-in-r.html#cb68-2" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(car_data<span class="sc">$</span>cyl_factor, car_data<span class="sc">$</span>am_factor), <span class="at">margin =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##             
+##              Automatic    Manual
+##   4-cylinder 0.1578947 0.6153846
+##   6-cylinder 0.2105263 0.2307692
+##   8-cylinder 0.6315789 0.1538462</code></pre>
+</div>
+</div>
+<div id="extracting-columns-and-rows" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Extracting Columns and Rows<a href="exploring-data-frames-in-r.html#extracting-columns-and-rows" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="extracting-columns" class="section level3 hasAnchor" number="2.6.1">
+<h3><span class="header-section-number">2.6.1</span> Extracting Columns<a href="exploring-data-frames-in-r.html#extracting-columns" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are several ways to extract columns from a data frame.</p>
+<div id="using-the-operator" class="section level4 hasAnchor" number="2.6.1.1">
+<h4><span class="header-section-number">2.6.1.1</span> Using the <code>$</code> Operator<a href="exploring-data-frames-in-r.html#using-the-operator" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The dollar sign <code>$</code> in R is a fundamental subsetting operator used to access and manipulate elements within data frames and lists by their names. This approach is intuitive and enhances code readability compared to other methods like square brackets. One thing to bear in mind is that column names are case-sensitive when using the <code>$</code> operator.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="exploring-data-frames-in-r.html#cb70-1" tabindex="-1"></a><span class="co"># Extract the mpg column as a vector</span></span>
+<span id="cb70-2"><a href="exploring-data-frames-in-r.html#cb70-2" tabindex="-1"></a>car_data<span class="sc">$</span>mpg</span></code></pre></div>
+</div>
+<div id="using-square-brackets-with-column-name" class="section level4 hasAnchor" number="2.6.1.2">
+<h4><span class="header-section-number">2.6.1.2</span> Using Square Brackets with Column Name<a href="exploring-data-frames-in-r.html#using-square-brackets-with-column-name" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In a data frame <code>df</code>, <code>df[["column_name"]]</code> extracts the column as a vector, while <code>df["column_name"]</code> returns a single-column data frame.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="exploring-data-frames-in-r.html#cb71-1" tabindex="-1"></a><span class="co"># Single brackets return a data frame</span></span>
+<span id="cb71-2"><a href="exploring-data-frames-in-r.html#cb71-2" tabindex="-1"></a>car_data[<span class="st">&quot;mpg&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="exploring-data-frames-in-r.html#cb72-1" tabindex="-1"></a><span class="co"># Double brackets return a vector</span></span>
+<span id="cb72-2"><a href="exploring-data-frames-in-r.html#cb72-2" tabindex="-1"></a>car_data[[<span class="st">&quot;mpg&quot;</span>]]</span></code></pre></div>
+</div>
+<div id="using-square-brackets-with-column-index" class="section level4 hasAnchor" number="2.6.1.3">
+<h4><span class="header-section-number">2.6.1.3</span> Using Square Brackets with Column Index<a href="exploring-data-frames-in-r.html#using-square-brackets-with-column-index" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Besides the two aforementioned techniques, one can also extract a column from a given data frame by using square brackets with the column index.</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="exploring-data-frames-in-r.html#cb73-1" tabindex="-1"></a><span class="co"># Extract the second column (mpg is in column 2 after X)</span></span>
+<span id="cb73-2"><a href="exploring-data-frames-in-r.html#cb73-2" tabindex="-1"></a>car_data[, <span class="dv">2</span>]</span></code></pre></div>
+</div>
+<div id="extracting-multiple-columns" class="section level4 hasAnchor" number="2.6.1.4">
+<h4><span class="header-section-number">2.6.1.4</span> Extracting Multiple Columns<a href="exploring-data-frames-in-r.html#extracting-multiple-columns" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Similar to extracting a single column from data frame <code>df</code>, one can employ base R square bracket notation to extract multiple columns. Use a vector of column names created with the c() function inside the brackets. The general syntax is <code>df[, c("col_name1", "col_name2")]</code> or <code>df[, c(col_index1, "col_index2")]</code>.</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="exploring-data-frames-in-r.html#cb74-1" tabindex="-1"></a><span class="co"># By name</span></span>
+<span id="cb74-2"><a href="exploring-data-frames-in-r.html#cb74-2" tabindex="-1"></a>car_data[, <span class="fu">c</span>(<span class="st">&quot;mpg&quot;</span>, <span class="st">&quot;hp&quot;</span>, <span class="st">&quot;wt&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="exploring-data-frames-in-r.html#cb75-1" tabindex="-1"></a><span class="co"># By index</span></span>
+<span id="cb75-2"><a href="exploring-data-frames-in-r.html#cb75-2" tabindex="-1"></a>car_data[, <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>)]</span></code></pre></div>
+</div>
+</div>
+<div id="extracting-rows" class="section level3 hasAnchor" number="2.6.2">
+<h3><span class="header-section-number">2.6.2</span> Extracting Rows<a href="exploring-data-frames-in-r.html#extracting-rows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="by-index" class="section level4 hasAnchor" number="2.6.2.1">
+<h4><span class="header-section-number">2.6.2.1</span> By Index<a href="exploring-data-frames-in-r.html#by-index" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="exploring-data-frames-in-r.html#cb76-1" tabindex="-1"></a><span class="co"># Extract the first row</span></span>
+<span id="cb76-2"><a href="exploring-data-frames-in-r.html#cb76-2" tabindex="-1"></a>car_data[<span class="dv">1</span>, ]</span></code></pre></div>
+<pre><code>##           X mpg cyl disp  hp drat   wt  qsec vs am gear carb cyl_factor
+## 1 Mazda RX4  21   6  160 110  3.9 2.62 16.46  0  1    4    4 6-cylinder
+##   am_factor
+## 1    Manual</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="exploring-data-frames-in-r.html#cb78-1" tabindex="-1"></a><span class="co"># Extract rows 1 through 5</span></span>
+<span id="cb78-2"><a href="exploring-data-frames-in-r.html#cb78-2" tabindex="-1"></a>car_data[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span></code></pre></div>
+<pre><code>##                   X  mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## 1         Mazda RX4 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## 2     Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## 3        Datsun 710 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## 4    Hornet 4 Drive 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## 5 Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+##   cyl_factor am_factor
+## 1 6-cylinder    Manual
+## 2 6-cylinder    Manual
+## 3 4-cylinder    Manual
+## 4 6-cylinder Automatic
+## 5 8-cylinder Automatic</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="exploring-data-frames-in-r.html#cb80-1" tabindex="-1"></a><span class="co"># Extract specific rows</span></span>
+<span id="cb80-2"><a href="exploring-data-frames-in-r.html#cb80-2" tabindex="-1"></a>car_data[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>), ]</span></code></pre></div>
+<pre><code>##                    X  mpg cyl  disp  hp drat   wt  qsec vs am gear carb
+## 1          Mazda RX4 21.0   6 160.0 110 3.90 2.62 16.46  0  1    4    4
+## 5  Hornet Sportabout 18.7   8 360.0 175 3.15 3.44 17.02  0  0    3    2
+## 10          Merc 280 19.2   6 167.6 123 3.92 3.44 18.30  1  0    4    4
+##    cyl_factor am_factor
+## 1  6-cylinder    Manual
+## 5  8-cylinder Automatic
+## 10 6-cylinder Automatic</code></pre>
+</div>
+<div id="by-condition-logical-subsetting" class="section level4 hasAnchor" number="2.6.2.2">
+<h4><span class="header-section-number">2.6.2.2</span> By Condition (Logical Subsetting)<a href="exploring-data-frames-in-r.html#by-condition-logical-subsetting" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="exploring-data-frames-in-r.html#cb82-1" tabindex="-1"></a><span class="co"># Cars with mpg greater than 25</span></span>
+<span id="cb82-2"><a href="exploring-data-frames-in-r.html#cb82-2" tabindex="-1"></a>car_data[car_data<span class="sc">$</span>mpg <span class="sc">&gt;</span> <span class="dv">25</span>, ]</span></code></pre></div>
+<pre><code>##                 X  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 18       Fiat 128 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 19    Honda Civic 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## 20 Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## 26      Fiat X1-9 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## 27  Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## 28   Lotus Europa 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+##    cyl_factor am_factor
+## 18 4-cylinder    Manual
+## 19 4-cylinder    Manual
+## 20 4-cylinder    Manual
+## 26 4-cylinder    Manual
+## 27 4-cylinder    Manual
+## 28 4-cylinder    Manual</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="exploring-data-frames-in-r.html#cb84-1" tabindex="-1"></a><span class="co"># Cars with 6 cylinders</span></span>
+<span id="cb84-2"><a href="exploring-data-frames-in-r.html#cb84-2" tabindex="-1"></a>car_data[car_data<span class="sc">$</span>cyl <span class="sc">==</span> <span class="dv">6</span>, ]</span></code></pre></div>
+<pre><code>##                 X  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 1       Mazda RX4 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## 2   Mazda RX4 Wag 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## 4  Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## 6         Valiant 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## 10       Merc 280 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## 11      Merc 280C 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## 30   Ferrari Dino 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+##    cyl_factor am_factor
+## 1  6-cylinder    Manual
+## 2  6-cylinder    Manual
+## 4  6-cylinder Automatic
+## 6  6-cylinder Automatic
+## 10 6-cylinder Automatic
+## 11 6-cylinder Automatic
+## 30 6-cylinder    Manual</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="exploring-data-frames-in-r.html#cb86-1" tabindex="-1"></a><span class="co"># Multiple conditions: 6 cylinders AND manual transmission</span></span>
+<span id="cb86-2"><a href="exploring-data-frames-in-r.html#cb86-2" tabindex="-1"></a>car_data[car_data<span class="sc">$</span>cyl <span class="sc">==</span> <span class="dv">6</span> <span class="sc">&amp;</span> car_data<span class="sc">$</span>am <span class="sc">==</span> <span class="dv">1</span>, ]</span></code></pre></div>
+<pre><code>##                X  mpg cyl disp  hp drat    wt  qsec vs am gear carb cyl_factor
+## 1      Mazda RX4 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4 6-cylinder
+## 2  Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4 6-cylinder
+## 30  Ferrari Dino 19.7   6  145 175 3.62 2.770 15.50  0  1    5    6 6-cylinder
+##    am_factor
+## 1     Manual
+## 2     Manual
+## 30    Manual</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="exploring-data-frames-in-r.html#cb88-1" tabindex="-1"></a><span class="co"># Multiple conditions: 4 cylinders OR 8 cylinders</span></span>
+<span id="cb88-2"><a href="exploring-data-frames-in-r.html#cb88-2" tabindex="-1"></a>car_data[car_data<span class="sc">$</span>cyl <span class="sc">==</span> <span class="dv">4</span> <span class="sc">|</span> car_data<span class="sc">$</span>cyl <span class="sc">==</span> <span class="dv">8</span>, ]</span></code></pre></div>
+<pre><code>##                      X  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 3           Datsun 710 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## 5    Hornet Sportabout 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## 7           Duster 360 14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## 8            Merc 240D 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 9             Merc 230 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## 12          Merc 450SE 16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## 13          Merc 450SL 17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## 14         Merc 450SLC 15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## 15  Cadillac Fleetwood 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## 16 Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## 17   Chrysler Imperial 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## 18            Fiat 128 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 19         Honda Civic 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## 20      Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## 21       Toyota Corona 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## 22    Dodge Challenger 15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## 23         AMC Javelin 15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## 24          Camaro Z28 13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## 25    Pontiac Firebird 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## 26           Fiat X1-9 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## 27       Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## 28        Lotus Europa 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## 29      Ford Pantera L 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## 31       Maserati Bora 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## 32          Volvo 142E 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+##    cyl_factor am_factor
+## 3  4-cylinder    Manual
+## 5  8-cylinder Automatic
+## 7  8-cylinder Automatic
+## 8  4-cylinder Automatic
+## 9  4-cylinder Automatic
+## 12 8-cylinder Automatic
+## 13 8-cylinder Automatic
+## 14 8-cylinder Automatic
+## 15 8-cylinder Automatic
+## 16 8-cylinder Automatic
+## 17 8-cylinder Automatic
+## 18 4-cylinder    Manual
+## 19 4-cylinder    Manual
+## 20 4-cylinder    Manual
+## 21 4-cylinder Automatic
+## 22 8-cylinder Automatic
+## 23 8-cylinder Automatic
+## 24 8-cylinder Automatic
+## 25 8-cylinder Automatic
+## 26 4-cylinder    Manual
+## 27 4-cylinder    Manual
+## 28 4-cylinder    Manual
+## 29 8-cylinder    Manual
+## 31 8-cylinder    Manual
+## 32 4-cylinder    Manual</code></pre>
+</div>
+</div>
+<div id="extracting-specific-cells" class="section level3 hasAnchor" number="2.6.3">
+<h3><span class="header-section-number">2.6.3</span> Extracting Specific Cells<a href="exploring-data-frames-in-r.html#extracting-specific-cells" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="exploring-data-frames-in-r.html#cb90-1" tabindex="-1"></a><span class="co"># Row 3, Column 2</span></span>
+<span id="cb90-2"><a href="exploring-data-frames-in-r.html#cb90-2" tabindex="-1"></a>car_data[<span class="dv">3</span>, <span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1] 22.8</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="exploring-data-frames-in-r.html#cb92-1" tabindex="-1"></a><span class="co"># Rows 1-3, Columns 2-4</span></span>
+<span id="cb92-2"><a href="exploring-data-frames-in-r.html#cb92-2" tabindex="-1"></a>car_data[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
+<pre><code>##    mpg cyl disp
+## 1 21.0   6  160
+## 2 21.0   6  160
+## 3 22.8   4  108</code></pre>
+</div>
+</div>
+<div id="references" class="section level2 hasAnchor" number="2.7">
+<h2><span class="header-section-number">2.7</span> References<a href="exploring-data-frames-in-r.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Wickham, H., &amp; Grolemund, G. (2017). <em>R for Data Science</em>. O’Reilly Media. Available free online at <a href="https://r4ds.had.co.nz/">https://r4ds.had.co.nz/</a></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-wrangling-with-dplyr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/numberteller/numberteller.github.io/edit/main/01-dataframes.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/numberteller/numberteller.github.io/blob/main/01-dataframes.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

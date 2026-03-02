@@ -1,343 +1,439 @@
-# Data Structures in R Overview
+# Exploring Data Frames in R
 
-A *data structure* is a particular way of organizing data in a computer so that it can be used effectively. The idea is to reduce the space and time complexities of different tasks. Data structures in R programming are tools for holding multiple values.
+In this lecture, we will learn how to work with data frames, which are the most common data structure for storing datasets in R. A data frame is essentially a table where each column represents a variable and each row represents an observation. Think of it like a spreadsheet in Excel, but with much more powerful capabilities for analysis.
 
-R has **six** primary built-in data structures, which are broadly categorized by their dimensionality and whether they can store a single (homogeneous) or multiple (heterogeneous) data types.
+## Importing Data into R
 
-## Vector
+### Setting Your Working Directory
 
-Vectors are the simplest form of data structure in R. They are a collection of elements of the same type, such as numeric, character, or logical.
+Prior to importing data, it is necessary to specify the file path from which R will read data files. This location is referred to as the **working directory**. Properly configuring the working directory is essential importing data files.
 
-A vector is created by `c()` command, short for *combine*:
+#### Checking Your Current Working Directory
 
-```{r}
-x = c(1,2,3)
-print(x)
-y = c("apple","orange","banana")
-print(y)
-```
-
-### Vectorized Operations
-
-You can apply a function to a vector without needing to loop through its elements explicitly. For example, adding two vectors together adds corresponding elements in a faster and more concise way than doing so element-wise through loops.
+To see your current working directory, use:
 
 ```{r}
-x = c(2,4,6)
-y = c(7,5,3)
-x+y # add vector x to vector y by elements
-x-y # subtract elements in vector y from corresponding elements in vector x
-x*y # multiply vector x by vector y by elements
+getwd()
 ```
 
-[***Question 1:***]{.underline} What will the following codes return?
+#### Setting the Working Directory on Windows
+
+On Windows, file paths use backslashes (`\`), but R requires either forward slashes (`/`) or double backslashes (`\\`).
+
+**Method 1: Using `setwd()` with forward slashes**
+```{r, eval=FALSE}
+setwd("C:/Users/YourUsername/Documents/R_Course")
+```
+
+**Method 2: Using `setwd()` with double backslashes**
+```{r, eval=FALSE}
+setwd("C:\\Users\\YourUsername\\Documents\\R_Course")
+```
+
+**Method 3: Using RStudio's menu**
+
+1. Go to **Session** → **Set Working Directory** → **Choose Directory...**
+2. Navigate to your desired folder
+3. Click **Select Folder**
+
+#### Setting the Working Directory on Mac
+
+On Mac, file paths use forward slashes (`/`), which is the same format R expects.
+
+**Method 1: Using `setwd()`**
+```{r, eval=FALSE}
+setwd("/Users/YourUsername/Documents/R_Course")
+```
+
+**Method 2: Using the tilde shortcut for home directory**
+```{r, eval=FALSE}
+setwd("~/Documents/R_Course")
+```
+
+**Method 3: Using RStudio's menu**
+
+1. Go to **Session** → **Set Working Directory** → **Choose Directory...**
+2. Navigate to your desired folder
+3. Click **Open**
+
+### Importing a CSV File
+
+CSV (Comma-Separated Values) files are one of the most common formats for storing tabular data. To import a CSV file, we use the `read.csv()` function.
+
+```{r, eval=FALSE}
+# Basic syntax
+my_data = read.csv("filename.csv")
+```
+
+For this lecture, we will use the built-in `mtcars` dataset and save it as a CSV to demonstrate the import process:
+
+```{r, eval = TRUE}
+# First, let's save mtcars as a CSV file for demonstration
+write.csv(mtcars, "mtcars_example.csv", row.names = TRUE)
+
+# Now import it back
+car_data = read.csv("mtcars_example.csv")
+```
+
+#### Common `read.csv()` Options
+
+The `read.csv()` function has several useful parameters:
+
+```{r, eval=FALSE}
+# Full path (if file is not in working directory)
+my_data = read.csv("C:/Users/YourUsername/Data/myfile.csv")
+
+# If your CSV uses a different separator (e.g., semicolon)
+my_data = read.csv("filename.csv", sep = ";")
+
+# If your CSV doesn't have column headers
+my_data = read.csv("filename.csv", header = FALSE)
+
+# If you want to keep strings as characters (not factors)
+my_data = read.csv("filename.csv", stringsAsFactors = FALSE)
+
+# If you want to skip the first few rows
+my_data = read.csv("filename.csv", skip = 2)
+```
+
+## Examining a Data Frame
+
+Once you have imported your data, you should always examine it to understand its structure and contents.
+
+### Viewing the Data
+
+```{r}
+# View the first 6 rows (default)
+head(car_data)
+```
+
+```{r}
+# View the first 10 rows
+head(car_data, 10)
+```
+
+```{r}
+# View the last 6 rows
+tail(car_data)
+```
+
+```{r, eval=FALSE}
+# Open the data in a spreadsheet-like viewer (in RStudio)
+View(car_data)
+```
+
+### Dimensions of the Data Frame
+
+```{r}
+# Number of rows (observations)
+nrow(car_data)
+```
+
+```{r}
+# Number of columns (variables)
+ncol(car_data)
+```
+
+```{r}
+# Both dimensions at once: rows, columns
+dim(car_data)
+```
+
+### Column Names
+
+```{r}
+# Get all column names
+names(car_data)
+```
+
+```{r}
+# Alternative function for column names
+colnames(car_data)
+```
+
+### Structure of the Data Frame
+
+The `str()` function provides a compact display of the internal structure of an R object:
+
+```{r}
+str(car_data)
+```
+
+This shows us the data type of each variable (e.g., `num` for numeric, `int` for integer, `chr` for character).
+
+### Summary of the Data Frame
+
+The `summary()` function provides a statistical summary of each variable:
+
+```{r}
+summary(car_data)
+```
+
+For numeric variables, `summary()` provides the minimum, 1st quartile, median, mean, 3rd quartile, and maximum. For categorical variables, it shows the frequency of each level.
+
+## Basic Numerical Summaries
+
+R provides many functions for calculating summary statistics on numeric data.
+
+## Measures of Central Tendency
+
+### Mean (Average)
+
+The mean is the sum of all values divided by the number of values.
+
+```{r}
+# Mean of miles per gallon
+mean(car_data$mpg)
+```
+
+#### Median
+
+The median is the middle value when data is sorted. It is more robust to outliers than the mean.
+
+```{r}
+# Median of miles per gallon
+median(car_data$mpg)
+```
+
+### Measures of Spread
+
+#### Variance and Standard Deviation
+
+```{r}
+# Variance
+var(car_data$mpg)
+
+# Standard deviation
+sd(car_data$mpg)
+```
+
+#### Range
+
+```{r}
+# Minimum value
+min(car_data$mpg)
+
+# Maximum value
+max(car_data$mpg)
+
+# Range (returns min and max)
+range(car_data$mpg)
+```
+
+### Quartiles and Percentiles
+
+Quartiles divide the data into four equal parts.
+
+```{r}
+# Default quartiles (0%, 25%, 50%, 75%, 100%)
+quantile(car_data$mpg)
+```
+
+```{r}
+# Specific percentiles
+quantile(car_data$mpg, probs = c(0.10, 0.25, 0.50, 0.75, 0.90))
+```
+
+```{r}
+# Interquartile range (Q3 - Q1)
+IQR(car_data$mpg)
+```
+
+### The Five-Number Summary
+
+The five-number summary consists of the minimum, Q1, median, Q3, and maximum:
+
+```{r}
+fivenum(car_data$mpg)
+```
+
+| Measurement | Interpretation | Syntax |
+|------------------------|------------------------|------------------------|
+| Mean (Average, Expected value, Expectation) | A quantity representing the "center" of a collection of numbers, calculated as the sum of the values divided by the number of values. | `mean()` |
+| Median | The middle value in an ordered dataset, separating the higher half from the lower half. More resistant to outliers, compared to mean. | `median()` |
+| Variance | The expected value of the squared deviation from the mean of a data set. | `var()` |
+| Standard Deviation | Is obtained as the square root of the variance. | `sd()` |
+| Range | The difference between the maximum value in a data set and its minimum value. | `range()`, however, gives you the minimum value and the maximum value of a data set, not their difference. |
+| Quartiles | A *k*-th percentile is a value below which there is a *k*-percent of the population. The first quartile (Q1) is a 25-th percentile. The second quartile (Q2) is a 50-th percentile, and the third quartile (Q3) is a 75-th percentile. | `quantile()` for the first, second and third quartiles; `quantile(,probs = c())` with predetermined percentages for any other percentiles. |
+| Interquartile Range (IQR) | The difference between the third quartile (Q3) and the first quartile (Q1). | `IQR()` |
+| Five-Number Summary | The five-number summary consists of the minimum, the first quartile (Q1), the second quartile (Q2, or also known as the median), the third quartile (Q3), and maximum. | `fivenum()` |
+
+
+### Handling Missing Values
+
+When your data contains missing values (`NA`), many summary functions will return `NA` by default. Use the `na.rm = TRUE` argument to remove missing values before calculation:
+
+```{r}
+# Create a vector with missing values for demonstration
+mpg_with_na = c(car_data$mpg, NA, NA)
+
+# Without na.rm, returns NA
+mean(mpg_with_na)
+
+# With na.rm = TRUE, ignores NA values
+mean(mpg_with_na, na.rm = TRUE)
+```
+
+## Summaries for Categorical Variables
+
+Categorical variables (also called factor variables) represent groups or categories. Let's create a categorical example using the `mtcars` data.
+
+```{r}
+# Create a copy with categorical variables
+car_data$cyl_factor = factor(car_data$cyl, 
+                               labels = c("4-cylinder", "6-cylinder", "8-cylinder"))
+car_data$am_factor = factor(car_data$am, 
+                              labels = c("Automatic", "Manual"))
+```
+
+### Frequency Tables
+
+```{r}
+# Count observations in each category
+table(car_data$cyl_factor)
+```
+
+```{r}
+# Two-way frequency table (cross-tabulation)
+table(car_data$cyl_factor, car_data$am_factor)
+```
+
+### Proportions
+
+```{r}
+# Proportion table
+prop.table(table(car_data$cyl_factor))
+```
+
+```{r}
+# Proportions as percentages (rounded to 1 decimal)
+round(prop.table(table(car_data$cyl_factor)) * 100, 1)
+```
+
+```{r}
+# Row proportions for two-way table
+prop.table(table(car_data$cyl_factor, car_data$am_factor), margin = 1)
+```
+
+```{r}
+# Column proportions for two-way table
+prop.table(table(car_data$cyl_factor, car_data$am_factor), margin = 2)
+```
+
+## Extracting Columns and Rows
+
+### Extracting Columns
+
+There are several ways to extract columns from a data frame.
+
+#### Using the `$` Operator
+
+The dollar sign `$` in R is a fundamental subsetting operator used to access and manipulate elements within data frames and lists by their names. This approach is intuitive and enhances code readability compared to other methods like square brackets. One thing to bear in mind is that column names are case-sensitive when using the `$` operator.
 
 ```{r eval=FALSE, include=TRUE}
-x = c(2,4,6)
-y = c(7,5,3)
-x < y
-x == y
-x > y
-x == 3
+# Extract the mpg column as a vector
+car_data$mpg
 ```
 
-### Accessing Vector Elements
+#### Using Square Brackets with Column Name
 
-Elements in a vector are accessed using square brackets `[]`. R uses 1-based indexing, meaning the first element is at index 1, not 0.
+In a data frame `df`, `df[["column_name"]]` extracts the column as a vector, while `df["column_name"]` returns a single-column data frame. 
+
+```{r eval=FALSE, include=TRUE}
+# Single brackets return a data frame
+car_data["mpg"]
+```
+
+```{r eval=FALSE, include=TRUE}
+# Double brackets return a vector
+car_data[["mpg"]]
+```
+
+#### Using Square Brackets with Column Index
+
+Besides the two aforementioned techniques, one can also extract a column from a given data frame by using square brackets with the column index.
+
+```{r eval=FALSE, include=TRUE}
+# Extract the second column (mpg is in column 2 after X)
+car_data[, 2]
+```
+
+#### Extracting Multiple Columns
+
+Similar to extracting a single column from data frame `df`, one can employ base R square bracket notation to extract multiple columns. Use a vector of column names created with the c() function inside the brackets. The general syntax is `df[, c("col_name1", "col_name2")]` or `df[, c(col_index1, "col_index2")]`.
+
+```{r eval=FALSE, include=TRUE}
+# By name
+car_data[, c("mpg", "hp", "wt")]
+```
+
+```{r eval=FALSE, include=TRUE}
+# By index
+car_data[, c(2, 5, 7)]
+```
+
+### Extracting Rows
+
+#### By Index
 
 ```{r}
-example = c(10, 20, 30, 40, 50)
-# Extract the third element
-example[3] 
-# Extract elements from the second to fourth position
-example[2:4] 
-# Extract non-sequential elements, e.g. the first element and the fourth element
-example[c(1, 4)] 
+# Extract the first row
+car_data[1, ]
 ```
-
-### Remove Vector Elements
-
-Specific elements in a vector can be excluded by using negative indices.
 
 ```{r}
-example = c(10, 20, 30, 40, 50)
-# Remove the third element
-example[-3] 
-# Remove elements from the second to fourth position
-example[-(2:4)] 
-# Remove non-sequential elements, e.g. the first element and the fourth element
-example[-c(1, 4)] 
+# Extract rows 1 through 5
+car_data[1:5, ]
 ```
-
-### Coercion in a Vector
-
-All elements of a vector must be the same type, so when you attempt to combine different types they will be coerced to the most flexible type. Types from least to most flexible are: logical, integer, double, and character. For instance, combining a character and an integer yields a character.
-
-## Lists
-
-Lists are versatile data structures in R that can hold a mix of objects of different types and sizes, even other lists. You can create a list using the `list()` function.
 
 ```{r}
-x = list(1:3, "a", c(TRUE, FALSE, TRUE), c(2.3, 5.9))
-print(x)
+# Extract specific rows
+car_data[c(1, 5, 10), ]
 ```
 
-You can also name objects included in a list:
+#### By Condition (Logical Subsetting)
 
 ```{r}
-anotherlist = list(name="Tina Belcher", year=2025, scores=c(80, 90, 85), female =TRUE)
-print(anotherlist)
+# Cars with mpg greater than 25
+car_data[car_data$mpg > 25, ]
 ```
-
-Once you have created the list, you can access its elements using either indices or the name.
 
 ```{r}
-print(anotherlist[[3]])
-print(anotherlist$name)
-print(anotherlist$scores)
+# Cars with 6 cylinders
+car_data[car_data$cyl == 6, ]
 ```
-
-[***Question 2:***]{.underline} Extract the second score (i.e. 90) from `anotherlist`.
-
-## Matrices
-
-A matrix is a two-dimensional data structure where all elements must be of the same type (homogeneous). You can create a matrix using the `matrix()` function. If no specifications are explicitly stated, by default, matrices are filled column-wise.
 
 ```{r}
-# Create a 3x3 matrix filled by column (default)
-m = matrix(1:9, nrow = 3, ncol = 3)
-print(m)
+# Multiple conditions: 6 cylinders AND manual transmission
+car_data[car_data$cyl == 6 & car_data$am == 1, ]
 ```
-
-To fill row-wise, use the `byrow` argument:
 
 ```{r}
-# Create a 3x3 matrix filled by row
-m_byrow = matrix(1:9, nrow = 3, ncol = 3, byrow = TRUE)
-print(m_byrow)
+# Multiple conditions: 4 cylinders OR 8 cylinders
+car_data[car_data$cyl == 4 | car_data$cyl == 8, ]
 ```
 
-### Naming Rows and Columns
-
-You can assign names to rows and columns using `rownames()` and `colnames()`:
+### Extracting Specific Cells
 
 ```{r}
-grades = matrix(c(85, 90, 78, 92, 88, 95), nrow = 2, ncol = 3, byrow = TRUE)
-rownames(grades) = c("Alice", "Bob")
-colnames(grades) = c("Exam1", "Exam2", "Exam3")
-print(grades)
+# Row 3, Column 2
+car_data[3, 2]
 ```
-
-### Accessing Matrix Elements
-
-Matrix elements are accessed using `[row, column]` notation. Note that, by default, subsetting a single row or column from a matrix returns a vector, not a column- or row-matrix as might be expected.
 
 ```{r}
-# Access element in row 1, column 2
-grades[1, 2]
-# Access entire first row
-grades[1, ]
-# Access entire second column
-grades[, 2]
-# Access a submatrix
-grades[1:2, 2:3]
+# Rows 1-3, Columns 2-4
+car_data[1:3, 2:4]
 ```
 
-### Matrix Operations
 
-R supports element-wise and matrix algebra operations:
+## References
 
-```{r}
-A = matrix(1:4, nrow = 2)
-B = matrix(5:8, nrow = 2)
+- Wickham, H., & Grolemund, G. (2017). *R for Data Science*. O'Reilly Media. Available free online at [https://r4ds.had.co.nz/](https://r4ds.had.co.nz/)
 
-# Element-wise multiplication
-A * B
-
-# Matrix multiplication
-A %*% B
-
-# Transpose
-t(A)
+```{r cleanup, include=FALSE}
+# Clean up the example CSV file
+if (file.exists("mtcars_example.csv")) {
+  file.remove("mtcars_example.csv")
+}
 ```
 
-[***Question 3:***]{.underline} Create a 2x4 matrix containing the numbers 10 through 17, filled by row. Then extract the element in the second row, third column.
-
-## Arrays
-
-Arrays extend matrices to more than two dimensions. All elements must still be of the same type. You create an array using the `array()` function. R populates arrays layer by layer, filling each column from top to bottom before moving to the next column, and completing each layer before advancing to the next. In the example below, the first nine values fill the first layer column-wise, and the remaining nine fill the second.
-
-```{r}
-# Create a 3x3x2 array (3 rows, 3 columns, 2 "layers")
-arr = array(1:18, dim = c(3, 3, 2))
-print(arr)
-```
-
-### Accessing Array Elements
-
-Array elements are accessed by specifying indices for each dimension:
-
-```{r}
-# Access element at row 2, column 3, layer 1
-arr[2, 3, 1]
-# Access the entire first layer
-arr[, , 1]
-# Access the second row across all layers
-arr[2, , ]
-```
-
-### Naming Array Dimensions
-
-You can name each dimension using the `dimnames` argument:
-
-```{r}
-arr_named = array(
-  1:12, 
-  dim = c(2, 3, 2),
-  dimnames = list(
-    c("Row1", "Row2"),
-    c("Col1", "Col2", "Col3"),
-    c("Layer1", "Layer2")
-  )
-)
-print(arr_named)
-```
-
-[***Question 4:***]{.underline} Create a 2x2x3 array. How many total elements does it contain?
-
-## Data Frames
-
-Data from a study or an experiment often consist of different types of measurements on a set of subjects or experimental units. For example, the World Bank provides summary statistics on countries around the world. In this case, the unit is the country and the measurements include gross domestic product, life expectancy, and literacy rate. These data are naturally organized into a table format with one row for each country and one column for each summary statistic.
-
-The data frame is a data structure designed for the purpose of working with data that naturally organize into rows that correspond to observations/units/individuals and columns that correspond to measurements take on the observations.
-
-Data frames are the most commonly used data structure for data analysis in R. They are two-dimensional, like matrices, but can hold columns of different types (heterogeneous).
-
-To create an R data frame use `data.frame()` function and then pass each of the vectors we have created as arguments to the function:
-
-```{r}
-# Create a data frame
-students = data.frame(
-  name = c("Alice", "Bob", "Charlie"),
-  age = c(20, 22, 21),
-  major = c("Math", "Statistics", "Physics"),
-  gpa = c(3.8, 3.5, 3.9)
-)
-print(students)
-```
-
-### Examining Data Frame Structure
-
-Several functions help you understand your data frame:
-
-```{r}
-# View structure
-str(students)
-# View first few rows
-head(students)
-# Get dimensions
-dim(students)
-# Get number of rows and columns
-nrow(students)
-ncol(students)
-# Get column names
-names(students)
-```
-
-### Accessing Data Frame Elements
-
-You can access data frame elements using indices, column names, or the `$` operator:
-
-```{r}
-# Access by column name
-students$name
-# Access by column index
-students[, 2]
-# Access by row and column
-students[1, 3]
-# Access multiple columns
-students[, c("name", "gpa")]
-# Access rows based on condition
-students[students$gpa > 3.6, ]
-```
-
-### Adding and Modifying Columns
-
-```{r}
-# Add a new column
-students$enrolled = c(TRUE, TRUE, FALSE)
-print(students)
-# Modify an existing column
-students$age = students$age + 1
-print(students)
-```
-
-### Useful Data Frame Functions
-
-```{r}
-# Summary statistics for each column
-summary(students)
-```
-
-[***Question 5:***]{.underline} Using the `students` data frame, extract all rows where the student's major is "Math" or "Statistics".
-
-## Factors
-
-Factors are used to represent categorical data in R. They store both the values and the predefined levels (categories) the data can take. Factors are essential for statistical modeling, as they tell R to treat the variable as categorical rather than continuous.
-
-```{r}
-# Create a factor
-sizes = factor(c("Small", "Medium", "Large", "Medium", "Small"))
-print(sizes)
-# View the levels
-levels(sizes)
-```
-
-### Ordered Factors
-
-For ordinal data (categories with a meaningful order), use ordered factors:
-
-```{r}
-# Create an ordered factor
-sizes_ordered = factor(
-  c("Small", "Medium", "Large", "Medium", "Small"),
-  levels = c("Small", "Medium", "Large"),
-  ordered = TRUE
-)
-print(sizes_ordered)
-# Comparisons work with ordered factors
-sizes_ordered[1] < sizes_ordered[3]
-```
-
-### Changing Factor Levels
-
-You can rename or reorder levels:
-
-```{r}
-# Reorder levels
-education = factor(c("High School", "Bachelor", "Master", "Bachelor"))
-education = factor(education, levels = c("High School", "Bachelor", "Master", "PhD"))
-print(education)
-levels(education)
-```
-
-### Factors in Data Frames
-
-When creating data frames, character columns are NOT automatically converted to factors in modern R (version 4.0+). You can explicitly convert them:
-
-```{r}
-students$major = factor(students$major)
-str(students)
-```
-
-[***Question 6:***]{.underline} Create a factor variable representing letter grades (A, B, C, D, F) for five students. Make it an ordered factor with F as the lowest and A as the highest.
-
-# Summary Table
-
-| Data Structure | Dimensions | Homogeneous? | Creation Function |
-|----------------|------------|--------------|-------------------|
-| Vector         | 1D         | Yes          | `c()`             |
-| List           | 1D         | No           | `list()`          |
-| Matrix         | 2D         | Yes          | `matrix()`        |
-| Array          | nD         | Yes          | `array()`         |
-| Data Frame     | 2D         | No           | `data.frame()`    |
-| Factor         | 1D         | Yes          | `factor()`        |
