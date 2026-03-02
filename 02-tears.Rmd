@@ -1,4 +1,356 @@
-# The pool of tears
-What the hell is "the pool of tears"??
+---
+title: "Lesson 01 - Data Structures and Data Types"
+author: "Bao Maddux"
+date: "2026-01-26"
+output:   
+  html_document:
+    number_sections: true
+---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
+# Data Structures in R Overview
+
+A *data structure* is a particular way of organizing data in a computer so that it can be used effectively. The idea is to reduce the space and time complexities of different tasks. Data structures in R programming are tools for holding multiple values.
+
+R has **six** primary built-in data structures, which are broadly categorized by their dimensionality and whether they can store a single (homogeneous) or multiple (heterogeneous) data types.
+
+## Vector
+
+Vectors are the simplest form of data structure in R. They are a collection of elements of the same type, such as numeric, character, or logical.
+
+A vector is created by `c()` command, short for *combine*:
+
+```{r}
+x = c(1,2,3)
+print(x)
+y = c("apple","orange","banana")
+print(y)
+```
+
+### Vectorized Operations
+
+You can apply a function to a vector without needing to loop through its elements explicitly. For example, adding two vectors together adds corresponding elements in a faster and more concise way than doing so element-wise through loops.
+
+```{r}
+x = c(2,4,6)
+y = c(7,5,3)
+x+y # add vector x to vector y by elements
+x-y # subtract elements in vector y from corresponding elements in vector x
+x*y # multiply vector x by vector y by elements
+```
+
+[***Question 1:***]{.underline} What will the following codes return?
+
+```{r eval=FALSE, include=TRUE}
+x = c(2,4,6)
+y = c(7,5,3)
+x < y
+x == y
+x > y
+x == 3
+```
+
+### Accessing Vector Elements
+
+Elements in a vector are accessed using square brackets `[]`. R uses 1-based indexing, meaning the first element is at index 1, not 0.
+
+```{r}
+example = c(10, 20, 30, 40, 50)
+# Extract the third element
+example[3] 
+# Extract elements from the second to fourth position
+example[2:4] 
+# Extract non-sequential elements, e.g. the first element and the fourth element
+example[c(1, 4)] 
+```
+
+### Remove Vector Elements
+
+Specific elements in a vector can be excluded by using negative indices.
+
+```{r}
+example = c(10, 20, 30, 40, 50)
+# Remove the third element
+example[-3] 
+# Remove elements from the second to fourth position
+example[-(2:4)] 
+# Remove non-sequential elements, e.g. the first element and the fourth element
+example[-c(1, 4)] 
+```
+
+### Coercion in a Vector
+
+All elements of a vector must be the same type, so when you attempt to combine different types they will be coerced to the most flexible type. Types from least to most flexible are: logical, integer, double, and character. For instance, combining a character and an integer yields a character.
+
+## Lists
+
+Lists are versatile data structures in R that can hold a mix of objects of different types and sizes, even other lists. You can create a list using the `list()` function.
+
+```{r}
+x = list(1:3, "a", c(TRUE, FALSE, TRUE), c(2.3, 5.9))
+print(x)
+```
+
+You can also name objects included in a list:
+
+```{r}
+anotherlist = list(name="Tina Belcher", year=2025, scores=c(80, 90, 85), female =TRUE)
+print(anotherlist)
+```
+
+Once you have created the list, you can access its elements using either indices or the name.
+
+```{r}
+print(anotherlist[[3]])
+print(anotherlist$name)
+print(anotherlist$scores)
+```
+
+[***Question 2:***]{.underline} Extract the second score (i.e. 90) from `anotherlist`.
+
+## Matrices
+
+A matrix is a two-dimensional data structure where all elements must be of the same type (homogeneous). You can create a matrix using the `matrix()` function. If no specifications are explicitly stated, by default, matrices are filled column-wise.
+
+```{r}
+# Create a 3x3 matrix filled by column (default)
+m = matrix(1:9, nrow = 3, ncol = 3)
+print(m)
+```
+
+To fill row-wise, use the `byrow` argument:
+
+```{r}
+# Create a 3x3 matrix filled by row
+m_byrow = matrix(1:9, nrow = 3, ncol = 3, byrow = TRUE)
+print(m_byrow)
+```
+
+### Naming Rows and Columns
+
+You can assign names to rows and columns using `rownames()` and `colnames()`:
+
+```{r}
+grades = matrix(c(85, 90, 78, 92, 88, 95), nrow = 2, ncol = 3, byrow = TRUE)
+rownames(grades) = c("Alice", "Bob")
+colnames(grades) = c("Exam1", "Exam2", "Exam3")
+print(grades)
+```
+
+### Accessing Matrix Elements
+
+Matrix elements are accessed using `[row, column]` notation. Note that, by default, subsetting a single row or column from a matrix returns a vector, not a column- or row-matrix as might be expected.
+
+```{r}
+# Access element in row 1, column 2
+grades[1, 2]
+# Access entire first row
+grades[1, ]
+# Access entire second column
+grades[, 2]
+# Access a submatrix
+grades[1:2, 2:3]
+```
+
+### Matrix Operations
+
+R supports element-wise and matrix algebra operations:
+
+```{r}
+A = matrix(1:4, nrow = 2)
+B = matrix(5:8, nrow = 2)
+
+# Element-wise multiplication
+A * B
+
+# Matrix multiplication
+A %*% B
+
+# Transpose
+t(A)
+```
+
+[***Question 3:***]{.underline} Create a 2x4 matrix containing the numbers 10 through 17, filled by row. Then extract the element in the second row, third column.
+
+## Arrays
+
+Arrays extend matrices to more than two dimensions. All elements must still be of the same type. You create an array using the `array()` function. R populates arrays layer by layer, filling each column from top to bottom before moving to the next column, and completing each layer before advancing to the next. In the example below, the first nine values fill the first layer column-wise, and the remaining nine fill the second.
+
+```{r}
+# Create a 3x3x2 array (3 rows, 3 columns, 2 "layers")
+arr = array(1:18, dim = c(3, 3, 2))
+print(arr)
+```
+
+### Accessing Array Elements
+
+Array elements are accessed by specifying indices for each dimension:
+
+```{r}
+# Access element at row 2, column 3, layer 1
+arr[2, 3, 1]
+# Access the entire first layer
+arr[, , 1]
+# Access the second row across all layers
+arr[2, , ]
+```
+
+### Naming Array Dimensions
+
+You can name each dimension using the `dimnames` argument:
+
+```{r}
+arr_named = array(
+  1:12, 
+  dim = c(2, 3, 2),
+  dimnames = list(
+    c("Row1", "Row2"),
+    c("Col1", "Col2", "Col3"),
+    c("Layer1", "Layer2")
+  )
+)
+print(arr_named)
+```
+
+[***Question 4:***]{.underline} Create a 2x2x3 array. How many total elements does it contain?
+
+## Data Frames
+
+Data from a study or an experiment often consist of different types of measurements on a set of subjects or experimental units. For example, the World Bank provides summary statistics on countries around the world. In this case, the unit is the country and the measurements include gross domestic product, life expectancy, and literacy rate. These data are naturally organized into a table format with one row for each country and one column for each summary statistic.
+
+The data frame is a data structure designed for the purpose of working with data that naturally organize into rows that correspond to observations/units/individuals and columns that correspond to measurements take on the observations.
+
+Data frames are the most commonly used data structure for data analysis in R. They are two-dimensional, like matrices, but can hold columns of different types (heterogeneous).
+
+To create an R data frame use `data.frame()` function and then pass each of the vectors we have created as arguments to the function:
+
+```{r}
+# Create a data frame
+students = data.frame(
+  name = c("Alice", "Bob", "Charlie"),
+  age = c(20, 22, 21),
+  major = c("Math", "Statistics", "Physics"),
+  gpa = c(3.8, 3.5, 3.9)
+)
+print(students)
+```
+
+### Examining Data Frame Structure
+
+Several functions help you understand your data frame:
+
+```{r}
+# View structure
+str(students)
+# View first few rows
+head(students)
+# Get dimensions
+dim(students)
+# Get number of rows and columns
+nrow(students)
+ncol(students)
+# Get column names
+names(students)
+```
+
+### Accessing Data Frame Elements
+
+You can access data frame elements using indices, column names, or the `$` operator:
+
+```{r}
+# Access by column name
+students$name
+# Access by column index
+students[, 2]
+# Access by row and column
+students[1, 3]
+# Access multiple columns
+students[, c("name", "gpa")]
+# Access rows based on condition
+students[students$gpa > 3.6, ]
+```
+
+### Adding and Modifying Columns
+
+```{r}
+# Add a new column
+students$enrolled = c(TRUE, TRUE, FALSE)
+print(students)
+# Modify an existing column
+students$age = students$age + 1
+print(students)
+```
+
+### Useful Data Frame Functions
+
+```{r}
+# Summary statistics for each column
+summary(students)
+```
+
+[***Question 5:***]{.underline} Using the `students` data frame, extract all rows where the student's major is "Math" or "Statistics".
+
+## Factors
+
+Factors are used to represent categorical data in R. They store both the values and the predefined levels (categories) the data can take. Factors are essential for statistical modeling, as they tell R to treat the variable as categorical rather than continuous.
+
+```{r}
+# Create a factor
+sizes = factor(c("Small", "Medium", "Large", "Medium", "Small"))
+print(sizes)
+# View the levels
+levels(sizes)
+```
+
+### Ordered Factors
+
+For ordinal data (categories with a meaningful order), use ordered factors:
+
+```{r}
+# Create an ordered factor
+sizes_ordered = factor(
+  c("Small", "Medium", "Large", "Medium", "Small"),
+  levels = c("Small", "Medium", "Large"),
+  ordered = TRUE
+)
+print(sizes_ordered)
+# Comparisons work with ordered factors
+sizes_ordered[1] < sizes_ordered[3]
+```
+
+### Changing Factor Levels
+
+You can rename or reorder levels:
+
+```{r}
+# Reorder levels
+education = factor(c("High School", "Bachelor", "Master", "Bachelor"))
+education = factor(education, levels = c("High School", "Bachelor", "Master", "PhD"))
+print(education)
+levels(education)
+```
+
+### Factors in Data Frames
+
+When creating data frames, character columns are NOT automatically converted to factors in modern R (version 4.0+). You can explicitly convert them:
+
+```{r}
+students$major = factor(students$major)
+str(students)
+```
+
+[***Question 6:***]{.underline} Create a factor variable representing letter grades (A, B, C, D, F) for five students. Make it an ordered factor with F as the lowest and A as the highest.
+
+# Summary Table
+
+| Data Structure | Dimensions | Homogeneous? | Creation Function |
+|----------------|------------|--------------|-------------------|
+| Vector         | 1D         | Yes          | `c()`             |
+| List           | 1D         | No           | `list()`          |
+| Matrix         | 2D         | Yes          | `matrix()`        |
+| Array          | nD         | Yes          | `array()`         |
+| Data Frame     | 2D         | No           | `data.frame()`    |
+| Factor         | 1D         | Yes          | `factor()`        |
